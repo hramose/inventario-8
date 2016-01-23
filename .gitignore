@@ -1,94 +1,40 @@
-# -- Symfony2 -----------------------------------------
-app/bootstrap.php.cache
-app/bootstrap_cache.php.cache
-app/config/parameters.ini
-app/config/parameters.yml
-app/config/parametersAdmission.yml
-app/config/parametersPg.yml
-app/config/parametersUPReports.yml
-app/config/parametersSims.yml
-app/cache/*
-app/logs/*
-vendor/*
-web/bundles/*
-web/css/*
-web/js/*
-web/uploads/*
+# Cache and logs (Symfony2)
+/app/cache/*
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
 
+# Cache and logs (Symfony3)
+/var/cache/*
+/var/logs/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
 
-# -- Composer -----------------------------------------
-composer.phar
-composer.lock
+# Parameters
+/app/config/parameters.yml
+/app/config/parameters.ini
 
-# -- PHPUnit ------------------------------------------
-app/phpunit.xml  
+# Managed by Composer
+/app/bootstrap.php.cache
+/var/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
+/vendor/
 
-# -- Editores -----------------------------------------
-# vim
-.*.sw[a-z]
-*.un~
-Session.vim
-.netrwhist
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
 
-# eclipse
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-.externalToolBuilders/
-*.launch
-.buildpath
+# Assets managed by Bower
+/web/assets/vendor/
 
-# phpstorm
-.idea/
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
 
-# textmate
-*.tmproj
-*.tmproject
-tmtags
+# Build data
+/build/
 
-# sublimetext
-/*.sublime-project
-*.sublime-workspace
-
-# netbeans
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-
-# -- Sistemas Operativos ------------------------------
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# Linux
-.*
-!.gitignore
-!.htaccess
-*~
-
-# Mac OS X
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-._*
-.Spotlight-V100
-.Trashes
-/_site/nbproject/private/
+# Composer PHAR
+/composer.phar

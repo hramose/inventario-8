@@ -1,0 +1,101 @@
+<aside class="sidebar" role="complementary">
+<!-- profile -->
+<div class="sidebar-block">
+  <div class="media">
+    <div class="media-left">
+      <a href="page-profile.html">
+      {#  <span class="status dotted dotted-primary" data-toggle="tooltip" data-container="body" title="available"></span>#}
+        {% block imagenPerfil %}
+            <img class="media-object img-circle" src="{{ asset('Photos/Empleado/imagen.png')}}" alt="photo profile">
+        {% endblock %}
+      </a>
+    </div>
+    {% block perfil %}
+        <div class="media-body">
+            <h4 class="media-heading"></h4>  <!-- nombre de usuario conectado -->
+            <p class="text-muted">
+                <small></small>
+            </p>
+        </div>
+
+    {% endblock %}
+  </div>
+</div><!-- /.sidebar-block -->
+<!-- /profile -->
+
+<!-- /navigation -->
+<div class="nav-wrapper">
+  <ul class="nav nav-stacked" role="navigation">
+    <li class="nav-item" role="presentation">
+      <a href="">
+        <span class="nav-icon"><i class="fa fa-object-group"></i></span>
+        <span class="nav-text">Dashboard</span>
+      </a>
+    </li>
+
+   
+   
+    <li class="divider"></li>
+    <li class="nav-header" role="presentation">MENU</li>
+    
+        <li class="nav-item" role="presentation">
+          <a href="#" data-toggle="nav-child">
+            <span class="nav-icon"><i class="glyphicon glyphicon-user"></i></span>
+            <span class="nav-text">Cuentas</span>
+          </a>
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Listado clientes</span></a></li>
+          </ul>
+           <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Listado proveedores</span></a></li>
+          </ul>  
+        </li>
+   
+   
+        <li class="nav-item" role="presentation">
+          <a href="#" data-toggle="nav-child">
+            <span class="nav-icon"><i class="fa fa-shopping-cart"></i></span>
+            <span class="nav-text">Inventario</span>
+          </a>
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Listado de inventario</span></a></li>
+          </ul>
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Administrar categorias</span></a></li>
+          </ul>  
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Administrar atributos</span></a></li>
+          </ul>  
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Localidades</span></a></li>
+          </ul>  
+        </li>
+   
+   
+        <li class="nav-item" role="presentation">
+          <a href="#" data-toggle="nav-child">
+            <span class="nav-icon"><i class="fa fa-pencil"></i></span>
+            <span class="nav-text">Ordenes</span>
+          </a>
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Ordenes de compra</span></a></li>
+          </ul>
+          <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Cotización</span></a></li>
+          </ul>
+           <ul class="nav nav-child level-1 nav-stacked nav-pills" role="menu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="nav-text">Facturación</span></a></li>
+          </ul>  
+        </li>
+   
+
+        <li class="collapse-item" role="presentation">
+          <a href="#" data-sidebar="toggleCollapse">
+            <i class="fa fa-angle-double-left"></i>
+          </a>
+        </li>
+   
+    
+  </ul>
+</div>
+</aside><!-- /.SIDEBAR -->

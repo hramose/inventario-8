@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   {# <h1>Nuevo tipo de cuenta</h1>#}
+
+    {{ form_start(form, {'action': path('admin_tipocuenta_new')}) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-info active mb-1x mr-1x" value="Guardar" />
+    {{ form_end(form) }}
+
+   {# <ul>
+        <li>
+            <a href="{{ path('admin_tipocuenta_index') }}">Back to the list</a>
+        </li>
+    </ul>#}
+{% endblock %}

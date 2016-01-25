@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="UsuarioSistema" table="usuario_sistema">
+    <indexes>
+      <index name="fk_usuario_persona_idx" columns="persona_id"/>
+      <index name="fk_usuario_sistema_time_zone1_idx" columns="time_zone_id"/>
+      <index name="fk_usuario_sistema_pais1_idx" columns="pais_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombres" type="string" column="nombres" length="75" nullable="true"/>
+    <field name="apellidos" type="string" column="apellidos" length="75" nullable="true"/>
+    <field name="email" type="string" column="email" length="100" nullable="true"/>
+    <field name="telefono" type="string" column="telefono" length="25" nullable="true"/>
+    <field name="password" type="string" column="password" length="255" nullable="true"/>
+    <field name="foto" type="string" column="foto" length="255" nullable="true"/>
+    <field name="salt" type="string" column="salt" length="255" nullable="true"/>
+    <many-to-one field="timeZone" target-entity="TimeZone">
+      <join-columns>
+        <join-column name="time_zone_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pais" target-entity="Pais">
+      <join-columns>
+        <join-column name="pais_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="persona" target-entity="Persona">
+      <join-columns>
+        <join-column name="persona_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-many field="rol" target-entity="Rol" mapped-by="usuario"/>
+  </entity>
+</doctrine-mapping>

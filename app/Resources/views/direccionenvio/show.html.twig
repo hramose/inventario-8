@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>DireccionEnvio</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ direccionEnvio.id }}</td>
+            </tr>
+            <tr>
+                <th>Direccion1</th>
+                <td>{{ direccionEnvio.direccion1 }}</td>
+            </tr>
+            <tr>
+                <th>Direccion2</th>
+                <td>{{ direccionEnvio.direccion2 }}</td>
+            </tr>
+            <tr>
+                <th>Ciudad</th>
+                <td>{{ direccionEnvio.ciudad }}</td>
+            </tr>
+            <tr>
+                <th>Provinciaestado</th>
+                <td>{{ direccionEnvio.provinciaEstado }}</td>
+            </tr>
+            <tr>
+                <th>Postalzip</th>
+                <td>{{ direccionEnvio.postalZip }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_direccionenvio_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_direccionenvio_edit', { 'id': direccionEnvio.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

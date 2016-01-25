@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TimeZone</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ timeZone.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ timeZone.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_timezone_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_timezone_edit', { 'id': timeZone.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ConfTax" table="conf_tax">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombreTax" type="string" column="nombre_tax" length="200" nullable="true"/>
+    <field name="numeroRegistro" type="integer" column="numero_registro" nullable="true"/>
+    <field name="porcentaje" type="decimal" column="porcentaje" precision="15" scale="2" nullable="true"/>
+  </entity>
+</doctrine-mapping>

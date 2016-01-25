@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Localidad</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ localidad.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ localidad.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Alias</th>
+                <td>{{ localidad.alias }}</td>
+            </tr>
+            <tr>
+                <th>Direccion1</th>
+                <td>{{ localidad.direccion1 }}</td>
+            </tr>
+            <tr>
+                <th>Direccion2</th>
+                <td>{{ localidad.direccion2 }}</td>
+            </tr>
+            <tr>
+                <th>Ciudad</th>
+                <td>{{ localidad.ciudad }}</td>
+            </tr>
+            <tr>
+                <th>Provinciaestado</th>
+                <td>{{ localidad.provinciaEstado }}</td>
+            </tr>
+            <tr>
+                <th>Postalzip</th>
+                <td>{{ localidad.postalZip }}</td>
+            </tr>
+            <tr>
+                <th>Paisid</th>
+                <td>{{ localidad.paisId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_localidad_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_localidad_edit', { 'id': localidad.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

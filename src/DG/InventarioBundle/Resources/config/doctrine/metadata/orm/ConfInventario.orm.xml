@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ConfInventario" table="conf_inventario">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="costo" type="boolean" column="costo" nullable="true"/>
+    <field name="disponibilidadTotal" type="boolean" column="disponibilidad_total" nullable="true"/>
+    <field name="oferta" type="boolean" column="oferta" nullable="true"/>
+    <field name="imagenProducto" type="boolean" column="imagen_producto" nullable="true"/>
+    <field name="imagenCotizacion" type="boolean" column="imagen_cotizacion" nullable="true"/>
+    <field name="imagenFactura" type="boolean" column="imagen_factura" nullable="true"/>
+  </entity>
+</doctrine-mapping>

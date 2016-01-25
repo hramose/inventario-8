@@ -1,0 +1,43 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>ConfTax list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombretax</th>
+                <th>Numeroregistro</th>
+                <th>Porcentaje</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for confTax in confTaxes %}
+            <tr>
+                <td><a href="{{ path('admin_conftax_show', { 'id': confTax.id }) }}">{{ confTax.id }}</a></td>
+                <td>{{ confTax.nombreTax }}</td>
+                <td>{{ confTax.numeroRegistro }}</td>
+                <td>{{ confTax.porcentaje }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_conftax_show', { 'id': confTax.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_conftax_edit', { 'id': confTax.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_conftax_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Atributo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Alias</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atributo in atributos %}
+            <tr>
+                <td><a href="{{ path('admin_atributo_show', { 'id': atributo.id }) }}">{{ atributo.id }}</a></td>
+                <td>{{ atributo.name }}</td>
+                <td>{{ atributo.alias }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_atributo_show', { 'id': atributo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_atributo_edit', { 'id': atributo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_atributo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

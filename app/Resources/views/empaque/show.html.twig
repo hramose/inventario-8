@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Empaque</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ empaque.id }}</td>
+            </tr>
+            <tr>
+                <th>Empaque</th>
+                <td>{% if empaque.empaque %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nota</th>
+                <td>{{ empaque.nota }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_empaque_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_empaque_edit', { 'id': empaque.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

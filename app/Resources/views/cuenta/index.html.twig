@@ -1,0 +1,51 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Cuenta list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombrecuenta</th>
+                <th>Email</th>
+                <th>Web</th>
+                <th>Telefono</th>
+                <th>Fax</th>
+                <th>Valoragregado</th>
+                <th>Tipocuenta</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cuentum in cuentas %}
+            <tr>
+                <td><a href="{{ path('admin_cuenta_show', { 'id': cuentum.id }) }}">{{ cuentum.id }}</a></td>
+                <td>{{ cuentum.nombreCuenta }}</td>
+                <td>{{ cuentum.email }}</td>
+                <td>{{ cuentum.web }}</td>
+                <td>{{ cuentum.telefono }}</td>
+                <td>{{ cuentum.fax }}</td>
+                <td>{{ cuentum.valorAgregado }}</td>
+                <td>{% if cuentum.tipoCuenta %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_cuenta_show', { 'id': cuentum.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_cuenta_edit', { 'id': cuentum.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_cuenta_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -31,8 +31,6 @@
         <link rel="stylesheet" href="{{ asset('bundles/adesignscalendar/css/fullcalendar/fullcalendar.css') }}" />
         <link rel="stylesheet" href="{{ asset('Resources/fullcalendar/css/fullcalendar.print.css') }}" media="print"/>
         <link rel="stylesheet" href="{{ asset('Resources/bValidator-0.73/themes/bvalidator.theme.bootstrap.rt.css') }}" />
-        <link rel="stylesheet" href="{{ asset('Resources/css/redmond/jquery-ui-1.10.4.custom.css') }}" />
-         <link rel="stylesheet" href="{{ asset('Resources/css/customcss.css') }}" />
         <!-- fullcalendar -->
         <style>
             {# Hace los encabezados mas grandes#}
@@ -54,48 +52,6 @@
         </style>
         {%- endblock %}
         
-        {% block estilos -%}    
-                {# Estilo de modal #}
-                <style>
-                    .ui-dialog{
-                        border-radius: 0px;
-                        border:0px;
-                        padding:0px;
-                    }
-                    
-                    .ui-dialog-titlebar{
-                        border-radius: 0px;
-                        border:0px;
-                        background: #3b9e6f;
-                        padding:0px;
-                    }
-                    .ui-widget-overlay{
-                        background:#111;
-                    }
-                    
-                    
-                    .ui-dialog-titlebar-close{
-                        border:0px;
-                        border-radius: 0px;
-                        background: #FFF;
-                        color:#000;
-                        
-                    }
-                    
-                    .ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only.ui-dialog-titlebar-close{
-                        background:#FFF;
-                        color:#FFF;
-                        border:0px;
-                    }
-                    
-                    .ui-widget-overlay{
-                        background: #222222;
-                        opacity: 0.9;
-                    }
-                </style>
-                
-            {%- endblock %}
-        
         
         
     {% endblock %}
@@ -115,9 +71,9 @@
             SIDEBAR SECTION
             =============================================== -->
             {% block sidebar %}
-            {% include 'DGInventarioBundle:Layout:sidebar.html.twig'%}
+            {% include 'DGInventarioBundle:Layout:sidebarajustes.html.twig'%}
             {% endblock %}
-                <div class="modal-center"></div>    
+                    
             <section class="content-wrapper" role="main">
                 <div class="content">
                 <div class="content-bar">
@@ -151,9 +107,6 @@
                 </div><!-- /.content -->
             </section><!-- /MAIN -->
         {% endblock %}
-        
-         
-        
         {% block footer -%} 
         {% include 'DGInventarioBundle:Layout:footer.html.twig'%} 
         {% endblock %}
@@ -161,13 +114,7 @@
     {%- endblock %}  
                         
 
-      
-     </body>
-</html>
-  
-
-{% block javascripts_step %}
-
+    {% block js -%}
         <!-- VENDORS : jQuery & Bootstrap -->
         <script src="{{ asset('Resources/wrapkit/scripts/vendor.js') }}"></script>
         <!-- END VENDORS -->
@@ -223,6 +170,37 @@
         <script src="{{ asset('Resources/wrapkit/scripts/fileinput.js') }}"></script>
         <!-- VALIDATOR: js -->
         
-         <script type="text/javascript" src="{{ asset('Resources/jquery-ui/jquery-ui.js') }}"></script>
-         
+        
+    
+    {% endblock %}  
+    {% block javascripts -%}
+    <!-- Aspectos generales de la plantilla -->
+    <script>
+        $(document).ready(function(){
+            $('select').each(function(index, val) {
+                if (!$(this).hasClass("busqueda") ){
+                   //$(this).selectBoxIt();
+                }
+                else{
+                    //$(this).select2();
+                }
+            });
+            
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip();
+          $('.dropdown-toggle').dropdown();
+        })
+    </script>
+    {% endblock %}  
+    {% block jquery -%}
+    {% endblock %} 
+    </body>
+</html>
+  
+
+{% block javascripts_step %}
+   
 {% endblock %}

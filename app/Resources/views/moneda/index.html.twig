@@ -1,0 +1,39 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Moneda list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for moneda in monedas %}
+            <tr>
+                <td><a href="{{ path('admin_moneda_show', { 'id': moneda.id }) }}">{{ moneda.id }}</a></td>
+                <td>{{ moneda.nombre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_moneda_show', { 'id': moneda.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_moneda_edit', { 'id': moneda.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_moneda_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

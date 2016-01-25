@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cuenta</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cuentum.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombrecuenta</th>
+                <td>{{ cuentum.nombreCuenta }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ cuentum.email }}</td>
+            </tr>
+            <tr>
+                <th>Web</th>
+                <td>{{ cuentum.web }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ cuentum.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ cuentum.fax }}</td>
+            </tr>
+            <tr>
+                <th>Valoragregado</th>
+                <td>{{ cuentum.valorAgregado }}</td>
+            </tr>
+            <tr>
+                <th>Tipocuenta</th>
+                <td>{% if cuentum.tipoCuenta %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_cuenta_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_cuenta_edit', { 'id': cuentum.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

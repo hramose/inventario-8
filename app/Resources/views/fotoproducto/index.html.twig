@@ -1,0 +1,39 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>FotoProducto list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fotoProducto in fotoProductos %}
+            <tr>
+                <td><a href="{{ path('admin_fotoproducto_show', { 'id': fotoProducto.id }) }}">{{ fotoProducto.id }}</a></td>
+                <td>{{ fotoProducto.nombre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_fotoproducto_show', { 'id': fotoProducto.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_fotoproducto_edit', { 'id': fotoProducto.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_fotoproducto_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

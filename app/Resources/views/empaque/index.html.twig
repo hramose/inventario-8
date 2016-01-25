@@ -1,0 +1,41 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Empaque list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Empaque</th>
+                <th>Nota</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for empaque in empaques %}
+            <tr>
+                <td><a href="{{ path('admin_empaque_show', { 'id': empaque.id }) }}">{{ empaque.id }}</a></td>
+                <td>{% if empaque.empaque %}Yes{% else %}No{% endif %}</td>
+                <td>{{ empaque.nota }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_empaque_show', { 'id': empaque.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_empaque_edit', { 'id': empaque.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_empaque_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

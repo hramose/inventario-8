@@ -1,0 +1,39 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>TipoInventario list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipoInventario in tipoInventarios %}
+            <tr>
+                <td><a href="{{ path('admin_tipoinventario_show', { 'id': tipoInventario.id }) }}">{{ tipoInventario.id }}</a></td>
+                <td>{{ tipoInventario.nombre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_tipoinventario_show', { 'id': tipoInventario.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_tipoinventario_edit', { 'id': tipoInventario.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_tipoinventario_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

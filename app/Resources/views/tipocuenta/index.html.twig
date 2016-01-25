@@ -1,0 +1,152 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+  
+   <div class=" " style="margin-bottom: 10px; margin-top: 10px;">  
+      <a href="{{ path('admin_tipocuenta_new') }}" class="btn btn-default nuevo-registro" >Crear nuevo tipo de cuenta</a>    
+   </div>  
+    
+   
+   <div id="resultado"></div>
+  
+   <div class="col-md-7 pull-right" >
+       <h2>Tipos de cuentas</h2>
+    </div>
+    
+
+    {# <ul>
+        <li>
+            <a href="{{ path('admin_tipocuenta_new') }}" class="pull-center nuevo-registro" >Create a new entry</a>
+        </li>
+    </ul>#}
+
+   <div class="form-edit-info" style="padding-top: 20px;">
+    <table class="listados table table-bordered table-hover" style="margin-top: 20px;">
+        <thead>
+            <tr>
+               {# <th>Id</th>#}
+                <th>Nombrecuenta</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tipoCuentum in tipoCuentas %}
+            <tr>
+               {# <td><a href="{{ path('admin_tipocuenta_show', { 'id': tipoCuentum.id }) }}">{{ tipoCuentum.id }}</a></td>#}
+                <td>{{ tipoCuentum.nombreCuenta }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_tipocuenta_show', { 'id': tipoCuentum.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_tipocuenta_edit', { 'id': tipoCuentum.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   </div>     
+
+   
+{% endblock %}
+
+
+
+{% block javascripts_step %}
+    {{parent()}}
+   {# <script type="text/javascript" src="{{ asset('Resources/jquery-ui/jquery-ui.js') }}"></script>#}
+    <script>
+                $(document).ready(function(){
+                    
+                    $('.listados').DataTable({
+                        "order":[[0,"desc"]],
+                        "columnDefs": [
+                               { "orderable": false, "targets": 1 }
+                              
+                            ],
+                    });
+                    $('.dataTables_filter').addClass('pull-right ');
+                    $('.dataTables_filter').children().children().attr('placeholder','');
+                   
+                    
+                    $('.nuevo-registro').on("click",function(){
+                       
+                        //var mas = $(this).children();
+                        
+                        //$(this).html('<img style="width:25%; position:inherit; float:right; " src="{{ asset('Resources/images/89.gif') }}">');
+                        
+                        var href = $(this).attr('href');
+                        
+                        ($('#resultado')) ? $('#resultado').remove():'';
+ 
+                        // crear un elemento para colocar la información
+                        var elem = $("<div id='resultado'></div>");
+ 
+                        //Agregar el elemento después de la clase records_list
+                        elem.insertAfter($(".listados"));
+ 
+                        // cargar mediante una llamada ajax la dirección que tiene href dentro de resultado 
+                        $('#resultado').load(href, function(){
+                            $(this).dialog({
+                                modal: true, 
+                                width: 600,
+                                title: "Registrar nuevo tipo de cuenta",
+                                resizable: false,
+                                position: { 
+                                    my: "center", 
+                                    at: "center", 
+                                    of: '.modal-center'
+                                },
+                                show: { effect: "fadeIn", duration: 800 }
+                            });
+                            //$('.nuevo-registro').html(mas);
+                            
+                        });
+                        
+                        return false;
+                    });
+                    
+                    $('.edit-registro').on("click",function(){
+                        var mas = $(this).children();
+                        
+                        $(this).html('<img style="width:25%; position:inherit; float:right; " src="{{ asset('Resources/images/89C.gif') }}">');
+                        
+                        var href = $(this).attr('href');
+                        
+                        ($('#resultado')) ? $('#resultado').remove():'';
+ 
+                        // crear un elemento para colocar la información
+                        var elem = $("<div id='resultado'></div>");
+                        
+                        //Agregar el elemento después de la clase records_list
+                        elem.insertAfter($(".listados"));
+{#                        return false;#}
+                        // cargar mediante una llamada ajax la dirección que tiene href dentro de resultado 
+                        $('#resultado').load(href, function(){
+                            $(this).dialog({
+                                modal: true, 
+                                width: 600,
+                                title: "Edit user information",
+                                resizable: false,
+                                position: { 
+                                    my: "center", 
+                                    at: "center", 
+                                    of: '.modal-center'
+                                },
+                                show: { effect: "fadeIn", duration: 800 }
+                            });
+                            $('.edit-registro').html(mas);
+                            
+                        });
+                        
+                        return false;
+                    });
+                    
+                });
+
+            </script>
+
+{% endblock %}

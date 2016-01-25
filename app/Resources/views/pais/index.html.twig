@@ -1,0 +1,41 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Pais list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Iso</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pai in pais %}
+            <tr>
+                <td><a href="{{ path('admin_pais_show', { 'id': pai.id }) }}">{{ pai.id }}</a></td>
+                <td>{{ pai.iso }}</td>
+                <td>{{ pai.nombre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_pais_show', { 'id': pai.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_pais_edit', { 'id': pai.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_pais_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

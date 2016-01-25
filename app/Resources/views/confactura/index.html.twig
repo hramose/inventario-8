@@ -1,0 +1,53 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>ConFactura list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Terminopago</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Logo</th>
+                <th>Versku</th>
+                <th>Vencimiento</th>
+                <th>Nombrefactura</th>
+                <th>Nombrecotizacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conFactura in conFacturas %}
+            <tr>
+                <td><a href="{{ path('admin_confactura_show', { 'id': conFactura.id }) }}">{{ conFactura.id }}</a></td>
+                <td>{{ conFactura.terminoPago }}</td>
+                <td>{{ conFactura.email }}</td>
+                <td>{{ conFactura.telefono }}</td>
+                <td>{{ conFactura.logo }}</td>
+                <td>{% if conFactura.verSku %}Yes{% else %}No{% endif %}</td>
+                <td>{{ conFactura.vencimiento }}</td>
+                <td>{{ conFactura.nombreFactura }}</td>
+                <td>{{ conFactura.nombreCotizacion }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_confactura_show', { 'id': conFactura.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_confactura_edit', { 'id': conFactura.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_confactura_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="LocalidadContacto" table="localidad_contacto">
+    <indexes>
+      <index name="fk_localidadcontacto_localidad1_idx" columns="localidad_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombreManager" type="string" column="nombre_manager" length="100" nullable="true"/>
+    <field name="email" type="string" column="email" length="100" nullable="true"/>
+    <field name="telefono" type="string" column="telefono" length="10" nullable="true"/>
+    <field name="fax" type="string" column="fax" length="10" nullable="true"/>
+    <many-to-one field="localidad" target-entity="Localidad">
+      <join-columns>
+        <join-column name="localidad_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

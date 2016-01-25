@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>ConFactura</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conFactura.id }}</td>
+            </tr>
+            <tr>
+                <th>Terminopago</th>
+                <td>{{ conFactura.terminoPago }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ conFactura.email }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ conFactura.telefono }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>{{ conFactura.logo }}</td>
+            </tr>
+            <tr>
+                <th>Versku</th>
+                <td>{% if conFactura.verSku %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Vencimiento</th>
+                <td>{{ conFactura.vencimiento }}</td>
+            </tr>
+            <tr>
+                <th>Nombrefactura</th>
+                <td>{{ conFactura.nombreFactura }}</td>
+            </tr>
+            <tr>
+                <th>Nombrecotizacion</th>
+                <td>{{ conFactura.nombreCotizacion }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_confactura_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_confactura_edit', { 'id': conFactura.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

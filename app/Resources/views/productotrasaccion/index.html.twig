@@ -1,0 +1,43 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>ProductoTrasaccion list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Tipotransaccion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for productoTrasaccion in productoTrasaccions %}
+            <tr>
+                <td><a href="{{ path('admin_productotransaccion_show', { 'id': productoTrasaccion.id }) }}">{{ productoTrasaccion.id }}</a></td>
+                <td>{{ productoTrasaccion.fecha }}</td>
+                <td>{{ productoTrasaccion.cantidad }}</td>
+                <td>{% if productoTrasaccion.tipoTransaccion %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_productotransaccion_show', { 'id': productoTrasaccion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_productotransaccion_edit', { 'id': productoTrasaccion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_productotransaccion_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

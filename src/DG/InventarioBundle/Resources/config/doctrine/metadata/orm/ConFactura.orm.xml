@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ConFactura" table="con_factura">
+    <indexes>
+      <index name="fk_confactura_moneda1_idx" columns="moneda_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="terminoPago" type="string" column="termino_pago" length="200" nullable="true"/>
+    <field name="email" type="string" column="email" length="50" nullable="true"/>
+    <field name="telefono" type="string" column="telefono" length="25" nullable="true"/>
+    <field name="logo" type="string" column="logo" length="255" nullable="true"/>
+    <field name="verSku" type="boolean" column="ver_sku" nullable="true"/>
+    <field name="vencimiento" type="integer" column="vencimiento" nullable="true"/>
+    <field name="nombreFactura" type="string" column="nombre_factura" length="100" nullable="true"/>
+    <field name="nombreCotizacion" type="string" column="nombre_cotizacion" length="100" nullable="true"/>
+    <many-to-one field="moneda" target-entity="Moneda">
+      <join-columns>
+        <join-column name="moneda_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

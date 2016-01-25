@@ -1,0 +1,55 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Producto list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Fecha</th>
+                <th>Descripcion</th>
+                <th>Preciocompra</th>
+                <th>Precioventa</th>
+                <th>Sku</th>
+                <th>Serial</th>
+                <th>Inventariobajo</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for producto in productos %}
+            <tr>
+                <td><a href="{{ path('admin_producto_show', { 'id': producto.id }) }}">{{ producto.id }}</a></td>
+                <td>{{ producto.nombre }}</td>
+                <td>{% if producto.fecha %}{{ producto.fecha|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precioCompra }}</td>
+                <td>{{ producto.precioVenta }}</td>
+                <td>{{ producto.sku }}</td>
+                <td>{{ producto.serial }}</td>
+                <td>{{ producto.inventarioBajo }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_producto_show', { 'id': producto.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_producto_edit', { 'id': producto.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_producto_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+    <h1>DireccionFactura list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Direccion1</th>
+                <th>Direccion2</th>
+                <th>Ciudad</th>
+                <th>Provinciaestado</th>
+                <th>Postalzip</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for direccionFactura in direccionFacturas %}
+            <tr>
+                <td><a href="{{ path('admin_direccionfactura_show', { 'id': direccionFactura.id }) }}">{{ direccionFactura.id }}</a></td>
+                <td>{{ direccionFactura.direccion1 }}</td>
+                <td>{{ direccionFactura.direccion2 }}</td>
+                <td>{{ direccionFactura.ciudad }}</td>
+                <td>{{ direccionFactura.provinciaEstado }}</td>
+                <td>{{ direccionFactura.postalZip }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_direccionfactura_show', { 'id': direccionFactura.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_direccionfactura_edit', { 'id': direccionFactura.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_direccionfactura_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

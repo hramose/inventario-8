@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Cuenta" table="cuenta">
+    <indexes>
+      <index name="fk_cuenta_tipo_cuenta1_idx" columns="tipo_cuenta_id"/>
+      <index name="fk_cuenta_empresa1_idx" columns="empresa_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombreCuenta" type="string" column="nombre_cuenta" length="100" nullable="true"/>
+    <field name="email" type="string" column="email" length="50" nullable="true"/>
+    <field name="web" type="string" column="web" length="200" nullable="true"/>
+    <field name="telefono" type="string" column="telefono" length="25" nullable="true"/>
+    <field name="fax" type="string" column="fax" length="25" nullable="true"/>
+    <field name="valorAgregado" type="string" column="valor_agregado" length="45" nullable="true"/>
+    <field name="tipoCuenta" type="boolean" column="tipo_cuenta" nullable="true"/>
+    <many-to-one field="tipoCuenta2" target-entity="TipoCuenta">
+      <join-columns>
+        <join-column name="tipo_cuenta_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="empresa" target-entity="AjusteEmpresa">
+      <join-columns>
+        <join-column name="empresa_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

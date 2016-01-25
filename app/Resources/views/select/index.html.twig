@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Select list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for select in selects %}
+            <tr>
+                <td><a href="{{ path('admin_select_show', { 'id': select.id }) }}">{{ select.id }}</a></td>
+                <td>{{ select.nombre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_select_show', { 'id': select.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_select_edit', { 'id': select.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_select_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

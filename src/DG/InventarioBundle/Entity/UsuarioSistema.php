@@ -1,58 +1,68 @@
 <?php
 
 namespace DG\InventarioBundle\Entity;
-
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * UsuarioSistema
  *
- * @ORM\Table(name="usuario_sistema", indexes={@ORM\Index(name="fk_usuario_persona_idx", columns={"persona_id"}), @ORM\Index(name="fk_usuario_sistema_time_zone1_idx", columns={"time_zone_id"}), @ORM\Index(name="fk_usuario_sistema_pais1_idx", columns={"pais_id"})})
  * @ORM\Entity
+ * @ORM\Table(name="usuario_sistema")
  */
-class UsuarioSistema
+class UsuarioSistema implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="usuario", type="string", length=50, nullable=true)
+     * @ORM\Column(name="usuario", type="string", length=40, nullable=false)
      */
-    private $usuario;
+    private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="salt", type="string", length=255, nullable=true)
+     * @ORM\Column(name="salt", type="string", length=255, nullable=false)
      */
     private $salt;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=false)
+     */
+    private $estado;
+
+    
 
     /**
      * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Persona")
+     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="usuarioSistema", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="persona_id", referencedColumnName="id")
      * })
      */
     private $persona;
-
-    /**
+    
+     /**
      * @var \Pais
      *
      * @ORM\ManyToOne(targetEntity="Pais")
@@ -72,26 +82,30 @@ class UsuarioSistema
      */
     private $timeZone;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Rol", mappedBy="usuario")
-     */
-    private $rol;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="rolusuario",
+     *     joinColumns={@ORM\JoinColumn(name="usuario_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
+     * )
+     */
+    private $user_roles;
+
+    private $isEnabled;// = false; 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->rol = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user_roles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -99,33 +113,35 @@ class UsuarioSistema
     }
 
     /**
-     * Set usuario
+     * Set username
      *
-     * @param string $usuario
-     * @return UsuarioSistema
+     * @param string $username
+     *
+     * @return Usuario
      */
-    public function setUsuario($usuario)
+    public function setUsername($username)
     {
-        $this->usuario = $usuario;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get usuario
+     * Get username
      *
-     * @return string 
+     * @return string
      */
-    public function getUsuario()
+    public function getUsername()
     {
-        return $this->usuario;
+        return $this->username;
     }
 
     /**
      * Set password
      *
      * @param string $password
-     * @return UsuarioSistema
+     *
+     * @return Usuario
      */
     public function setPassword($password)
     {
@@ -137,7 +153,7 @@ class UsuarioSistema
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -148,7 +164,8 @@ class UsuarioSistema
      * Set salt
      *
      * @param string $salt
-     * @return UsuarioSistema
+     *
+     * @return Usuario
      */
     public function setSalt($salt)
     {
@@ -160,18 +177,44 @@ class UsuarioSistema
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
         return $this->salt;
     }
+    
+     /**
+     * Set estado
+     *
+     * @param boolean $estado
+     *
+     * @return Usuario
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+    
 
     /**
      * Set persona
      *
      * @param \DG\InventarioBundle\Entity\Persona $persona
-     * @return UsuarioSistema
+     *
+     * @return Usuario
      */
     public function setPersona(\DG\InventarioBundle\Entity\Persona $persona = null)
     {
@@ -183,13 +226,13 @@ class UsuarioSistema
     /**
      * Get persona
      *
-     * @return \DG\InventarioBundle\Entity\Persona 
+     * @return \DG\InventarioBundle\Entity\Persona
      */
     public function getPersona()
     {
         return $this->persona;
     }
-
+    
     /**
      * Set pais
      *
@@ -239,33 +282,119 @@ class UsuarioSistema
     /**
      * Add rol
      *
-     * @param \DG\InventarioBundle\Entity\Rol $rol
+     * @param \DG\InventarioBundle\Entity\Rol $userRoles
+     *
      * @return UsuarioSistema
      */
-    public function addRol(\DG\InventarioBundle\Entity\Rol $rol)
+    public function addRol(\DG\InventarioBundle\Entity\Rol $userRoles)
     {
-        $this->rol[] = $rol;
+        $this->user_roles[] = $userRoles;
 
         return $this;
     }
-
+    
     /**
-     * Remove rol
+     * Remove role
      *
-     * @param \DG\InventarioBundle\Entity\Rol $rol
+     * @param \DG\InventarioBundle\Entity\Rol $userRoles
      */
-    public function removeRol(\DG\InventarioBundle\Entity\Rol $rol)
+    public function removeRole(\DG\InventarioBundle\Entity\Rol $userRoles)
     {
-        $this->rol->removeElement($rol);
+        $this->user_roles->removeElement($userRoles);
+    }
+
+    
+    
+    public function setUserRoles($roles) {
+        $this->user_roles = $roles;
     }
 
     /**
-     * Get rol
+     * Get user_roles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
-    public function getRol()
+    public function getUserRoles()
     {
-        return $this->rol;
+        return $this->user_roles;
+    }
+ 
+    /**
+     * Get roles
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->user_roles->toArray(); //IMPORTANTE: el mecanismo de seguridad de Sf2 requiere ésto como un array
+    }
+    
+    /**
+     * Compares this user to another to determine if they are the same.
+     *
+     * @param UserInterface $user The user
+     * @return boolean True if equal, false othwerwise.
+     */
+    public function equals(UserInterface $user) {
+        return md5($this->getUsername()) == md5($user->getUsername());
+ 
+    }
+ 
+    /**
+     * Erases the user credentials.
+     */
+    public function eraseCredentials() {
+ 
+    }
+    
+    /*public function __toString() {
+        return $this->username ? $this->username : '';
+    }*/
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+        ));
+    }
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            ) = unserialize($serialized);
+    }
+    
+    public function isAccountNonExpired()
+    {
+            return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+            return  !$this->isEnabled;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+            return true;
+    }
+
+    public function isEnabled()
+    {
+        if ((int)$this->estado == 1)
+        $this->isEnabled = true;
+        else
+        $this->isEnabled  = false;
+        return  $this->isEnabled;
+    }
+    
+     public function __toString() {
+    return $this->username ? $this->username : '';
     }
 }

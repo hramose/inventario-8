@@ -8,8 +8,8 @@
             <tr>
                 <th>Id</th>
                 <th>Usuario</th>
-                <th>Password</th>
-                <th>Salt</th>
+                <th>Nombre</th>
+              {#  <th>Salt</th>#}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,9 +17,10 @@
         {% for usuarioSistema in usuarioSistemas %}
             <tr>
                 <td><a href="{{ path('admin_usuario_show', { 'id': usuarioSistema.id }) }}">{{ usuarioSistema.id }}</a></td>
-                <td>{{ usuarioSistema.usuario }}</td>
-                <td>{{ usuarioSistema.password }}</td>
-                <td>{{ usuarioSistema.salt }}</td>
+                <td>{{ usuarioSistema.username }}</td>
+                <td>{{ usuarioSistema.persona }}</td>
+               {# <td>{{ usuarioSistema.password }}</td>#}
+                {#<td>{{ usuarioSistema.salt }}</td>#}
                 <td>
                     <ul>
                         <li>

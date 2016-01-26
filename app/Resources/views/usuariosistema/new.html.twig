@@ -23,27 +23,38 @@
   {{ form_start(form) }}
     {{ form_errors(form) }}
    
-        {# <div class="col-xs-12 col-sm-6"> #}
-        
-      {#  </div> #}
+ <div class="row"> 
      
-        {% include 'DGInventarioBundle:Persona:form.html.twig' with { 'form': form.persona }%}  
-        
-  
-         <div class="col-xs-12 col-sm-2">
-        {{ form_row(form.usuario) }}
+     <div class="row">
+               <div class="col-md-12">
+                  <h3 class="text">Informacion personal</h3>
+                  <hr>
+                </div>
+      </div> 
+
+   {% include 'DGInventarioBundle:Persona:form.html.twig' with { 'form': form.persona }%}  
+   <div class="row">
+               <div class="col-md-12">
+                  <h3 class="text">Informacion de usuario</h3>
+                  <hr>
+                </div>
+      </div> 
+
+    
+          <div class="col-md-12">
+        {{ form_row(form.username) }}
          </div> 
-         <div class="col-xs-12 col-sm-2">
+          <div class="col-md-12">
         {{ form_row(form.password) }}
          </div>  
-         <div class="col-xs-12 col-sm-2">
+         {#<div class="col-md-12">
         {{ form_row(form.salt) }}
-         </div>  
-       
-
+         </div>  #}
+     
+ </div> 
              <div class="form-grouphide col-sm-12">
                 <a href="{{ path('admin_usuario_index') }}">Cancelar</a>
-                {{ form_widget(form.submit) }}
+                <input type="submit" value="Guardar" />
               </div>
             
       

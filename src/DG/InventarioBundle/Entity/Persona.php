@@ -242,4 +242,9 @@ class Persona
     {
         return $this->foto;
     }
+    
+     public function __toString() {
+    //return $this->cargo ? $this->cargo : '';
+    return $this->getNombres().' '.$this->getApellidos();
+    }
 }

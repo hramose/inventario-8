@@ -4,7 +4,7 @@ namespace DG\InventarioBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PersonaType extends AbstractType
 {
@@ -15,13 +15,38 @@ class PersonaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombres')
-            ->add('apellidos')
-            ->add('correo')
-            ->add('celular')
-            ->add('fijo')
-            ->add('direccion')
-            ->add('foto')
+           ->add('nombres','text',array('label' => 'Nombres','required'=>false,
+                    'attr'=>array(
+                    'class'=>'nombresPersona'
+                    )))
+            /*->add('segundoNombre','text',array('label' => 'Segundo nombre',
+                    'attr'=>array(
+                    'class'=>'form-control input-sm'
+                    )))*/
+            ->add('apellidos','text',array('label' => 'Apellidos','required'=>false,
+                    'attr'=>array(
+                    'class'=>'apellidosPersona'
+                    )))
+            ->add('correo','text',array('label' => 'Correo','required'=>false,
+                    'attr'=>array(
+                    'class'=>'correoPersona'
+                    )))
+            ->add('celular','text',array('label' => 'Celular','required'=>false,
+                    'attr'=>array(
+                    'class'=>'celularPersona'
+                    )))
+            ->add('fijo','text',array('label' => 'Fijo','required'=>false,
+                    'attr'=>array(
+                    'class'=>'fijoPersona'
+                    )))
+            ->add('direccion','text',array('label' => 'Direccion','required'=>false,
+                    'attr'=>array(
+                    'class'=>'apellidosPersona'
+                    )))
+            ->add('foto','text',array('label' => 'Foto','required'=>false,
+                    'attr'=>array(
+                    'class'=>'apellidosPersona'
+                    )))
         ;
     }
     

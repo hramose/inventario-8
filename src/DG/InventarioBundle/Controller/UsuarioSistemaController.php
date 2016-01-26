@@ -50,10 +50,11 @@ class UsuarioSistemaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $this->setSecurePassword($usuarioSistema);
             $em->persist($usuarioSistema);
             $em->flush();
 
-            return $this->redirectToRoute('admin_usuario_show', array('id' => $usuariosistema->getId()));
+            return $this->redirectToRoute('admin_usuario_index');
         }
 
         return $this->render('usuariosistema/new.html.twig', array(
@@ -88,9 +89,19 @@ class UsuarioSistemaController extends Controller
     {
         $deleteForm = $this->createDeleteForm($usuarioSistema);
         $editForm = $this->createForm('DG\InventarioBundle\Form\UsuarioSistemaType', $usuarioSistema);
+        $current_pass = $usuarioSistema->getPassword();
         $editForm->handleRequest($request);
+        
+        if($usuarioSistema->getPassword()==""){
+            $usuarioSistema->setPassword($current_pass);
+        }
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            
+            if ($current_pass != $usuarioSistema->getPassword()) {
+                $this->setSecurePassword($usuarioSistema);
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($usuarioSistema);
             $em->flush();
@@ -140,4 +151,12 @@ class UsuarioSistemaController extends Controller
             ->getForm()
         ;
     }
+    
+     private function setSecurePassword(&$entity) {
+        $entity->setSalt(md5(time()));
+        $encoder = new \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder('sha512', true, 10);
+        $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+        $entity->setPassword($password);
+    }
+    
 }

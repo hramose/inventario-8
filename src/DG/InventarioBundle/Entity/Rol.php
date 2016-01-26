@@ -2,6 +2,7 @@
 
 namespace DG\InventarioBundle\Entity;
 
+use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="rol")
  * @ORM\Entity
  */
-class Rol
+class Rol implements RoleInterface
 {
     /**
      * @var integer
@@ -24,17 +25,17 @@ class Rol
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
+     * @ORM\Column(name="nombre", type="string", length=30, nullable=false)
      */
     private $nombre;
-
-    /**
+    
+     /**
      * @var string
      *
      * @ORM\Column(name="descripcion", type="string", length=100, nullable=true)
      */
     private $descripcion;
-
+    
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
@@ -50,19 +51,11 @@ class Rol
      */
     private $usuario;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->usuario = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-
+   
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -73,6 +66,7 @@ class Rol
      * Set nombre
      *
      * @param string $nombre
+     *
      * @return Rol
      */
     public function setNombre($nombre)
@@ -85,13 +79,13 @@ class Rol
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
         return $this->nombre;
     }
-
+    
     /**
      * Set descripcion
      *
@@ -114,8 +108,8 @@ class Rol
     {
         return $this->descripcion;
     }
-
-    /**
+    
+     /**
      * Add usuario
      *
      * @param \DG\InventarioBundle\Entity\UsuarioSistema $usuario
@@ -147,4 +141,13 @@ class Rol
     {
         return $this->usuario;
     }
+
+    public function getRole() {
+            return $this->getNombre();
+    }
+    public function __toString() {
+        return $this->getRole();
+    }
+     
+   
 }

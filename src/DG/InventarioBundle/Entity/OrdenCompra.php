@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OrdenCompra
  *
- * @ORM\Table(name="orden_compra", indexes={@ORM\Index(name="fk_orden_compra_producto1_idx", columns={"producto_id"})})
+ * @ORM\Table(name="orden_compra", indexes={@ORM\Index(name="fk_orden_compra_usuario_sistema1_idx", columns={"usuario_sistema_id"})})
  * @ORM\Entity
  */
 class OrdenCompra
@@ -57,14 +57,21 @@ class OrdenCompra
     private $montoTotal;
 
     /**
-     * @var \Producto
+     * @var \DateTime
      *
-     * @ORM\ManyToOne(targetEntity="Producto")
+     * @ORM\Column(name="fecha_creacion", type="datetime", nullable=true)
+     */
+    private $fechaCreacion;
+
+    /**
+     * @var \UsuarioSistema
+     *
+     * @ORM\ManyToOne(targetEntity="UsuarioSistema")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="usuario_sistema_id", referencedColumnName="id")
      * })
      */
-    private $producto;
+    private $usuarioSistema;
 
 
 
@@ -194,25 +201,48 @@ class OrdenCompra
     }
 
     /**
-     * Set producto
+     * Set fechaCreacion
      *
-     * @param \DG\InventarioBundle\Entity\Producto $producto
+     * @param \DateTime $fechaCreacion
      * @return OrdenCompra
      */
-    public function setProducto(\DG\InventarioBundle\Entity\Producto $producto = null)
+    public function setFechaCreacion($fechaCreacion)
     {
-        $this->producto = $producto;
+        $this->fechaCreacion = $fechaCreacion;
 
         return $this;
     }
 
     /**
-     * Get producto
+     * Get fechaCreacion
      *
-     * @return \DG\InventarioBundle\Entity\Producto 
+     * @return \DateTime 
      */
-    public function getProducto()
+    public function getFechaCreacion()
     {
-        return $this->producto;
+        return $this->fechaCreacion;
+    }
+
+    /**
+     * Set usuarioSistema
+     *
+     * @param \DG\InventarioBundle\Entity\UsuarioSistema $usuarioSistema
+     * @return OrdenCompra
+     */
+    public function setUsuarioSistema(\DG\InventarioBundle\Entity\UsuarioSistema $usuarioSistema = null)
+    {
+        $this->usuarioSistema = $usuarioSistema;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioSistema
+     *
+     * @return \DG\InventarioBundle\Entity\UsuarioSistema 
+     */
+    public function getUsuarioSistema()
+    {
+        return $this->usuarioSistema;
     }
 }

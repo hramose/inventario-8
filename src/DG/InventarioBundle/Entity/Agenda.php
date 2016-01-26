@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Agenda
  *
- * @ORM\Table(name="agenda", indexes={@ORM\Index(name="fk_agenda_usuario_sistema1_idx", columns={"usuario_sistema_id"})})
+ * @ORM\Table(name="agenda")
  * @ORM\Entity
  */
 class Agenda
@@ -76,16 +76,6 @@ class Agenda
      * @ORM\Column(name="email2", type="string", length=100, nullable=true)
      */
     private $email2;
-
-    /**
-     * @var \UsuarioSistema
-     *
-     * @ORM\ManyToOne(targetEntity="UsuarioSistema")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_sistema_id", referencedColumnName="id")
-     * })
-     */
-    private $usuarioSistema;
 
 
 
@@ -281,28 +271,5 @@ class Agenda
     public function getEmail2()
     {
         return $this->email2;
-    }
-
-    /**
-     * Set usuarioSistema
-     *
-     * @param \DG\InventarioBundle\Entity\UsuarioSistema $usuarioSistema
-     * @return Agenda
-     */
-    public function setUsuarioSistema(\DG\InventarioBundle\Entity\UsuarioSistema $usuarioSistema = null)
-    {
-        $this->usuarioSistema = $usuarioSistema;
-
-        return $this;
-    }
-
-    /**
-     * Get usuarioSistema
-     *
-     * @return \DG\InventarioBundle\Entity\UsuarioSistema 
-     */
-    public function getUsuarioSistema()
-    {
-        return $this->usuarioSistema;
     }
 }

@@ -15,12 +15,13 @@
     <field name="fax" type="string" column="fax" length="25" nullable="true"/>
     <field name="valorAgregado" type="string" column="valor_agregado" length="45" nullable="true"/>
     <field name="tipoCuenta" type="boolean" column="tipo_cuenta" nullable="true"/>
+    <field name="direccionIgual" type="boolean" column="direccion_igual" nullable="true"/>
     <many-to-one field="tipoCuenta2" target-entity="TipoCuenta">
       <join-columns>
         <join-column name="tipo_cuenta_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="empresa" target-entity="AjusteEmpresa">
+    <many-to-one field="empresa" target-entity="ConfiguracionEmpresa">
       <join-columns>
         <join-column name="empresa_id" referenced-column-name="id"/>
       </join-columns>

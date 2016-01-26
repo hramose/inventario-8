@@ -28,6 +28,13 @@ class Status
      */
     private $nombre;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="estado", type="string", length=45, nullable=true)
+     */
+    private $estado;
+
 
 
     /**
@@ -61,5 +68,28 @@ class Status
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return Status
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return string 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

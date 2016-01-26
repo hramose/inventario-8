@@ -28,6 +28,13 @@ class TipoAtributo
      */
     private $nombre;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="multiple", type="boolean", nullable=true)
+     */
+    private $multiple;
+
 
 
     /**
@@ -61,5 +68,28 @@ class TipoAtributo
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set multiple
+     *
+     * @param boolean $multiple
+     * @return TipoAtributo
+     */
+    public function setMultiple($multiple)
+    {
+        $this->multiple = $multiple;
+
+        return $this;
+    }
+
+    /**
+     * Get multiple
+     *
+     * @return boolean 
+     */
+    public function getMultiple()
+    {
+        return $this->multiple;
     }
 }

@@ -2,7 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="OrdenCompra" table="orden_compra">
     <indexes>
-      <index name="fk_orden_compra_producto1_idx" columns="producto_id"/>
+      <index name="fk_orden_compra_usuario_sistema1_idx" columns="usuario_sistema_id"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -12,9 +12,10 @@
     <field name="resumen" type="text" column="resumen" length="65535" nullable="true"/>
     <field name="cantidadTotal" type="integer" column="cantidad_total" nullable="true"/>
     <field name="montoTotal" type="string" column="monto_total" length="45" nullable="true"/>
-    <many-to-one field="producto" target-entity="Producto">
+    <field name="fechaCreacion" type="datetime" column="fecha_creacion" nullable="true"/>
+    <many-to-one field="usuarioSistema" target-entity="UsuarioSistema">
       <join-columns>
-        <join-column name="producto_id" referenced-column-name="id"/>
+        <join-column name="usuario_sistema_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

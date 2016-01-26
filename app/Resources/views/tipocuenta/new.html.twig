@@ -4,8 +4,19 @@
    {# <h1>Nuevo tipo de cuenta</h1>#}
 
     {{ form_start(form, {'action': path('admin_tipocuenta_new')}) }}
-        {{ form_widget(form) }}
-        <input type="submit" class="btn btn-info active mb-1x mr-1x" value="Guardar" />
+    
+    {{ form_errors(form) }}
+     <div class="row" style="margin: 50px 0;">
+     <div class="col-md-5 text-right" style="margin-bottom: 4px;">
+           Nombre:
+     </div>
+     <div class="col-md-6" style="margin-bottom: 4px;">
+         {{ form_widget(form.nombreCuenta) }}
+     </div>
+    
+    
+    {{ form_widget(form) }}
+        <input type="submit" class="btn btn-info active mb-1x mr-1x btn-nuevo btn pull-right" value="Guardar" />
     {{ form_end(form) }}
 
    {# <ul>

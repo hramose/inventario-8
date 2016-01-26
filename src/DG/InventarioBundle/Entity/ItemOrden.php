@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ItemOrden
  *
- * @ORM\Table(name="item_orden", indexes={@ORM\Index(name="fk_item_orden_orden_compra1_idx", columns={"orden_compra_id"})})
+ * @ORM\Table(name="item_orden", indexes={@ORM\Index(name="fk_item_orden_orden_compra1_idx", columns={"orden_compra_id"}), @ORM\Index(name="fk_item_orden_producto1_idx", columns={"producto_id"})})
  * @ORM\Entity
  */
 class ItemOrden
@@ -65,6 +65,16 @@ class ItemOrden
      * })
      */
     private $ordenCompra;
+
+    /**
+     * @var \Producto
+     *
+     * @ORM\ManyToOne(targetEntity="Producto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
+     * })
+     */
+    private $producto;
 
 
 
@@ -214,5 +224,28 @@ class ItemOrden
     public function getOrdenCompra()
     {
         return $this->ordenCompra;
+    }
+
+    /**
+     * Set producto
+     *
+     * @param \DG\InventarioBundle\Entity\Producto $producto
+     * @return ItemOrden
+     */
+    public function setProducto(\DG\InventarioBundle\Entity\Producto $producto = null)
+    {
+        $this->producto = $producto;
+
+        return $this;
+    }
+
+    /**
+     * Get producto
+     *
+     * @return \DG\InventarioBundle\Entity\Producto 
+     */
+    public function getProducto()
+    {
+        return $this->producto;
     }
 }

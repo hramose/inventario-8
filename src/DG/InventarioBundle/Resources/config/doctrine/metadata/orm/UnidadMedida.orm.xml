@@ -2,16 +2,16 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="UnidadMedida" table="unidad_medida">
     <indexes>
-      <index name="fk_unidad_medida_ajuste_empresa1_idx" columns="ajuste_empresa_id"/>
+      <index name="fk_unidad_medida_configuracion_empresa1_idx" columns="configuracion_empresa_id"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
     <field name="nombre" type="string" column="nombre" length="100" nullable="true"/>
     <field name="alias" type="string" column="alias" length="50" nullable="true"/>
-    <many-to-one field="ajusteEmpresa" target-entity="AjusteEmpresa">
+    <many-to-one field="configuracionEmpresa" target-entity="ConfiguracionEmpresa">
       <join-columns>
-        <join-column name="ajuste_empresa_id" referenced-column-name="id"/>
+        <join-column name="configuracion_empresa_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

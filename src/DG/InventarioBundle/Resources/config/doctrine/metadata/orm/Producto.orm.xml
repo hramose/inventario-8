@@ -4,7 +4,6 @@
     <indexes>
       <index name="fk_producto_catproducto1_idx" columns="catproducto_id"/>
       <index name="fk_producto_zona1_idx" columns="zona_id"/>
-      <index name="fk_producto_empaque1_idx" columns="empaque_id"/>
       <index name="fk_producto_unidades1_idx" columns="unidades_id"/>
       <index name="fk_producto_cuenta1_idx" columns="cuenta_id"/>
       <index name="fk_producto_tipo_inventario1_idx" columns="tipo_inventario_id"/>
@@ -20,15 +19,15 @@
     <field name="sku" type="string" column="sku" length="100" nullable="true"/>
     <field name="serial" type="string" column="serial" length="100" nullable="true"/>
     <field name="inventarioBajo" type="integer" column="inventario_bajo" nullable="true"/>
-    <field name="stock" type="integer" column="stock" nullable="true"/>
-    <many-to-one field="unidades" target-entity="UnidadMedida">
-      <join-columns>
-        <join-column name="unidades_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
+    <field name="totalExistencia" type="integer" column="total_existencia" nullable="true"/>
     <many-to-one field="zona" target-entity="Zona">
       <join-columns>
         <join-column name="zona_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="unidades" target-entity="UnidadMedida">
+      <join-columns>
+        <join-column name="unidades_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
     <many-to-one field="tipoInventario" target-entity="TipoInventario">
@@ -36,17 +35,12 @@
         <join-column name="tipo_inventario_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="empaque" target-entity="Empaque">
-      <join-columns>
-        <join-column name="empaque_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
     <many-to-one field="cuenta" target-entity="Cuenta">
       <join-columns>
         <join-column name="cuenta_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="catproducto" target-entity="Catproducto">
+    <many-to-one field="catproducto" target-entity="CatProducto">
       <join-columns>
         <join-column name="catproducto_id" referenced-column-name="id"/>
       </join-columns>

@@ -24,30 +24,9 @@ class UsuarioSistema
     /**
      * @var string
      *
-     * @ORM\Column(name="nombres", type="string", length=75, nullable=true)
+     * @ORM\Column(name="usuario", type="string", length=50, nullable=true)
      */
-    private $nombres;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="apellidos", type="string", length=75, nullable=true)
-     */
-    private $apellidos;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=100, nullable=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="telefono", type="string", length=25, nullable=true)
-     */
-    private $telefono;
+    private $usuario;
 
     /**
      * @var string
@@ -55,13 +34,6 @@ class UsuarioSistema
      * @ORM\Column(name="password", type="string", length=255, nullable=true)
      */
     private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
-     */
-    private $foto;
 
     /**
      * @var string
@@ -127,95 +99,26 @@ class UsuarioSistema
     }
 
     /**
-     * Set nombres
+     * Set usuario
      *
-     * @param string $nombres
+     * @param string $usuario
      * @return UsuarioSistema
      */
-    public function setNombres($nombres)
+    public function setUsuario($usuario)
     {
-        $this->nombres = $nombres;
+        $this->usuario = $usuario;
 
         return $this;
     }
 
     /**
-     * Get nombres
+     * Get usuario
      *
      * @return string 
      */
-    public function getNombres()
+    public function getUsuario()
     {
-        return $this->nombres;
-    }
-
-    /**
-     * Set apellidos
-     *
-     * @param string $apellidos
-     * @return UsuarioSistema
-     */
-    public function setApellidos($apellidos)
-    {
-        $this->apellidos = $apellidos;
-
-        return $this;
-    }
-
-    /**
-     * Get apellidos
-     *
-     * @return string 
-     */
-    public function getApellidos()
-    {
-        return $this->apellidos;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return UsuarioSistema
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set telefono
-     *
-     * @param string $telefono
-     * @return UsuarioSistema
-     */
-    public function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
-
-        return $this;
-    }
-
-    /**
-     * Get telefono
-     *
-     * @return string 
-     */
-    public function getTelefono()
-    {
-        return $this->telefono;
+        return $this->usuario;
     }
 
     /**
@@ -239,29 +142,6 @@ class UsuarioSistema
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set foto
-     *
-     * @param string $foto
-     * @return UsuarioSistema
-     */
-    public function setFoto($foto)
-    {
-        $this->foto = $foto;
-
-        return $this;
-    }
-
-    /**
-     * Get foto
-     *
-     * @return string 
-     */
-    public function getFoto()
-    {
-        return $this->foto;
     }
 
     /**

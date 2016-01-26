@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Sucursal" table="sucursal">
+    <indexes>
+      <index name="fk_localidad_conf_tax1_idx" columns="conf_tax_id"/>
+      <index name="fk_sucursal_configuracion_empresa1_idx" columns="configuracion_empresa_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="100" nullable="true"/>
+    <field name="alias" type="string" column="alias" length="50" nullable="true"/>
+    <field name="direccion1" type="string" column="direccion1" length="200" nullable="true"/>
+    <field name="direccion2" type="string" column="direccion2" length="200" nullable="true"/>
+    <field name="ciudad" type="string" column="ciudad" length="100" nullable="true"/>
+    <field name="provinciaEstado" type="string" column="provincia_estado" length="25" nullable="true"/>
+    <field name="postalZip" type="string" column="postal_zip" length="10" nullable="true"/>
+    <field name="estado" type="boolean" column="estado" nullable="true"/>
+    <many-to-one field="configuracionEmpresa" target-entity="ConfiguracionEmpresa">
+      <join-columns>
+        <join-column name="configuracion_empresa_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="confTax" target-entity="ConfTax">
+      <join-columns>
+        <join-column name="conf_tax_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

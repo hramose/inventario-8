@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>UsuarioSistema</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ usuarioSistema.id }}</td>
+            </tr>
+            <tr>
+                <th>Usuario</th>
+                <td>{{ usuarioSistema.usuario }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ usuarioSistema.password }}</td>
+            </tr>
+            <tr>
+                <th>Salt</th>
+                <td>{{ usuarioSistema.salt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_usuario_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_usuario_edit', { 'id': usuarioSistema.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

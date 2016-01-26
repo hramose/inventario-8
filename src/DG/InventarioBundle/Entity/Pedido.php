@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pedido
  *
- * @ORM\Table(name="pedido", indexes={@ORM\Index(name="fk_cotizacion_usuario1_idx", columns={"usuario_id"}), @ORM\Index(name="fk_cotizacion_conftax1_idx", columns={"conftax_id"}), @ORM\Index(name="fk_cotizacion_producto1_idx", columns={"producto_id"}), @ORM\Index(name="fk_pedido_confpedido1_idx", columns={"confpedido_id"}), @ORM\Index(name="fk_pedido_status1_idx", columns={"status_id"})})
+ * @ORM\Table(name="pedido", indexes={@ORM\Index(name="fk_cotizacion_usuario1_idx", columns={"usuario_id"}), @ORM\Index(name="fk_cotizacion_conftax1_idx", columns={"conftax_id"}), @ORM\Index(name="fk_pedido_confpedido1_idx", columns={"confpedido_id"}), @ORM\Index(name="fk_pedido_status1_idx", columns={"status_id"})})
  * @ORM\Entity
  */
 class Pedido
@@ -107,16 +107,6 @@ class Pedido
      * })
      */
     private $conftax;
-
-    /**
-     * @var \Producto
-     *
-     * @ORM\ManyToOne(targetEntity="Producto")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="producto_id", referencedColumnName="id")
-     * })
-     */
-    private $producto;
 
     /**
      * @var \UsuarioSistema
@@ -434,29 +424,6 @@ class Pedido
     public function getConftax()
     {
         return $this->conftax;
-    }
-
-    /**
-     * Set producto
-     *
-     * @param \DG\InventarioBundle\Entity\Producto $producto
-     * @return Pedido
-     */
-    public function setProducto(\DG\InventarioBundle\Entity\Producto $producto = null)
-    {
-        $this->producto = $producto;
-
-        return $this;
-    }
-
-    /**
-     * Get producto
-     *
-     * @return \DG\InventarioBundle\Entity\Producto 
-     */
-    public function getProducto()
-    {
-        return $this->producto;
     }
 
     /**

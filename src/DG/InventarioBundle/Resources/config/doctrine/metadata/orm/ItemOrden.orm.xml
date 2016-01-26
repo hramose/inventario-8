@@ -3,6 +3,7 @@
   <entity name="ItemOrden" table="item_orden">
     <indexes>
       <index name="fk_item_orden_orden_compra1_idx" columns="orden_compra_id"/>
+      <index name="fk_item_orden_producto1_idx" columns="producto_id"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
@@ -12,6 +13,11 @@
     <field name="cantidad" type="integer" column="cantidad" nullable="true"/>
     <field name="unidadMedida" type="string" column="unidad_medida" length="100" nullable="true"/>
     <field name="montoItem" type="decimal" column="monto_item" precision="15" scale="2" nullable="true"/>
+    <many-to-one field="producto" target-entity="Producto">
+      <join-columns>
+        <join-column name="producto_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
     <many-to-one field="ordenCompra" target-entity="OrdenCompra">
       <join-columns>
         <join-column name="orden_compra_id" referenced-column-name="id"/>

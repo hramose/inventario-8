@@ -5,12 +5,12 @@ namespace DG\InventarioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Catproducto
+ * CatProducto
  *
- * @ORM\Table(name="catproducto")
+ * @ORM\Table(name="cat_producto")
  * @ORM\Entity
  */
-class Catproducto
+class CatProducto
 {
     /**
      * @var integer
@@ -35,6 +35,13 @@ class Catproducto
      */
     private $descripcion;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
 
 
     /**
@@ -51,7 +58,7 @@ class Catproducto
      * Set nombre
      *
      * @param string $nombre
-     * @return Catproducto
+     * @return CatProducto
      */
     public function setNombre($nombre)
     {
@@ -74,7 +81,7 @@ class Catproducto
      * Set descripcion
      *
      * @param string $descripcion
-     * @return Catproducto
+     * @return CatProducto
      */
     public function setDescripcion($descripcion)
     {
@@ -91,5 +98,28 @@ class Catproducto
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return CatProducto
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

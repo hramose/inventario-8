@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Producto
  *
- * @ORM\Table(name="producto", indexes={@ORM\Index(name="fk_producto_catproducto1_idx", columns={"catproducto_id"}), @ORM\Index(name="fk_producto_zona1_idx", columns={"zona_id"}), @ORM\Index(name="fk_producto_empaque1_idx", columns={"empaque_id"}), @ORM\Index(name="fk_producto_unidades1_idx", columns={"unidades_id"}), @ORM\Index(name="fk_producto_cuenta1_idx", columns={"cuenta_id"}), @ORM\Index(name="fk_producto_tipo_inventario1_idx", columns={"tipo_inventario_id"})})
+ * @ORM\Table(name="producto", indexes={@ORM\Index(name="fk_producto_catproducto1_idx", columns={"catproducto_id"}), @ORM\Index(name="fk_producto_zona1_idx", columns={"zona_id"}), @ORM\Index(name="fk_producto_unidades1_idx", columns={"unidades_id"}), @ORM\Index(name="fk_producto_cuenta1_idx", columns={"cuenta_id"}), @ORM\Index(name="fk_producto_tipo_inventario1_idx", columns={"tipo_inventario_id"})})
  * @ORM\Entity
  */
 class Producto
@@ -80,14 +80,14 @@ class Producto
     /**
      * @var integer
      *
-     * @ORM\Column(name="stock", type="integer", nullable=true)
+     * @ORM\Column(name="total_existencia", type="integer", nullable=true)
      */
-    private $stock;
+    private $totalExistencia;
 
     /**
-     * @var \Catproducto
+     * @var \CatProducto
      *
-     * @ORM\ManyToOne(targetEntity="Catproducto")
+     * @ORM\ManyToOne(targetEntity="CatProducto")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="catproducto_id", referencedColumnName="id")
      * })
@@ -103,16 +103,6 @@ class Producto
      * })
      */
     private $cuenta;
-
-    /**
-     * @var \Empaque
-     *
-     * @ORM\ManyToOne(targetEntity="Empaque")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="empaque_id", referencedColumnName="id")
-     * })
-     */
-    private $empaque;
 
     /**
      * @var \TipoInventario
@@ -341,35 +331,35 @@ class Producto
     }
 
     /**
-     * Set stock
+     * Set totalExistencia
      *
-     * @param integer $stock
+     * @param integer $totalExistencia
      * @return Producto
      */
-    public function setStock($stock)
+    public function setTotalExistencia($totalExistencia)
     {
-        $this->stock = $stock;
+        $this->totalExistencia = $totalExistencia;
 
         return $this;
     }
 
     /**
-     * Get stock
+     * Get totalExistencia
      *
      * @return integer 
      */
-    public function getStock()
+    public function getTotalExistencia()
     {
-        return $this->stock;
+        return $this->totalExistencia;
     }
 
     /**
      * Set catproducto
      *
-     * @param \DG\InventarioBundle\Entity\Catproducto $catproducto
+     * @param \DG\InventarioBundle\Entity\CatProducto $catproducto
      * @return Producto
      */
-    public function setCatproducto(\DG\InventarioBundle\Entity\Catproducto $catproducto = null)
+    public function setCatproducto(\DG\InventarioBundle\Entity\CatProducto $catproducto = null)
     {
         $this->catproducto = $catproducto;
 
@@ -379,7 +369,7 @@ class Producto
     /**
      * Get catproducto
      *
-     * @return \DG\InventarioBundle\Entity\Catproducto 
+     * @return \DG\InventarioBundle\Entity\CatProducto 
      */
     public function getCatproducto()
     {
@@ -407,29 +397,6 @@ class Producto
     public function getCuenta()
     {
         return $this->cuenta;
-    }
-
-    /**
-     * Set empaque
-     *
-     * @param \DG\InventarioBundle\Entity\Empaque $empaque
-     * @return Producto
-     */
-    public function setEmpaque(\DG\InventarioBundle\Entity\Empaque $empaque = null)
-    {
-        $this->empaque = $empaque;
-
-        return $this;
-    }
-
-    /**
-     * Get empaque
-     *
-     * @return \DG\InventarioBundle\Entity\Empaque 
-     */
-    public function getEmpaque()
-    {
-        return $this->empaque;
     }
 
     /**

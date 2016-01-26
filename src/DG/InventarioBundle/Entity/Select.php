@@ -29,9 +29,9 @@ class Select
     private $nombre;
 
     /**
-     * @var \Atributo
+     * @var \AtributoPersonalizado
      *
-     * @ORM\ManyToOne(targetEntity="Atributo")
+     * @ORM\ManyToOne(targetEntity="AtributoPersonalizado")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="atributo_id", referencedColumnName="id")
      * })
@@ -76,10 +76,10 @@ class Select
     /**
      * Set atributo
      *
-     * @param \DG\InventarioBundle\Entity\Atributo $atributo
+     * @param \DG\InventarioBundle\Entity\AtributoPersonalizado $atributo
      * @return Select
      */
-    public function setAtributo(\DG\InventarioBundle\Entity\Atributo $atributo = null)
+    public function setAtributo(\DG\InventarioBundle\Entity\AtributoPersonalizado $atributo = null)
     {
         $this->atributo = $atributo;
 
@@ -89,7 +89,7 @@ class Select
     /**
      * Get atributo
      *
-     * @return \DG\InventarioBundle\Entity\Atributo 
+     * @return \DG\InventarioBundle\Entity\AtributoPersonalizado 
      */
     public function getAtributo()
     {

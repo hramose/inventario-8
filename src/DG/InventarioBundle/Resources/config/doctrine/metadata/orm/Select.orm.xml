@@ -8,7 +8,7 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="nombre" type="string" column="nombre" length="100" nullable="true"/>
-    <many-to-one field="atributo" target-entity="Atributo">
+    <many-to-one field="atributo" target-entity="AtributoPersonalizado">
       <join-columns>
         <join-column name="atributo_id" referenced-column-name="id"/>
       </join-columns>

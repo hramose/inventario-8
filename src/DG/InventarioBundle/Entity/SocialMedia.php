@@ -36,9 +36,9 @@ class SocialMedia
     private $facebook;
 
     /**
-     * @var \AjusteEmpresa
+     * @var \ConfiguracionEmpresa
      *
-     * @ORM\ManyToOne(targetEntity="AjusteEmpresa")
+     * @ORM\ManyToOne(targetEntity="ConfiguracionEmpresa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="empresa_id", referencedColumnName="id")
      * })
@@ -116,10 +116,10 @@ class SocialMedia
     /**
      * Set empresa
      *
-     * @param \DG\InventarioBundle\Entity\AjusteEmpresa $empresa
+     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa
      * @return SocialMedia
      */
-    public function setEmpresa(\DG\InventarioBundle\Entity\AjusteEmpresa $empresa = null)
+    public function setEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa = null)
     {
         $this->empresa = $empresa;
 
@@ -129,7 +129,7 @@ class SocialMedia
     /**
      * Get empresa
      *
-     * @return \DG\InventarioBundle\Entity\AjusteEmpresa 
+     * @return \DG\InventarioBundle\Entity\ConfiguracionEmpresa 
      */
     public function getEmpresa()
     {

@@ -1,0 +1,62 @@
+{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
+
+{% block contenido %}
+
+    {#<h1>UsuarioSistema creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_usuario_index') }}">Back to the list</a>
+        </li>
+    </ul>#}
+    
+    
+    <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><p>Usuario</p></div>
+  <div class="panel-body">
+  {{ form_start(form) }}
+    {{ form_errors(form) }}
+   
+        {# <div class="col-xs-12 col-sm-6"> #}
+        
+      {#  </div> #}
+     
+        {% include 'DGInventarioBundle:Persona:form.html.twig' with { 'form': form.persona }%}  
+        
+  
+         <div class="col-xs-12 col-sm-2">
+        {{ form_row(form.usuario) }}
+         </div> 
+         <div class="col-xs-12 col-sm-2">
+        {{ form_row(form.password) }}
+         </div>  
+         <div class="col-xs-12 col-sm-2">
+        {{ form_row(form.salt) }}
+         </div>  
+       
+
+             <div class="form-grouphide col-sm-12">
+                <a href="{{ path('admin_usuario_index') }}">Cancelar</a>
+                {{ form_widget(form.submit) }}
+              </div>
+            
+      
+  
+    {{ form_end(form) }}
+  </div>
+
+
+</div>
+    
+    
+    
+    
+    
+    
+{% endblock %}

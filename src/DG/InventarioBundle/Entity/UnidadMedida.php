@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * UnidadMedida
  *
- * @ORM\Table(name="unidad_medida", indexes={@ORM\Index(name="fk_unidad_medida_ajuste_empresa1_idx", columns={"ajuste_empresa_id"})})
+ * @ORM\Table(name="unidad_medida", indexes={@ORM\Index(name="fk_unidad_medida_configuracion_empresa1_idx", columns={"configuracion_empresa_id"})})
  * @ORM\Entity
  */
 class UnidadMedida
@@ -36,14 +36,14 @@ class UnidadMedida
     private $alias;
 
     /**
-     * @var \AjusteEmpresa
+     * @var \ConfiguracionEmpresa
      *
-     * @ORM\ManyToOne(targetEntity="AjusteEmpresa")
+     * @ORM\ManyToOne(targetEntity="ConfiguracionEmpresa")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ajuste_empresa_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="configuracion_empresa_id", referencedColumnName="id")
      * })
      */
-    private $ajusteEmpresa;
+    private $configuracionEmpresa;
 
 
 
@@ -104,25 +104,25 @@ class UnidadMedida
     }
 
     /**
-     * Set ajusteEmpresa
+     * Set configuracionEmpresa
      *
-     * @param \DG\InventarioBundle\Entity\AjusteEmpresa $ajusteEmpresa
+     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $configuracionEmpresa
      * @return UnidadMedida
      */
-    public function setAjusteEmpresa(\DG\InventarioBundle\Entity\AjusteEmpresa $ajusteEmpresa = null)
+    public function setConfiguracionEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $configuracionEmpresa = null)
     {
-        $this->ajusteEmpresa = $ajusteEmpresa;
+        $this->configuracionEmpresa = $configuracionEmpresa;
 
         return $this;
     }
 
     /**
-     * Get ajusteEmpresa
+     * Get configuracionEmpresa
      *
-     * @return \DG\InventarioBundle\Entity\AjusteEmpresa 
+     * @return \DG\InventarioBundle\Entity\ConfiguracionEmpresa 
      */
-    public function getAjusteEmpresa()
+    public function getConfiguracionEmpresa()
     {
-        return $this->ajusteEmpresa;
+        return $this->configuracionEmpresa;
     }
 }

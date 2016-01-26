@@ -71,9 +71,16 @@ class Cuenta
     private $tipoCuenta;
 
     /**
-     * @var \AjusteEmpresa
+     * @var boolean
      *
-     * @ORM\ManyToOne(targetEntity="AjusteEmpresa")
+     * @ORM\Column(name="direccion_igual", type="boolean", nullable=true)
+     */
+    private $direccionIgual;
+
+    /**
+     * @var \ConfiguracionEmpresa
+     *
+     * @ORM\ManyToOne(targetEntity="ConfiguracionEmpresa")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="empresa_id", referencedColumnName="id")
      * })
@@ -264,12 +271,35 @@ class Cuenta
     }
 
     /**
-     * Set empresa
+     * Set direccionIgual
      *
-     * @param \DG\InventarioBundle\Entity\AjusteEmpresa $empresa
+     * @param boolean $direccionIgual
      * @return Cuenta
      */
-    public function setEmpresa(\DG\InventarioBundle\Entity\AjusteEmpresa $empresa = null)
+    public function setDireccionIgual($direccionIgual)
+    {
+        $this->direccionIgual = $direccionIgual;
+
+        return $this;
+    }
+
+    /**
+     * Get direccionIgual
+     *
+     * @return boolean 
+     */
+    public function getDireccionIgual()
+    {
+        return $this->direccionIgual;
+    }
+
+    /**
+     * Set empresa
+     *
+     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa
+     * @return Cuenta
+     */
+    public function setEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa = null)
     {
         $this->empresa = $empresa;
 
@@ -279,7 +309,7 @@ class Cuenta
     /**
      * Get empresa
      *
-     * @return \DG\InventarioBundle\Entity\AjusteEmpresa 
+     * @return \DG\InventarioBundle\Entity\ConfiguracionEmpresa 
      */
     public function getEmpresa()
     {

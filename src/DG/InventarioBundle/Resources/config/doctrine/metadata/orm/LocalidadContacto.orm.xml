@@ -11,7 +11,7 @@
     <field name="email" type="string" column="email" length="100" nullable="true"/>
     <field name="telefono" type="string" column="telefono" length="10" nullable="true"/>
     <field name="fax" type="string" column="fax" length="10" nullable="true"/>
-    <many-to-one field="localidad" target-entity="Localidad">
+    <many-to-one field="localidad" target-entity="Sucursal">
       <join-columns>
         <join-column name="localidad_id" referenced-column-name="id"/>
       </join-columns>

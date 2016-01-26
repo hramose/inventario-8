@@ -50,9 +50,9 @@ class LocalidadContacto
     private $fax;
 
     /**
-     * @var \Localidad
+     * @var \Sucursal
      *
-     * @ORM\ManyToOne(targetEntity="Localidad")
+     * @ORM\ManyToOne(targetEntity="Sucursal")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
      * })
@@ -166,10 +166,10 @@ class LocalidadContacto
     /**
      * Set localidad
      *
-     * @param \DG\InventarioBundle\Entity\Localidad $localidad
+     * @param \DG\InventarioBundle\Entity\Sucursal $localidad
      * @return LocalidadContacto
      */
-    public function setLocalidad(\DG\InventarioBundle\Entity\Localidad $localidad = null)
+    public function setLocalidad(\DG\InventarioBundle\Entity\Sucursal $localidad = null)
     {
         $this->localidad = $localidad;
 
@@ -179,7 +179,7 @@ class LocalidadContacto
     /**
      * Get localidad
      *
-     * @return \DG\InventarioBundle\Entity\Localidad 
+     * @return \DG\InventarioBundle\Entity\Sucursal 
      */
     public function getLocalidad()
     {

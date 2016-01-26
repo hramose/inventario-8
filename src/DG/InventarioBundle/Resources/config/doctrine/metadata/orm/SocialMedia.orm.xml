@@ -15,7 +15,7 @@
         <join-column name="usuario_sistema_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="empresa" target-entity="AjusteEmpresa">
+    <many-to-one field="empresa" target-entity="ConfiguracionEmpresa">
       <join-columns>
         <join-column name="empresa_id" referenced-column-name="id"/>
       </join-columns>

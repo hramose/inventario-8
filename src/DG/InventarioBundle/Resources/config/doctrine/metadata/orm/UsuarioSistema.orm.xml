@@ -9,12 +9,8 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="nombres" type="string" column="nombres" length="75" nullable="true"/>
-    <field name="apellidos" type="string" column="apellidos" length="75" nullable="true"/>
-    <field name="email" type="string" column="email" length="100" nullable="true"/>
-    <field name="telefono" type="string" column="telefono" length="25" nullable="true"/>
+    <field name="usuario" type="string" column="usuario" length="50" nullable="true"/>
     <field name="password" type="string" column="password" length="255" nullable="true"/>
-    <field name="foto" type="string" column="foto" length="255" nullable="true"/>
     <field name="salt" type="string" column="salt" length="255" nullable="true"/>
     <many-to-one field="timeZone" target-entity="TimeZone">
       <join-columns>

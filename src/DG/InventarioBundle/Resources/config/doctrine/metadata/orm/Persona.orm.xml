@@ -10,5 +10,6 @@
     <field name="celular" type="string" column="celular" length="15" nullable="true"/>
     <field name="fijo" type="string" column="fijo" length="15" nullable="true"/>
     <field name="direccion" type="string" column="direccion" length="100" nullable="true"/>
+    <field name="foto" type="string" column="foto" length="255" nullable="true"/>
   </entity>
 </doctrine-mapping>

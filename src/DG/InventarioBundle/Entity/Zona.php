@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Zona
  *
- * @ORM\Table(name="zona", indexes={@ORM\Index(name="fk_zona_localidad1_idx", columns={"localidad_id"})})
+ * @ORM\Table(name="zona", indexes={@ORM\Index(name="fk_zona_sucursal1_idx", columns={"sucursal_id"})})
  * @ORM\Entity
  */
 class Zona
@@ -43,14 +43,21 @@ class Zona
     private $descripcion;
 
     /**
-     * @var \Localidad
+     * @var boolean
      *
-     * @ORM\ManyToOne(targetEntity="Localidad")
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
+     * @var \Sucursal
+     *
+     * @ORM\ManyToOne(targetEntity="Sucursal")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
      * })
      */
-    private $localidad;
+    private $sucursal;
 
 
 
@@ -134,25 +141,48 @@ class Zona
     }
 
     /**
-     * Set localidad
+     * Set estado
      *
-     * @param \DG\InventarioBundle\Entity\Localidad $localidad
+     * @param boolean $estado
      * @return Zona
      */
-    public function setLocalidad(\DG\InventarioBundle\Entity\Localidad $localidad = null)
+    public function setEstado($estado)
     {
-        $this->localidad = $localidad;
+        $this->estado = $estado;
 
         return $this;
     }
 
     /**
-     * Get localidad
+     * Get estado
      *
-     * @return \DG\InventarioBundle\Entity\Localidad 
+     * @return boolean 
      */
-    public function getLocalidad()
+    public function getEstado()
     {
-        return $this->localidad;
+        return $this->estado;
+    }
+
+    /**
+     * Set sucursal
+     *
+     * @param \DG\InventarioBundle\Entity\Sucursal $sucursal
+     * @return Zona
+     */
+    public function setSucursal(\DG\InventarioBundle\Entity\Sucursal $sucursal = null)
+    {
+        $this->sucursal = $sucursal;
+
+        return $this;
+    }
+
+    /**
+     * Get sucursal
+     *
+     * @return \DG\InventarioBundle\Entity\Sucursal 
+     */
+    public function getSucursal()
+    {
+        return $this->sucursal;
     }
 }

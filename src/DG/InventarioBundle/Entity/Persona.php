@@ -63,6 +63,13 @@ class Persona
      */
     private $direccion;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foto", type="string", length=255, nullable=true)
+     */
+    private $foto;
+
 
 
     /**
@@ -211,5 +218,28 @@ class Persona
     public function getDireccion()
     {
         return $this->direccion;
+    }
+
+    /**
+     * Set foto
+     *
+     * @param string $foto
+     * @return Persona
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
+
+    /**
+     * Get foto
+     *
+     * @return string 
+     */
+    public function getFoto()
+    {
+        return $this->foto;
     }
 }

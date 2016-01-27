@@ -19,6 +19,7 @@
     <field name="nrc" type="string" column="nrc" length="20" nullable="true"/>
     <field name="nit" type="string" column="nit" length="20" nullable="true"/>
     <field name="giro" type="string" column="giro" length="100" nullable="true"/>
+    <field name="estado" type="string" column="estado" length="100" nullable="true"/>
     <many-to-one field="usuarioSistema" target-entity="UsuarioSistema">
       <join-columns>
         <join-column name="usuario_sistema_id" referenced-column-name="id"/>

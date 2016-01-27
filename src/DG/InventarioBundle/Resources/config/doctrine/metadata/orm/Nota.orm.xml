@@ -9,6 +9,7 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="nota" type="text" column="nota" length="65535" nullable="true"/>
+    <field name="estado" type="boolean" column="estado" nullable="true"/>
     <many-to-one field="pedido" target-entity="Pedido">
       <join-columns>
         <join-column name="pedido_id" referenced-column-name="id"/>

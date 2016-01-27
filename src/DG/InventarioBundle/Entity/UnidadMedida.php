@@ -36,6 +36,13 @@ class UnidadMedida
     private $alias;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
      * @var \ConfiguracionEmpresa
      *
      * @ORM\ManyToOne(targetEntity="ConfiguracionEmpresa")
@@ -101,6 +108,29 @@ class UnidadMedida
     public function getAlias()
     {
         return $this->alias;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return UnidadMedida
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 
     /**

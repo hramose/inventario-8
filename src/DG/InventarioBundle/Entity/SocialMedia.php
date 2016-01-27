@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * SocialMedia
  *
- * @ORM\Table(name="social_media", indexes={@ORM\Index(name="fk_social_media_usuario_sistema1_idx", columns={"usuario_sistema_id"}), @ORM\Index(name="fk_social_media_empresa1_idx", columns={"empresa_id"})})
+ * @ORM\Table(name="social_media", indexes={@ORM\Index(name="fk_social_media_usuario_sistema1_idx", columns={"usuario_sistema_id"}), @ORM\Index(name="fk_social_media_configuracion_empresa1_idx", columns={"configuracion_empresa_id"})})
  * @ORM\Entity
  */
 class SocialMedia
@@ -40,10 +40,10 @@ class SocialMedia
      *
      * @ORM\ManyToOne(targetEntity="ConfiguracionEmpresa")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="empresa_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="configuracion_empresa_id", referencedColumnName="id")
      * })
      */
-    private $empresa;
+    private $configuracionEmpresa;
 
     /**
      * @var \UsuarioSistema
@@ -114,26 +114,26 @@ class SocialMedia
     }
 
     /**
-     * Set empresa
+     * Set configuracionEmpresa
      *
-     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa
+     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $configuracionEmpresa
      * @return SocialMedia
      */
-    public function setEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa = null)
+    public function setConfiguracionEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $configuracionEmpresa = null)
     {
-        $this->empresa = $empresa;
+        $this->configuracionEmpresa = $configuracionEmpresa;
 
         return $this;
     }
 
     /**
-     * Get empresa
+     * Get configuracionEmpresa
      *
      * @return \DG\InventarioBundle\Entity\ConfiguracionEmpresa 
      */
-    public function getEmpresa()
+    public function getConfiguracionEmpresa()
     {
-        return $this->empresa;
+        return $this->configuracionEmpresa;
     }
 
     /**

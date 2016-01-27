@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LocalidadContacto
  *
- * @ORM\Table(name="localidad_contacto", indexes={@ORM\Index(name="fk_localidadcontacto_localidad1_idx", columns={"localidad_id"})})
+ * @ORM\Table(name="localidad_contacto", indexes={@ORM\Index(name="fk_localidad_contacto_sucursal1_idx", columns={"sucursal_id"})})
  * @ORM\Entity
  */
 class LocalidadContacto
@@ -54,10 +54,10 @@ class LocalidadContacto
      *
      * @ORM\ManyToOne(targetEntity="Sucursal")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
      * })
      */
-    private $localidad;
+    private $sucursal;
 
 
 
@@ -164,25 +164,25 @@ class LocalidadContacto
     }
 
     /**
-     * Set localidad
+     * Set sucursal
      *
-     * @param \DG\InventarioBundle\Entity\Sucursal $localidad
+     * @param \DG\InventarioBundle\Entity\Sucursal $sucursal
      * @return LocalidadContacto
      */
-    public function setLocalidad(\DG\InventarioBundle\Entity\Sucursal $localidad = null)
+    public function setSucursal(\DG\InventarioBundle\Entity\Sucursal $sucursal = null)
     {
-        $this->localidad = $localidad;
+        $this->sucursal = $sucursal;
 
         return $this;
     }
 
     /**
-     * Get localidad
+     * Get sucursal
      *
      * @return \DG\InventarioBundle\Entity\Sucursal 
      */
-    public function getLocalidad()
+    public function getSucursal()
     {
-        return $this->localidad;
+        return $this->sucursal;
     }
 }

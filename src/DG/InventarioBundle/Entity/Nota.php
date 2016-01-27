@@ -29,6 +29,13 @@ class Nota
     private $nota;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
      * @var \OrdenCompra
      *
      * @ORM\ManyToOne(targetEntity="OrdenCompra")
@@ -81,6 +88,29 @@ class Nota
     public function getNota()
     {
         return $this->nota;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Nota
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 
     /**

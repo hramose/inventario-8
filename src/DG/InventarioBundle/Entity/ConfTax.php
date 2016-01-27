@@ -42,6 +42,13 @@ class ConfTax
      */
     private $porcentaje;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
 
 
     /**
@@ -121,5 +128,28 @@ class ConfTax
     public function getPorcentaje()
     {
         return $this->porcentaje;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return ConfTax
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

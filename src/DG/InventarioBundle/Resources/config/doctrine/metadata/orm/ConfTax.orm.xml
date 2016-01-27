@@ -7,5 +7,6 @@
     <field name="nombreTax" type="string" column="nombre_tax" length="200" nullable="true"/>
     <field name="numeroRegistro" type="integer" column="numero_registro" nullable="true"/>
     <field name="porcentaje" type="decimal" column="porcentaje" precision="15" scale="2" nullable="true"/>
+    <field name="estado" type="boolean" column="estado" nullable="true"/>
   </entity>
 </doctrine-mapping>

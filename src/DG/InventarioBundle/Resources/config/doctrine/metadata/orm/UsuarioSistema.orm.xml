@@ -12,6 +12,7 @@
     <field name="usuario" type="string" column="usuario" length="50" nullable="true"/>
     <field name="password" type="string" column="password" length="255" nullable="true"/>
     <field name="salt" type="string" column="salt" length="255" nullable="true"/>
+    <field name="estado" type="boolean" column="estado" nullable="true"/>
     <many-to-one field="timeZone" target-entity="TimeZone">
       <join-columns>
         <join-column name="time_zone_id" referenced-column-name="id"/>

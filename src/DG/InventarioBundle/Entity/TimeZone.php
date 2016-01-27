@@ -24,9 +24,16 @@ class TimeZone
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=45, nullable=true)
+     * @ORM\Column(name="nombre", type="string", length=100, nullable=true)
      */
     private $nombre;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
 
 
 
@@ -61,5 +68,28 @@ class TimeZone
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return TimeZone
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

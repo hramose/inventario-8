@@ -28,6 +28,13 @@ class TipoCuenta
      */
     private $nombreCuenta;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
 
 
     /**
@@ -61,5 +68,28 @@ class TipoCuenta
     public function getNombreCuenta()
     {
         return $this->nombreCuenta;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return TipoCuenta
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

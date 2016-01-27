@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Cuenta
  *
- * @ORM\Table(name="cuenta", indexes={@ORM\Index(name="fk_cuenta_tipo_cuenta1_idx", columns={"tipo_cuenta_id"}), @ORM\Index(name="fk_cuenta_empresa1_idx", columns={"empresa_id"})})
+ * @ORM\Table(name="cuenta", indexes={@ORM\Index(name="fk_cuenta_tipo_cuenta1_idx", columns={"tipo_cuenta_id"}), @ORM\Index(name="fk_cuenta_configuracion_empresa1_idx", columns={"configuracion_empresa_id"})})
  * @ORM\Entity
  */
 class Cuenta
@@ -78,14 +78,21 @@ class Cuenta
     private $direccionIgual;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
+    /**
      * @var \ConfiguracionEmpresa
      *
      * @ORM\ManyToOne(targetEntity="ConfiguracionEmpresa")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="empresa_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="configuracion_empresa_id", referencedColumnName="id")
      * })
      */
-    private $empresa;
+    private $configuracionEmpresa;
 
     /**
      * @var \TipoCuenta
@@ -294,26 +301,49 @@ class Cuenta
     }
 
     /**
-     * Set empresa
+     * Set estado
      *
-     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa
+     * @param boolean $estado
      * @return Cuenta
      */
-    public function setEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $empresa = null)
+    public function setEstado($estado)
     {
-        $this->empresa = $empresa;
+        $this->estado = $estado;
 
         return $this;
     }
 
     /**
-     * Get empresa
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set configuracionEmpresa
+     *
+     * @param \DG\InventarioBundle\Entity\ConfiguracionEmpresa $configuracionEmpresa
+     * @return Cuenta
+     */
+    public function setConfiguracionEmpresa(\DG\InventarioBundle\Entity\ConfiguracionEmpresa $configuracionEmpresa = null)
+    {
+        $this->configuracionEmpresa = $configuracionEmpresa;
+
+        return $this;
+    }
+
+    /**
+     * Get configuracionEmpresa
      *
      * @return \DG\InventarioBundle\Entity\ConfiguracionEmpresa 
      */
-    public function getEmpresa()
+    public function getConfiguracionEmpresa()
     {
-        return $this->empresa;
+        return $this->configuracionEmpresa;
     }
 
     /**

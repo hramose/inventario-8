@@ -28,6 +28,13 @@ class Moneda
      */
     private $nombre;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", nullable=true)
+     */
+    private $estado;
+
 
 
     /**
@@ -61,5 +68,28 @@ class Moneda
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Moneda
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 }

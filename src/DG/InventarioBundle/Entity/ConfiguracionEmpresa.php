@@ -85,6 +85,13 @@ class ConfiguracionEmpresa
     private $giro;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="estado", type="string", length=100, nullable=true)
+     */
+    private $estado;
+
+    /**
      * @var \Idioma
      *
      * @ORM\ManyToOne(targetEntity="Idioma")
@@ -341,6 +348,29 @@ class ConfiguracionEmpresa
     public function getGiro()
     {
         return $this->giro;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param string $estado
+     * @return ConfiguracionEmpresa
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return string 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php
 
 namespace DG\InventarioBundle\Entity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -278,6 +280,33 @@ class UsuarioSistema implements AdvancedUserInterface, \Serializable
     {
         return $this->timeZone;
     }
+    
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
 
     /**
      * Add rol

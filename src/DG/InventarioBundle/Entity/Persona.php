@@ -1,7 +1,6 @@
 <?php
 
 namespace DG\InventarioBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -242,6 +241,7 @@ class Persona
     {
         return $this->foto;
     }
+   
     
      public function __toString() {
     //return $this->cargo ? $this->cargo : '';

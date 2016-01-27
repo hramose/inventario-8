@@ -104,6 +104,15 @@ class Cuenta
      */
     private $tipoCuenta2;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DireccionEnvio", mappedBy="cuenta", cascade={"persist", "remove"})
+     */
+    private $direccionEnvio; //Esta sirve para la poder embeber el formulario de Direcion Envio
+    
+    /**
+     * @ORM\OneToMany(targetEntity="DireccionFactura", mappedBy="cuenta", cascade={"persist", "remove"})
+     */
+    private $direccionFactura; //Esta sirve para la poder embeber el formulario de Direcion Factura
 
 
     /**
@@ -265,6 +274,26 @@ class Cuenta
         $this->tipoCuenta = $tipoCuenta;
 
         return $this;
+    }
+    
+    function getDireccionEnvio() 
+    {
+        return $this->direccionEnvio;
+    }
+    
+    function setDireccionEnvio($direccionEnvio) 
+    {
+        $this->direccionEnvio = $direccionEnvio;
+    }
+    
+    function getDireccionFactura() 
+    {
+        return $this->direccionFactura;
+    }
+    
+    function setDireccionFactura($direccionFactura) 
+    {
+        $this->direccionFactura = $direccionFactura;
     }
 
     /**

@@ -92,4 +92,8 @@ class TipoCuenta
     {
         return $this->estado;
     }
+    
+    public function __toString() {
+        return $this->nombreCuenta;
+    }
 }

@@ -59,7 +59,7 @@ class DireccionFactura
     /**
      * @var \Cuenta
      *
-     * @ORM\ManyToOne(targetEntity="Cuenta")
+     * @ORM\ManyToOne(targetEntity="Cuenta" ,inversedBy="cuenta", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cuenta_id", referencedColumnName="id")
      * })
@@ -215,4 +215,6 @@ class DireccionFactura
     {
         return $this->cuenta;
     }
+    
+    
 }

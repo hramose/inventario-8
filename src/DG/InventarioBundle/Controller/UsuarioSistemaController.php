@@ -45,6 +45,7 @@ class UsuarioSistemaController extends Controller
     public function newAction(Request $request)
     {
         $usuarioSistema = new UsuarioSistema();
+        $usuarioSistema->setEstado(true);
         $form = $this->createForm('DG\InventarioBundle\Form\UsuarioSistemaType', $usuarioSistema);
         $form->handleRequest($request);
 
@@ -53,6 +54,24 @@ class UsuarioSistemaController extends Controller
             $this->setSecurePassword($usuarioSistema);
             $em->persist($usuarioSistema);
             $em->flush();
+            
+            
+             if($usuarioSistema->getFile()!=null){
+                $path = $this->container->getParameter('photo.empleado');
+
+                $fecha = date('Y-m-d His');
+                $extension = $usuarioSistema->getFile()->getClientOriginalExtension();
+                $nombreArchivo = $usuarioSistema->getId()."-".$fecha.".".$extension;
+                $em->persist($usuarioSistema);
+                $em->flush();
+                //var_dump($path.$nombreArchivo);
+
+                $usuarioSistema->getPersona()->setFoto($nombreArchivo);
+                $usuarioSistema->getFile()->move($path,$nombreArchivo);
+                $em->persist($usuarioSistema);
+                $em->flush();
+            }
+            
 
             return $this->redirectToRoute('admin_usuario_index');
         }

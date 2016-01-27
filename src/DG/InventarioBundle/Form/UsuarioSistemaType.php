@@ -35,6 +35,21 @@ class UsuarioSistemaType extends AbstractType
                     'class'=>'form-control input-sm secondPassword'
                     )),
                 ))
+                
+                
+             ->add('user_roles','entity',array('label' => 'Seleccione rol','required'=>false,
+                'class'=>'DGInventarioBundle:Rol','property'=>'nombre',
+                'multiple'=>true,
+                'expanded'=>true,
+                    'attr'=>array(
+                    'class'=>'roles'
+                    )))
+                
+                
+                 ->add('file',null, array('label'=>'Foto de perfil','required'=>false,
+                    'attr'=>array('class'=>'fotoUsuario'
+                    )))    
+                
             //->add('salt')
            // ->add('persona')
             //->add('pais')

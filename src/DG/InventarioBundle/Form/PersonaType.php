@@ -17,7 +17,7 @@ class PersonaType extends AbstractType
         $builder
            ->add('nombres','text',array('label' => 'Nombres','required'=>false,
                     'attr'=>array(
-                    'class'=>'nombresPersona'
+                    'class'=>'form-control input-sm nombresPersona'
                     )))
             /*->add('segundoNombre','text',array('label' => 'Segundo nombre',
                     'attr'=>array(
@@ -25,28 +25,29 @@ class PersonaType extends AbstractType
                     )))*/
             ->add('apellidos','text',array('label' => 'Apellidos','required'=>false,
                     'attr'=>array(
-                    'class'=>'apellidosPersona'
+                    'class'=>'form-control input-sm apellidosPersona'
                     )))
             ->add('correo','text',array('label' => 'Correo','required'=>false,
                     'attr'=>array(
-                    'class'=>'correoPersona'
+                    'class'=>'form-control input-sm correoPersona'
                     )))
             ->add('celular','text',array('label' => 'Celular','required'=>false,
                     'attr'=>array(
-                    'class'=>'celularPersona'
+                    'class'=>'form-control input-sm celularPersona'
                     )))
-            ->add('fijo','text',array('label' => 'Fijo','required'=>false,
+            ->add('fijo','text',array('label' => 'Telefono fijo','required'=>false,
                     'attr'=>array(
-                    'class'=>'fijoPersona'
+                    'class'=>'form-control input-sm fijoPersona'
                     )))
             ->add('direccion','text',array('label' => 'Direccion','required'=>false,
                     'attr'=>array(
-                    'class'=>'apellidosPersona'
+                    'class'=>'form-control input-sm apellidosPersona'
                     )))
-            ->add('foto','text',array('label' => 'Foto','required'=>false,
+           /* ->add('foto','text',array('label' => 'Foto','required'=>false,
                     'attr'=>array(
-                    'class'=>'apellidosPersona'
-                    )))
+                    'class'=>'form-control input-sm apellidosPersona'
+                    )))  */
+
         ;
     }
     

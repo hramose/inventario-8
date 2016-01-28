@@ -69,7 +69,10 @@ class Persona
      */
     private $foto;
 
-
+    /**
+    * @ORM\OneToMany(targetEntity="UsuarioSistema", mappedBy="persona", cascade={"persist", "remove"})
+    */
+    protected $usuarioSistema;
 
     /**
      * Get id

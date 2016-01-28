@@ -24,15 +24,28 @@ class CuentaType extends AbstractType
             //->add('tipo_cuenta')
             ->add('direccionIgual')
             ->add('estado')
-                ->add('tipo_cuenta','entity',array('label' => 'Seleccione tipo cuenta','required'=>true,
-                'class'=>'DGInventarioBundle:TipoCuenta',
-                'multiple'=>false,
-                'expanded'=>true,
-                    'attr'=>array(
-                    'class'=>''
-                    )))
-            ->add('direccionEnvio', new DireccionEnvioType())
-            ->add('direccionFactura', new DireccionFacturaType())
+//            ->add('tipoCuenta','entity',array('label' => 'Seleccione tipo cuenta','required'=>true,
+//            'class'=>'DGInventarioBundle:TipoCuenta',
+//            'multiple'=>false,
+//            'expanded'=>true,
+//                'attr'=>array(
+//                'class'=>''
+//                )))
+//               
+                ->add('direccionEnvio','collection',array(
+                'type' => new DireccionEnvioType(),
+                'label'=>' ',
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                ))
+            //->add('direccionEnvio', new DireccionEnvioType())
+            //->add('direccionFactura', new DireccionFacturaType())
+//            ->add('tipoCuenta','entity', array(
+//                'label' => 'Elija una categoria', 'required' => true,'empty_value'=>'Seleccione categoria...',
+//                'class'=>'DGInventarioBundle:TipoCuenta',
+//                'cascade_validation' => true,
+//                ))
         ;
     }
     

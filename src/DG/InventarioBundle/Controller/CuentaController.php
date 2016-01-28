@@ -41,20 +41,20 @@ class CuentaController extends Controller
      */
     public function newAction(Request $request)
     {
-        $cuentum = new Cuenta();
-        $form = $this->createForm('DG\InventarioBundle\Form\CuentaType', $cuentum);
+        $cuenta = new Cuenta();
+        $form = $this->createForm('DG\InventarioBundle\Form\CuentaType', $cuenta);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($cuentum);
+            $em->persist($cuenta);
             $em->flush();
 
             return $this->redirectToRoute('admin_cuenta_show', array('id' => $cuenta->getId()));
         }
 
         return $this->render('cuenta/new.html.twig', array(
-            'cuentum' => $cuentum,
+            'cuentum' => $cuenta,
             'form' => $form->createView(),
         ));
     }
@@ -65,12 +65,12 @@ class CuentaController extends Controller
      * @Route("/{id}", name="admin_cuenta_show")
      * @Method("GET")
      */
-    public function showAction(Cuenta $cuentum)
+    public function showAction(Cuenta $cuenta)
     {
-        $deleteForm = $this->createDeleteForm($cuentum);
+        $deleteForm = $this->createDeleteForm($cuenta);
 
         return $this->render('cuenta/show.html.twig', array(
-            'cuentum' => $cuentum,
+            'cuentum' => $cuenta,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -81,22 +81,22 @@ class CuentaController extends Controller
      * @Route("/{id}/edit", name="admin_cuenta_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Cuenta $cuentum)
+    public function editAction(Request $request, Cuenta $cuenta)
     {
-        $deleteForm = $this->createDeleteForm($cuentum);
-        $editForm = $this->createForm('DG\InventarioBundle\Form\CuentaType', $cuentum);
+        $deleteForm = $this->createDeleteForm($cuenta);
+        $editForm = $this->createForm('DG\InventarioBundle\Form\CuentaType', $cuenta);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($cuentum);
+            $em->persist($cuenta);
             $em->flush();
 
-            return $this->redirectToRoute('admin_cuenta_edit', array('id' => $cuentum->getId()));
+            return $this->redirectToRoute('admin_cuenta_edit', array('id' => $cuenta->getId()));
         }
 
         return $this->render('cuenta/edit.html.twig', array(
-            'cuentum' => $cuentum,
+            'cuenta' => $cuenta,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -108,14 +108,14 @@ class CuentaController extends Controller
      * @Route("/{id}", name="admin_cuenta_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Cuenta $cuentum)
+    public function deleteAction(Request $request, Cuenta $cuenta)
     {
-        $form = $this->createDeleteForm($cuentum);
+        $form = $this->createDeleteForm($cuenta);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($cuentum);
+            $em->remove($cuenta);
             $em->flush();
         }
 
@@ -129,10 +129,10 @@ class CuentaController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Cuenta $cuentum)
+    private function createDeleteForm(Cuenta $cuenta)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_cuenta_delete', array('id' => $cuentum->getId())))
+            ->setAction($this->generateUrl('admin_cuenta_delete', array('id' => $cuenta->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

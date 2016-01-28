@@ -36,21 +36,14 @@ class Rol implements RoleInterface
      */
     private $descripcion;
     
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="UsuarioSistema", inversedBy="rol")
-     * @ORM\JoinTable(name="rolusuario",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
-     *   }
-     * )
+ 
+/**
+     * Constructor
      */
-    private $usuario;
-
+    public function __construct()
+    {
+        $this->usuario = new \Doctrine\Common\Collections\ArrayCollection();
+    }
    
     /**
      * Get id
@@ -132,15 +125,7 @@ class Rol implements RoleInterface
         $this->usuario->removeElement($usuario);
     }
 
-    /**
-     * Get usuario
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
+
 
     public function getRole() {
             return $this->getNombre();

@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
+{% block contenido %}
     <h1>Editar tipo de cuenta</h1>
  {{ form_start(edit_form, {'action': path('admin_tipocuenta_edit',{'id':tipoCuentum.id})}) }}
         {{ form_widget(edit_form) }}

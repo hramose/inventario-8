@@ -108,9 +108,13 @@
 
 {% block javascripts_step %}
     {{parent()}}
-   {# <script type="text/javascript" src="{{ asset('Resources/jquery-ui/jquery-ui.js') }}"></script>#}
+   {#<script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script>  
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script> #}
+   <script src="{{ asset('Resources/js/ValidarUsuario.js') }}"></script> 
+   <script src="{{ asset('Resources/js/ValidarEditarUsuario.js') }}"></script>
    
     <script>
+       
                 $(document).ready(function(){
  
                  var link=0;
@@ -133,10 +137,10 @@
                      link=$(this).attr("id");
                     //alert(link);
                     //Carga del form modificar
-                    $("#editFormContainer").load(link+"/edit");
+                    //$("#editFormContainer").load(link+"/edit");
                     
                     //Hay que cambiar el numero de la columna para las otras tablas
-                    estadoPrevio = $(this).children('td:nth-child(5)').html();
+                    estadoPrevio = $(this).children('td:nth-child(3)').html();
                     estadoPrevio = estadoPrevio.trim();
                     if(estadoPrevio==="Inactivo"){//se muestran los iconos de desactivado
                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
@@ -174,21 +178,21 @@
                    if(!$(this).hasClass('disabled')){
                     bootbox.confirm("¿Desea cambiar el estado de este registro?", function(result) {
                         if(result){
-                            $.getJSON(Routing.generate('admin_sucursal_desactivar', { id: link}), 
+                            $.getJSON(Routing.generate('admin_usuariosistema_desactivar', { id: link}), 
                                 function(data) {
                                     var mensaje="";
                                     if(data.regs==0){
                                         //Se cambia a desactivado
-                                        mensaje ="Sucursal desactivado con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Inactivo');
+                                        mensaje ="Usuario desactivado con exito";
+                                        $('#'+link + ' > td:nth-child(3)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
                                     //$('#datatables1>tbody>tr>td:nth-child(5)').html('Inactivo');
                                     }
                                     if(data.regs==1){
                                         //Se cambia a activado
-                                        mensaje ="Sucursal activada con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Activo');
+                                        mensaje ="Usuario activada con exito";
+                                        $('#'+link + ' > td:nth-child(3)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
                                     }
@@ -340,10 +344,10 @@
                     
                  $('.edit-registro').on("click",function(){
                         var mas = $(this).children();
-                        
+                       
                        // $(this).html('<img style="width:25%; position:inherit; float:right; " src="{{ asset('Resources/images/89C.gif') }}">');
-                        
-                        var href = $(this).attr('href');
+{#                       {% set link = 0%}#}
+                        var href = link+"/edit";
                         
                         ($('#resultado')) ? $('#resultado').remove():'';
  
@@ -357,8 +361,8 @@
                         $('#resultado').load(href, function(){
                             $(this).dialog({
                                 modal: true, 
-                                width: 600,
-                                title: "Editar nuevo tipo de cuenta",
+                                width: 850,
+                                title: "Editar usuario",
                                 resizable: false,
                                 position: { 
                                     my: "center", 
@@ -373,7 +377,8 @@
                         
                         return false;
                     });
-                    
+                 ValidarUsuario1(); 
+                 ValidarEditarUsuario1(); 
           });
 
     </script>

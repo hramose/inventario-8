@@ -106,26 +106,56 @@ class UsuarioSistemaController extends Controller
      */
     public function editAction(Request $request, UsuarioSistema $usuarioSistema)
     {
+        
+        $passOriginal = $usuarioSistema->getPassword();
+        
         $deleteForm = $this->createDeleteForm($usuarioSistema);
         $editForm = $this->createForm('DG\InventarioBundle\Form\UsuarioSistemaType', $usuarioSistema);
         $current_pass = $usuarioSistema->getPassword();
         $editForm->handleRequest($request);
         
-        if($usuarioSistema->getPassword()==""){
-            $usuarioSistema->setPassword($current_pass);
+         if($usuarioSistema->getPassword()==""){
+            $usuarioSistema->setPassword($passOriginal);
         }
+           
+        $path  = $this->getRequest()->server->get('DOCUMENT_ROOT').'/inventario/web/Photos/Empleado/';
+        $path2 = $this->container->getParameter('photo.empleado');    
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             
             if ($current_pass != $usuarioSistema->getPassword()) {
                 $this->setSecurePassword($usuarioSistema);
             }
-            
+          
             $em = $this->getDoctrine()->getManager();
-            $em->persist($usuarioSistema);
-            $em->flush();
+//            $em->persist($usuarioSistema);
+//            $em->flush();
+            
+            
+            
+            if($usuarioSistema->getFile()!=null){
+                $file_path = $path.'/'.$usuarioSistema->getPersona()->getFoto();
+                if(file_exists($file_path) && $usuarioSistema->getPersona()->getFoto()!="") unlink($file_path);
+                $path = $this->container->getParameter('photo.empleado');
 
-            return $this->redirectToRoute('admin_usuario_edit', array('id' => $usuarioSistema->getId()));
+                $fecha = date('Y-m-d His');
+                $extension = $usuarioSistema->getFile()->getClientOriginalExtension();
+                $nombreArchivo = $usuarioSistema->getId()."-".$fecha.".".$extension;
+//                $em->persist($usuarioSistema);
+//                $em->flush();
+                //var_dump($path.$nombreArchivo);
+
+                $usuarioSistema->getPersona()->setFoto($nombreArchivo);
+                $usuarioSistema->getFile()->move($path,$nombreArchivo);
+                //$em->marge($usuarioSistema);
+                $em->flush();
+                
+            }
+                
+                 $em->flush();
+            
+
+            return $this->redirectToRoute('admin_usuario_index', array('id' => $usuarioSistema->getId()));
         }
 
         return $this->render('usuariosistema/edit.html.twig', array(
@@ -177,5 +207,37 @@ class UsuarioSistemaController extends Controller
         $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
         $entity->setPassword($password);
     }
+    
+   /**
+     * Deletes a UsuarioSistema entity.
+     *
+     * @Route("/desactivar_usuariosistema/{id}", name="admin_usuariosistema_desactivar", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function desactivarAction(Request $request, $id)
+    {
+        //$form = $this->createDeleteForm($id);
+        //$form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('DGInventarioBundle:UsuarioSistema')->find($id);
+        
+        if($entity->getEstado()==0){
+            $entity->setEstado(1);
+            $exito['regs']=1;//registro activado
+        }
+        else{
+            $entity->setEstado(0);
+            $exito['regs']=0;//registro desactivado
+        }
+        
+        $em->persist($entity);
+        $em->flush();
+        
+        
+        
+        return new Response(json_encode($exito));
+        
+    }  
     
 }

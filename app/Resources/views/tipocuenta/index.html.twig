@@ -170,7 +170,7 @@
                                     if(data.regs==0){
                                         //Se cambia a desactivado
                                         mensaje ="Sucursal desactivado con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Inactivo');
+                                        $('#'+link + ' > td:nth-child(2)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
                                     //$('#datatables1>tbody>tr>td:nth-child(5)').html('Inactivo');
@@ -178,7 +178,7 @@
                                     if(data.regs==1){
                                         //Se cambia a activado
                                         mensaje ="Sucursal activada con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Activo');
+                                        $('#'+link + ' > td:nth-child(2)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
                                     }
@@ -333,7 +333,7 @@
                         
                        // $(this).html('<img style="width:25%; position:inherit; float:right; " src="{{ asset('Resources/images/89C.gif') }}">');
                         
-                        var href = $(this).attr('href');
+                         var href = link+"/edit";
                         
                         ($('#resultado')) ? $('#resultado').remove():'';
  

@@ -59,7 +59,7 @@ class DireccionEnvio
     /**
      * @var \Cuenta
      *
-     * @ORM\ManyToOne(targetEntity="Cuenta" , inversedBy="cuenta", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Cuenta" , inversedBy="direccionEnvio", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="cuenta_id", referencedColumnName="id")
      * })

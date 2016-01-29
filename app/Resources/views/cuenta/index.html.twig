@@ -1,6 +1,11 @@
 {% extends 'DGInventarioBundle:Layout:layout.html.twig' %}
 
 {% block contenido %}
+    <style>
+        #ax,.btn-danger{
+            display: none;
+        }
+    </style>
     <h1>Cuenta list</h1>
 
     <div id="resultado"></div>
@@ -40,29 +45,37 @@
     <table id="datatables1" class="table table-noborder table-hover bordered-top">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombrecuenta</th>
+                {#<th>Id</th>#}
+                <th>Nombre de cuenta</th>
                 <th>Email</th>
                 <th>Web</th>
                 <th>Telefono</th>
                 <th>Fax</th>
-                <th>Valoragregado</th>
-                <th>Tipocuenta</th>
-                <th>Actions</th>
+                <th>Valor agregado</th>
+                <th>Estado</th>
+                {#<th>Actions</th>#}
             </tr>
         </thead>
         <tbody>
         {% for cuentum in cuentas %}
-            <tr>
-                <td><a href="{{ path('admin_cuenta_show', { 'id': cuentum.id }) }}">{{ cuentum.id }}</a></td>
+            <tr id="{{ cuentum.id}}">
+               {# <td><a href="{{ path('admin_cuenta_show', { 'id': cuentum.id }) }}">{{ cuentum.id }}</a></td>#}
                 <td>{{ cuentum.nombreCuenta }}</td>
                 <td>{{ cuentum.email }}</td>
                 <td>{{ cuentum.web }}</td>
                 <td>{{ cuentum.telefono }}</td>
                 <td>{{ cuentum.fax }}</td>
                 <td>{{ cuentum.valorAgregado }}</td>
-                <td>{% if cuentum.tipoCuenta %}Yes{% else %}No{% endif %}</td>
                 <td>
+                   {% if cuentum.estado == 1 %}
+                       Activo
+                   {% else %}
+                       Inactivo
+                   {% endif %}
+                   
+               </td>
+                {#<td>{% if cuentum.tipoCuenta %}Yes{% else %}No{% endif %}</td>#}
+                {#<td>
                     <ul>
                         <li>
                             <a href="{{ path('admin_cuenta_show', { 'id': cuentum.id }) }}">show</a>
@@ -71,28 +84,28 @@
                             <a href="{{ path('admin_cuenta_edit', { 'id': cuentum.id }) }}">edit</a>
                         </li>
                     </ul>
-                </td>
+                </td>#}
             </tr>
         {% endfor %}
         </tbody>
     </table>
         </div><!-- /.panel -->
         
-    <ul>
+    {#<ul>
         <li>
-            <a href="{{ path('admin_cuenta_new') }}">Create a new entry</a>
+            <a href="{{ path('admin_cuenta_new') }}">Create a new</a>
         </li>
-    </ul>
+    </ul>#}
             </div><!-- /.content -->
 {% endblock %}
 
 {% block javascripts_step %}
     {{parent()}}
-   {# <script type="text/javascript" src="{{ asset('Resources/jquery-ui/jquery-ui.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('Resources/jquery-ui/jquery-ui.js') }}"></script>#}
    
     <script>
                 $(document).ready(function(){
- 
+                 
                  var link=0;
                  var estadoPrevio = "";
                 //Seleccionar un registro
@@ -116,7 +129,7 @@
                     $("#editFormContainer").load(link+"/edit");
                     
                     //Hay que cambiar el numero de la columna para las otras tablas
-                    estadoPrevio = $(this).children('td:nth-child(5)').html();
+                    estadoPrevio = $(this).children('td:nth-child(7)').html();
                     estadoPrevio = estadoPrevio.trim();
                     if(estadoPrevio==="Inactivo"){//se muestran los iconos de desactivado
                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
@@ -154,21 +167,21 @@
                    if(!$(this).hasClass('disabled')){
                     bootbox.confirm("¿Desea cambiar el estado de este registro?", function(result) {
                         if(result){
-                            $.getJSON(Routing.generate('admin_sucursal_desactivar', { id: link}), 
+                            $.getJSON(Routing.generate('admin_cuenta_desactivar', { id: link}), 
                                 function(data) {
                                     var mensaje="";
                                     if(data.regs==0){
                                         //Se cambia a desactivado
                                         mensaje ="Sucursal desactivado con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Inactivo');
+                                        $('#'+link + ' > td:nth-child(7)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
-                                    //$('#datatables1>tbody>tr>td:nth-child(5)').html('Inactivo');
+                                        //$('#datatables1>tbody>tr>td:nth-child(7)').html('Inactivo');
                                     }
                                     if(data.regs==1){
                                         //Se cambia a activado
                                         mensaje ="Sucursal activada con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Activo');
+                                        $('#'+link + ' > td:nth-child(7)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
                                     }
@@ -231,7 +244,13 @@
                     searching:true,
                     "order":[[0, "desc"],[1,"desc"]],
                     "columnDefs": [
-                           { "orderable": false, "targets": 0 }
+                           
+                           { "orderable": false, "targets": 1 },
+                           { "orderable": false, "targets": 2 },
+                           { "orderable": false, "targets": 3 },
+                           { "orderable": false, "targets": 4 },
+                           { "orderable": false, "targets": 5 },
+                           { "orderable": false, "targets": 6 }
                          
                      
                            

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use DG\InventarioBundle\Entity\Cuenta;
 use DG\InventarioBundle\Form\CuentaType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Cuenta controller.
@@ -26,7 +27,7 @@ class CuentaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $cuentas = $em->getRepository('DGInventarioBundle:Cuenta')->findAll();
+        $cuentas = $em->getRepository('DGInventarioBundle:Cuenta')->findBy(array('estado'=>1));
 
         return $this->render('cuenta/index.html.twig', array(
             'cuentas' => $cuentas,
@@ -47,6 +48,13 @@ class CuentaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $coleccion = $cuenta->getDireccionEnvio();
+            foreach ($coleccion as $col)
+            {
+                $col->setCuenta($cuenta);
+                //$cuenta->setColeccion($col);
+            }
+            var_dump($cuenta->getDireccionEnvio());
             $em->persist($cuenta);
             $em->flush();
 
@@ -54,7 +62,7 @@ class CuentaController extends Controller
         }
 
         return $this->render('cuenta/new.html.twig', array(
-            'cuentum' => $cuenta,
+            'cuenta' => $cuenta,
             'form' => $form->createView(),
         ));
     }
@@ -70,7 +78,7 @@ class CuentaController extends Controller
         $deleteForm = $this->createDeleteForm($cuenta);
 
         return $this->render('cuenta/show.html.twig', array(
-            'cuentum' => $cuenta,
+            'cuenta' => $cuenta,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -125,7 +133,7 @@ class CuentaController extends Controller
     /**
      * Creates a form to delete a Cuenta entity.
      *
-     * @param Cuenta $cuentum The Cuenta entity
+     * @param Cuenta $cuenta The Cuenta entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -137,4 +145,36 @@ class CuentaController extends Controller
             ->getForm()
         ;
     }
+    
+    /**
+    * Deletes a Cuenta entity.
+    *
+    * @Route("/desactivar_cuenta/{id}", name="admin_cuenta_desactivar", options={"expose"=true})
+    * @Method("GET")
+    */
+   public function desactivarAction(Request $request, $id)
+   {
+       //$form = $this->createDeleteForm($id);
+       //$form->handleRequest($request);
+
+       $em = $this->getDoctrine()->getManager();
+       $entity = $em->getRepository('DGInventarioBundle:Cuenta')->find($id);
+       
+       if($entity->getEstado()==0){
+           $entity->setEstado(1);
+           $exito['regs']=1;//registro activado
+       }
+       else{
+           $entity->setEstado(0);
+           $exito['regs']=0;//registro desactivado
+       }
+       
+       $em->persist($entity);
+       $em->flush();
+       
+       
+       
+       return new Response(json_encode($exito));
+       
+   }  
 }

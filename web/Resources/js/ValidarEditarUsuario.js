@@ -3,8 +3,8 @@
 $('.nombresPersona').
   attr('data-bvalidator', 'required,required');
   
-//$('.apellidosPersona').
-//  attr('data-bvalidator', 'required,required');  
+$('.apellidosPersona').
+  attr('data-bvalidator', 'required,required');  
 //  
 //$('.correoPersona').
 //  attr('data-bvalidator', 'email,required,required');  
@@ -18,11 +18,11 @@ $('.nombresPersona').
 //$('.direccionPersona').
 //        attr('data-bvalidator', 'required,required');
 //
-//$('.nombreUsuario').
-//        attr('data-bvalidator', 'required,required');
+$('.nombreUsuario').
+        attr('data-bvalidator', 'required,required');
 //
-//$('.firstPassword').
-//        attr('data-bvalidator', 'required,required');	
+$('.firstPassword').
+        attr('data-bvalidator');	
 //
 //$('.secondPassword').
 //  attr('data-bvalidator', 'required,required');  
@@ -31,8 +31,15 @@ $('.nombresPersona').
 //  attr('data-bvalidator','required,required');    
 //  
 //
-//$('.fotoUsuario').
-//  attr('data-bvalidator', 'extension[jpg:png],required'); 
+$('.fotoUsuario').
+  attr('data-bvalidator', 'extension[jpg:png]'); 
+
+
+//$('#usuario_sistema_password_second').
+//        attr('data-bvalidator', 'equalto[usuario_sistema_password_first],required,required');
+//	
+//$('#usuario_sistema_password_second').
+//        attr('data-bvalidator-msg', 'Las contraseñas deben coincidir, vuelva a digitarla');   
   
 
     //Opciones del validador

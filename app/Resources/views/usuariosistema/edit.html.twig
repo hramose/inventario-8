@@ -57,11 +57,14 @@
       </div> 
 
     
-          <div class="col-md-7">
+          <div class="col-md-4">
         {{ form_row(edit_form.username) }}
          </div> 
-          <div class="col-md-7">
-        {{ form_row(edit_form.password) }}
+          <div class="col-md-4">
+        {{ form_row(edit_form.password.first) }}
+         </div>  
+          <div class="col-md-4">
+        {{ form_row(edit_form.password.second) }}
          </div>  
          
          
@@ -85,7 +88,7 @@
         <div class="container-fluid" >
              <div class="form-grouphide col-sm-12" style="">
                <div class="text-center" style="margin-top: 30px;"> {{ form_widget(edit_form) }} <a href="{{ path('admin_usuario_index') }}">Cancelar</a>
-                <input type="submit" class="btn btn-default" value="Editar" />
+                <input id="editarUsuario_submit" type="submit" class="btn btn-default" value="Editar" />
                </div>
               </div>
           </div>
@@ -141,13 +144,20 @@
    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
    <script src="{{ asset('Resources/js/ValidarEditarUsuario.js') }}"></script>
-   
+
+
     <script>
        
         $(document).ready(function(){
+         
+        $(document).on('click','#editarUsuario_submit',function(){
+                    if($('.firstPassword').val()!=$('.secondPassword').val()){
+                        bootbox.alert('Las contraseñas no coinciden');
+                        return false;
+                    }
+               });
                     
-                    
-                ValidarEditarUsuario1();   
+          ValidarEditarUsuario1();   
          });
 
     </script>

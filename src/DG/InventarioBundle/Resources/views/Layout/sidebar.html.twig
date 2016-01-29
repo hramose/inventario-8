@@ -6,13 +6,13 @@
       <a href="page-profile.html">
       {#  <span class="status dotted dotted-primary" data-toggle="tooltip" data-container="body" title="available"></span>#}
         {% block imagenPerfil %}
-            <img class="media-object img-circle" src="{{ asset('Photos/Empleado/imagen.jpg')}}" alt="photo profile">
+            <img class="media-object img-circle" src="{{ asset('Photos/Empleado/') }}{{app.user.persona.foto}}" alt="photo profile">
         {% endblock %}
       </a>
     </div>
     {% block perfil %}
         <div class="media-body">
-            <h5 class="media-heading" style="margin-bottom: 0px;">Nestor Herrera</h5>  <!-- nombre de usuario conectado -->
+            <h5 class="media-heading" style="margin-bottom: 0px;">{{app.user.persona.nombres}} {{app.user.persona.apellidos}}</h5>  <!-- nombre de usuario conectado -->
             <p class="text-muted">
                 <small>Back-end Developer</small>
             </p>

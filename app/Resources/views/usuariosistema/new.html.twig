@@ -68,11 +68,14 @@
       </div> 
 
     
-          <div class="col-md-7">
+          <div class="col-md-4">
         {{ form_row(form.username) }}
          </div> 
-          <div class="col-md-7">
-        {{ form_row(form.password) }}
+          <div class="col-md-4">
+        {{ form_row(form.password.first) }}
+         </div>  
+         <div class="col-md-4">
+        {{ form_row(form.password.second) }}
          </div>  
          
          

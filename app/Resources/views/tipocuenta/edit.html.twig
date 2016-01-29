@@ -1,13 +1,31 @@
 {#{% extends 'base.html.twig' %}#}
 
 {% block contenido %}
-    <h1>Editar tipo de cuenta</h1>
+    {#<h1>Editar tipo de cuenta</h1>#}
  {{ form_start(edit_form, {'action': path('admin_tipocuenta_edit',{'id':tipoCuentum.id})}) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Editar" />
+ 
+  {{ form_errors(edit_form) }}
+   <div class="row" style="margin: 50px 0;">
+    
+     <div class="col-md-12">
+         {{ form_row(edit_form.nombreCuenta) }}
+     </div>
+    </div> 
+
+     
+  <div class="container-fluid" >
+      <div class="form-grouphide col-sm-12" style="">
+          <div class="text-center" style="margin-top: 30px;"> {{ form_widget(edit_form) }} <a href="{{ path('admin_tipocuenta_index') }}">Cancelar</a>
+             <input id="" type="submit" class="btn btn-default" value="Editar" />
+          </div>
+      </div>
+  </div>    
+     
+       {# {{ form_widget(edit_form) }}
+        <input type="submit" value="Editar" />#}
     {{ form_end(edit_form) }}
 
-    <ul>
+   {# <ul>
         <li>
             <a href="{{ path('admin_tipocuenta_index') }}">Back to the list</a>
         </li>
@@ -16,5 +34,22 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
-    </ul>
+    </ul>#}
+{% endblock %}
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarTipoCuenta.js') }}"></script>
+   
+    <script>
+       
+        $(document).ready(function(){
+                    
+                    
+                ValidarTipoCuenta1();   
+         });
+
+    </script>
+                    
 {% endblock %}

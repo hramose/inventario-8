@@ -61,19 +61,27 @@
         </thead>
         <tbody>
         {% for tipoCuentum in tipoCuentas %}
-            <tr>
+            <tr id="{{ tipoCuentum.id}}">
                {# <td><a href="{{ path('admin_tipocuenta_show', { 'id': tipoCuentum.id }) }}">{{ tipoCuentum.id }}</a></td>#}
                 <td>{{ tipoCuentum.nombreCuenta }}</td>
                 <td>
-                   {# <ul>
+                    {% if tipoCuentum.estado == 1 %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                    
+                </td>
+                {#<td>
+                   <ul>
                         <li>
                             <a href="{{ path('admin_tipocuenta_show', { 'id': tipoCuentum.id }) }}">show</a>
                         </li>
                         <li>
                             <a href="{{ path('admin_tipocuenta_edit', { 'id': tipoCuentum.id }) }}">edit</a>
                         </li>
-                    </ul>#}
-                </td>
+                    </ul>
+                </td>#}
             </tr>
         {% endfor %}
         </tbody>
@@ -126,7 +134,7 @@
                     $("#editFormContainer").load(link+"/edit");
                     
                     //Hay que cambiar el numero de la columna para las otras tablas
-                    estadoPrevio = $(this).children('td:nth-child(5)').html();
+                    estadoPrevio = $(this).children('td:nth-child(2)').html();
                     estadoPrevio = estadoPrevio.trim();
                     if(estadoPrevio==="Inactivo"){//se muestran los iconos de desactivado
                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
@@ -164,12 +172,12 @@
                    if(!$(this).hasClass('disabled')){
                     bootbox.confirm("¿Desea cambiar el estado de este registro?", function(result) {
                         if(result){
-                            $.getJSON(Routing.generate('admin_sucursal_desactivar', { id: link}), 
+                            $.getJSON(Routing.generate('admin_tipocuenta_desactivar', { id: link}), 
                                 function(data) {
                                     var mensaje="";
                                     if(data.regs==0){
                                         //Se cambia a desactivado
-                                        mensaje ="Sucursal desactivado con exito";
+                                        mensaje ="Tipo de cuenta desactivado con exito";
                                         $('#'+link + ' > td:nth-child(2)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
@@ -177,7 +185,7 @@
                                     }
                                     if(data.regs==1){
                                         //Se cambia a activado
-                                        mensaje ="Sucursal activada con exito";
+                                        mensaje ="Tipo de cuenta activada con exito";
                                         $('#'+link + ' > td:nth-child(2)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
@@ -241,7 +249,8 @@
                     searching:true,
                     "order":[[0, "desc"],[1,"desc"]],
                     "columnDefs": [
-                           { "orderable": false, "targets": 0 }
+                           { "orderable": false, "targets": 0 },
+                           { "orderable": false, "targets": 1 }
                          
                      
                            
@@ -348,7 +357,7 @@
                             $(this).dialog({
                                 modal: true, 
                                 width: 600,
-                                title: "Editar nuevo tipo de cuenta",
+                                title: "Editar tipo de cuenta",
                                 resizable: false,
                                 position: { 
                                     my: "center", 

@@ -1,27 +1,47 @@
 {#{% extends 'base.html.twig' %}#}
 
-{% block body %}
+{% block contenido %}
    {# <h1>Nuevo tipo de cuenta</h1>#}
 
     {{ form_start(form, {'action': path('admin_tipocuenta_new')}) }}
     
     {{ form_errors(form) }}
-     <div class="row" style="margin: 50px 0;">
-     <div class="col-md-5 text-right" style="margin-bottom: 4px;">
+   <div class="row" style="margin: 50px 0;">
+    {# <div class="col-md-5 text-right" style="margin-bottom: 4px;">
            Nombre:
+     </div>#}
+     <div class="col-md-12">
+         {{ form_row(form.nombreCuenta) }}
      </div>
-     <div class="col-md-6" style="margin-bottom: 4px;">
-         {{ form_widget(form.nombreCuenta) }}
-     </div>
-    
-    
-    {{ form_widget(form) }}
-        <input type="submit" class="btn btn-info active mb-1x mr-1x btn-nuevo btn pull-right" value="Guardar" />
+    </div> 
+
+      <div class="container-fluid" >
+             <div class="form-grouphide col-sm-12" style="">
+               <div class="text-center" style="margin-top: 10px;"> <a href="{{ path('admin_tipocuenta_index') }}">Cancelar</a>
+                 <input type="submit" class="btn btn-default btn-nuevo" value="Guardar" />
+               </div>
+              </div>
+      </div>
+     
     {{ form_end(form) }}
 
-   {# <ul>
-        <li>
-            <a href="{{ path('admin_tipocuenta_index') }}">Back to the list</a>
-        </li>
-    </ul>#}
+   
+{% endblock %}
+
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarTipoCuenta.js') }}"></script>
+   
+    <script>
+       
+        $(document).ready(function(){
+                    
+                    
+                ValidarTipoCuenta1();   
+         });
+
+    </script>
+                    
 {% endblock %}

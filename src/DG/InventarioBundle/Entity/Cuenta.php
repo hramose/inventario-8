@@ -1,7 +1,7 @@
 <?php
 
 namespace DG\InventarioBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,13 +66,6 @@ class Cuenta
     /**
      * @var boolean
      *
-     * @ORM\Column(name="tipo_cuenta", type="boolean", nullable=true)
-     */
-    private $tipoCuenta;
-
-    /**
-     * @var boolean
-     *
      * @ORM\Column(name="direccion_igual", type="boolean", nullable=true)
      */
     private $direccionIgual;
@@ -102,8 +95,18 @@ class Cuenta
      *   @ORM\JoinColumn(name="tipo_cuenta_id", referencedColumnName="id")
      * })
      */
-    private $tipoCuenta2;
+    private $tipoCuenta;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DireccionEnvio", mappedBy="cuenta", cascade={"persist", "remove"})
+     * 
+     */
+    private $direccionEnvio; //Esta sirve para la poder embeber el formulario de Direcion Envio
+    
+    /**
+     * @ORM\OneToMany(targetEntity="DireccionFactura", mappedBy="cuenta", cascade={"persist", "remove"})
+     */
+    private $direccionFactura; //Esta sirve para la poder embeber el formulario de Direcion Factura
 
 
     /**
@@ -253,28 +256,25 @@ class Cuenta
     {
         return $this->valorAgregado;
     }
-
-    /**
-     * Set tipoCuenta
-     *
-     * @param boolean $tipoCuenta
-     * @return Cuenta
-     */
-    public function setTipoCuenta($tipoCuenta)
+    
+    function getDireccionEnvio() 
     {
-        $this->tipoCuenta = $tipoCuenta;
-
-        return $this;
+        return $this->direccionEnvio;
     }
-
-    /**
-     * Get tipoCuenta
-     *
-     * @return boolean 
-     */
-    public function getTipoCuenta()
+    
+    function setDireccionEnvio($direccionEnvio) 
     {
-        return $this->tipoCuenta;
+        $this->direccionEnvio = $direccionEnvio;
+    }
+    
+    function getDireccionFactura() 
+    {
+        return $this->direccionFactura;
+    }
+    
+    function setDireccionFactura($direccionFactura) 
+    {
+        $this->direccionFactura = $direccionFactura;
     }
 
     /**
@@ -347,25 +347,56 @@ class Cuenta
     }
 
     /**
-     * Set tipoCuenta2
+     * Set tipoCuenta
      *
-     * @param \DG\InventarioBundle\Entity\TipoCuenta $tipoCuenta2
+     * @param \DG\InventarioBundle\Entity\TipoCuenta $tipoCuenta
      * @return Cuenta
      */
-    public function setTipoCuenta2(\DG\InventarioBundle\Entity\TipoCuenta $tipoCuenta2 = null)
+    public function setTipoCuenta(\DG\InventarioBundle\Entity\TipoCuenta $tipoCuenta = null)
     {
-        $this->tipoCuenta2 = $tipoCuenta2;
+        $this->tipoCuenta = $tipoCuenta;
 
         return $this;
     }
 
     /**
-     * Get tipoCuenta2
+     * Get tipoCuenta
      *
      * @return \DG\InventarioBundle\Entity\TipoCuenta 
      */
-    public function getTipoCuenta2()
+    public function getTipoCuenta()
     {
-        return $this->tipoCuenta2;
+        return $this->tipoCuenta;
     }
+    
+    
+     
+     /**
+     * @ORM\OneToMany(targetEntity="Cuenta", mappedBy="cuenta", cascade={"persist", "remove"})
+     */
+    protected $coleccion;
+    public function __construct()
+    {
+        //$this->placas = array(new EstudioRadTamPlaca(), new EstudioRadTamPlaca());
+        $this->coleccion = new ArrayCollection();
+    }           
+    public function getColeccion()
+    {
+        return $this->coleccion;
+    }
+    public function setColeccion(\Doctrine\Common\Collections\Collection $coleccion)
+    {
+        $this->coleccion = $coleccion;
+        foreach ($coleccion as $coleccion) {
+            $coleccion->setTipoColeccion($this);
+        }
+    }
+    
+      public function removeColeccion(Cuenta $cuenta)
+    {
+        $this->cuenta->removeElement($cuenta);
+    }
+    
+    
+    
 }

@@ -20,7 +20,7 @@ class DireccionFacturaType extends AbstractType
             ->add('ciudad')
             ->add('provinciaEstado')
             ->add('postalZip')
-            ->add('cuenta')
+            //->add('cuenta')
         ;
     }
     

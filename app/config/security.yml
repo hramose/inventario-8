@@ -6,8 +6,10 @@ security:
             algorithm:        sha512
             encode-as-base64: true
             iterations:       10
-#    role_hierarchy:
-#        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]        
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]        
+        ROLE_ADMIN: [ROLE_USER]        
+        
     providers:
         user_db:
             entity: { class: DG\InventarioBundle\Entity\UsuarioSistema, property: username }
@@ -23,25 +25,13 @@ security:
             anonymous: ~
         secured_area:
             anonymous: ~
-#            oauth:
-#                resource_owners:
-#                    facebook:           "/login/check-facebook"
-#                login_path:          /secured/login
-#                default_target_path: /admin/usuario
-#                failure_path:        /secured/login
-#
-#                oauth_user_provider:
-#                    service: hwi_oauth.user.provider.entity
-                    
             pattern: ^/
             switch_user: { role: ROLE_ADMIN, parameter: _change }
             form_login:
                 login_path: /secured/login
                 check_path: /secured/login_check
                 default_target_path: /admin/usuario
-                #always_use_default_target_path: true 
                 failure_path:      /secured/login
-                #use_referer:         true
             logout:
                 path: /secured/logout
                 target: /secured/login        
@@ -51,6 +41,7 @@ security:
         - { path: ^/admin/usuario/registeruser/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/usuario/account/created, role: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/admin/*, role:  ROLE_USER } 
+        - { path: ^/admin/*, role:  [ROLE_USER, ROLE_ADMIN]} 
         - { path: ^/secured/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #Roles admin
         - { path: ^/admin/*, role:  ROLE_ADMIN }

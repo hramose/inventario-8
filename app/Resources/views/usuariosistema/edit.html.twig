@@ -1,7 +1,127 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <h1>UsuarioSistema edit</h1>
+{% block contenido %}
+    
+    
+    
+  <!-- Default panel contents -->
+  {#<div class="panel-heading"><p>Usuario</p></div>#}
+  <div class="panel-body">
+  {{ form_start(edit_form, {'action': path('admin_usuario_edit',{'id':usuarioSistema.id})}) }}
+    {{ form_errors(edit_form) }}
+   
+ {#<div class="row"> #}
+     
+     <div class="row">
+               <div class="col-md-12">
+                  <h3 class="text">Informacion personal</h3>
+                  <hr>
+                </div>
+      </div> 
+
+   {% include 'DGInventarioBundle:Persona:edit_form.html.twig' with { 'edit_form': edit_form.persona }%}  
+   
+{#   <div class="col-md-6" style="margin-top: 40px;">
+    {{ form_row(form.file) }}
+   </div>#}
+   
+   
+   
+                <div class="col-md-6" style="margin-top: 30px;">
+                  <div class="form-group">
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-preview thumbnail bg-light" data-trigger="fileinput" style="width: 200px; min-height: 100px">
+                            <img src="{{ asset('Photos/Empleado/')}}{{usuarioSistema.persona.foto}}"></img>
+                        </div>
+                      <div>
+                        <span class="btn btn-primary btn-file">
+                          <span class="fileinput-new">Seleccione imagen</span>
+                          <span class="fileinput-exists">Cambiar</span>
+{#                          <input type="file" name="...">#}
+{#<input id="usuario_sistema_file" name="usuario_sistema[file]" class="fotoUsuario" type="file">#}
+                             {{ form_widget(edit_form.file,{'attr':{'name':'...'}}) }}
+                        </span>
+                        <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+                      </div>
+                    </div>
+                  </div><!-- /.form-group -->
+                </div><!-- /.cols -->
+   
+   
+   
+   <div class="row">
+               <div class="col-md-12" >
+                  <h3 class="text">Informacion de usuario</h3>
+                  <hr>
+                </div>
+      </div> 
+
+    
+          <div class="col-md-4">
+        {{ form_row(edit_form.username) }}
+         </div> 
+          <div class="col-md-4">
+        {{ form_row(edit_form.password.first) }}
+         </div>  
+          <div class="col-md-4">
+        {{ form_row(edit_form.password.second) }}
+         </div>  
+         
+         
+        
+         <div class="clearfix"></div>
+         <div class="col-md-5 text" style="margin-top: 40px;">
+                Seleccione un rol:
+         </div>
+         <div class="col-md-12 text-center" style="margin-bottom: 4px;">
+                {{ form_widget(edit_form.user_roles) }}
+         </div>
+         {# <div class="col-md-4">
+        {{ form_row(form.password.second) }}
+         </div> #}
+        
+         {#<div class="col-md-12">
+        {{ form_row(form.salt) }}
+         </div>  #}
+     
+{# </div> #}
+        <div class="container-fluid" >
+             <div class="form-grouphide col-sm-12" style="">
+               <div class="text-center" style="margin-top: 30px;"> {{ form_widget(edit_form) }} <a href="{{ path('admin_usuario_index') }}">Cancelar</a>
+                <input id="editarUsuario_submit" type="submit" class="btn btn-default" value="Editar" />
+               </div>
+              </div>
+          </div>
+         
+         
+         
+        {#  {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />#}
+         {{ form_end(edit_form) }} 
+         
+         
+   {# <ul>
+        <li>
+            <a href="{{ path('admin_usuario_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+            #}
+      
+  
+  
+  </div>   
+    
+    
+    
+    
+    
+    
+    {#<h1>UsuarioSistema edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -17,5 +137,29 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
-    </ul>
+    </ul>#}
+{% endblock %}
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarEditarUsuario.js') }}"></script>
+
+
+    <script>
+       
+        $(document).ready(function(){
+         
+        $(document).on('click','#editarUsuario_submit',function(){
+                    if($('.firstPassword').val()!=$('.secondPassword').val()){
+                        bootbox.alert('Las contraseñas no coinciden');
+                        return false;
+                    }
+               });
+                    
+          ValidarEditarUsuario1();   
+         });
+
+    </script>
+                    
 {% endblock %}

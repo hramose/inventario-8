@@ -32,7 +32,7 @@
                 <li class="media unread">
                   <a href="#">
                     <div class="media-left">
-                      <img class="media-object img-circle" width="32" src="{{ asset('Resources/wrapkit/images/dummy/profile.jpg') }}" alt="user">
+                      <img class="media-object img-circle" width="32" src="{{ asset('Photos/Empleado/') }}{{app.user.persona.foto}}" alt="user">
                     </div>
                     <div class="media-body">
                       <p class="pull-right"><small>6m</small></p>
@@ -76,7 +76,7 @@
         {#<li role="presentation"><a role="menuitem" tabindex="-1" href="page-help.html"><span class="pull-right"><i class="fa fa-question-circle text-muted"></i></span>Ayuda</a></li>
         <li class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="page-locked.html"><span class="pull-right"><i class="fa fa-lock text-muted"></i></span>Locked</a></li>#}
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><span class="pull-right"><i class="fa fa-sign-out text-muted"></i></span> Cerrar sesión</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{{path('inventario_logout')}}"><span class="pull-right"><i class="fa fa-sign-out text-muted"></i></span> Cerrar sesión</a></li>
 
         {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
         <li class="divider"></li>    

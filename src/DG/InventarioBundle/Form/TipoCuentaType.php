@@ -15,7 +15,10 @@ class TipoCuentaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreCuenta')
+            ->add('nombreCuenta','text',array('label' => 'Nombre','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm nombreCuenta'
+                    )))   
         ;
     }
     

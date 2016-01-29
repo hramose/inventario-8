@@ -1,9 +1,8 @@
 
-function validarTipoConsulta(){
-$('.nombreTipoConsulta').
-        attr('data-bvalidator', 'required,required');
-	
- 
+ function ValidarTipoCuenta1(){
+$('.nombreCuenta').
+  attr('data-bvalidator', 'required,required');
+  
     //Opciones del validador
     var optionsRed = { 
         classNamePrefix: 'bvalidator_bootstraprt_', 
@@ -12,6 +11,7 @@ $('.nombreTipoConsulta').
  
     //Validar el formulario
     $('form').bValidator(optionsRed);
+    
 	
  }	
 	

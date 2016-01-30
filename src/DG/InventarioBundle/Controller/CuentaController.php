@@ -100,7 +100,7 @@ class CuentaController extends Controller
             $em->persist($cuenta);
             $em->flush();
 
-            return $this->redirectToRoute('admin_cuenta_edit', array('id' => $cuenta->getId()));
+            return $this->redirectToRoute('admin_cuenta_index', array('id' => $cuenta->getId()));
         }
 
         return $this->render('cuenta/edit.html.twig', array(

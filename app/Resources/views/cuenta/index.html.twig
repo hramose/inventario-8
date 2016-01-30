@@ -6,7 +6,7 @@
             display: none;
         }
     </style>
-    <h1>Cuenta list</h1>
+    {#<h1>Cuenta list</h1>#}
 
     <div id="resultado"></div>
     <div class="content-body">
@@ -51,7 +51,7 @@
                 <th>Web</th>
                 <th>Telefono</th>
                 <th>Fax</th>
-                <th>Valor agregado</th>
+                {#<th>Valor agregado</th>#}
                 <th>Estado</th>
                 {#<th>Actions</th>#}
             </tr>
@@ -65,7 +65,7 @@
                 <td>{{ cuentum.web }}</td>
                 <td>{{ cuentum.telefono }}</td>
                 <td>{{ cuentum.fax }}</td>
-                <td>{{ cuentum.valorAgregado }}</td>
+               {# <td>{{ cuentum.valorAgregado }}</td>#}
                 <td>
                    {% if cuentum.estado == 1 %}
                        Activo
@@ -108,6 +108,8 @@
                  
                  var link=0;
                  var estadoPrevio = "";
+                 
+                 $('div[id*="cuenta_direccionEnvio"]').children('label').remove();   // Oculta el id de la colección
                 //Seleccionar un registro
                 $('#datatables1>tbody>tr').on('click', function(event) {
                     //Se limpia los otros que esten activos
@@ -129,7 +131,7 @@
                     $("#editFormContainer").load(link+"/edit");
                     
                     //Hay que cambiar el numero de la columna para las otras tablas
-                    estadoPrevio = $(this).children('td:nth-child(7)').html();
+                    estadoPrevio = $(this).children('td:nth-child(6)').html();
                     estadoPrevio = estadoPrevio.trim();
                     if(estadoPrevio==="Inactivo"){//se muestran los iconos de desactivado
                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
@@ -173,15 +175,15 @@
                                     if(data.regs==0){
                                         //Se cambia a desactivado
                                         mensaje ="Sucursal desactivado con exito";
-                                        $('#'+link + ' > td:nth-child(7)').html('Inactivo');
+                                        $('#'+link + ' > td:nth-child(6)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
-                                        //$('#datatables1>tbody>tr>td:nth-child(7)').html('Inactivo');
+                                        //$('#datatables1>tbody>tr>td:nth-child(6)').html('Inactivo');
                                     }
                                     if(data.regs==1){
                                         //Se cambia a activado
                                         mensaje ="Sucursal activada con exito";
-                                        $('#'+link + ' > td:nth-child(7)').html('Activo');
+                                        $('#'+link + ' > td:nth-child(6)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
                                     }
@@ -249,11 +251,8 @@
                            { "orderable": false, "targets": 2 },
                            { "orderable": false, "targets": 3 },
                            { "orderable": false, "targets": 4 },
-                           { "orderable": false, "targets": 5 },
-                           { "orderable": false, "targets": 6 }
+                           { "orderable": false, "targets": 5 },                                                                         
                          
-                     
-                           
                            //{ "orderData": [ 2, 3, 4 ], "targets": 2 }
                     ],
                     "language": {
@@ -342,7 +341,8 @@
                         
                        // $(this).html('<img style="width:25%; position:inherit; float:right; " src="{{ asset('Resources/images/89C.gif') }}">');
                         
-                        var href = $(this).attr('href');
+                        var href = link + '/edit'; 
+{#                        $(this).attr('href');#}
                         
                         ($('#resultado')) ? $('#resultado').remove():'';
  

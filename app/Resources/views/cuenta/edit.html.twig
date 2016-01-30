@@ -1,10 +1,53 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <h1>Cuenta edit</h1>
+{% block cs %}
+    <style>
+        #cuenta_direccionEnvio > div > label { display : none; }
+    </style>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
+{% endblock %}
+    
+{% block contenido %}
+    {{ form_start(edit_form, {'action': path('admin_cuenta_edit',{'id':cuenta.id})}) }}
+    {#<h1>Cuenta edit</h1>#}
+    
+    <div class="row">
+        
+        <div class="col-md-6">
+            {{ form_row(edit_form.nombreCuenta) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.email) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.web) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.telefono) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.fax) }}
+        </div>
+        {#<div class="col-md-6">
+            {{ form_row(form.valorAgregado) }}
+        </div>#}
+        <div class="col-md-6">            
+            {{ form_row(edit_form.direccionIgual) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(edit_form.estado) }}
+        </div>
+        
+        <div id="listadoa">
+           <div class="listado col-md-12" style="margin-bottom:0px">          
+               <div class="placas" data-prototype="{% filter escape %}  {% include 'DGInventarioBundle:Prototype:edit_direccion.html.twig' with { 'edit_form': edit_form.direccionEnvio.vars.prototype} %}   {% endfilter  %}"> 
+                  {{ form_row(edit_form.direccionEnvio) }}
+               </div>
+           </div>
+        </div>
+    </div>  
+    
+        {#{{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
@@ -17,5 +60,15 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
-    </ul>
+    </ul>#}
+        
+        <div class="container-fluid" >
+             <div class="form-grouphide col-sm-12" style="">
+               <div class="text-center" style="margin-top: 30px;"> {{ form_widget(edit_form) }} <a href="{{ path('admin_cuenta_index') }}">Cancelar</a>
+                <input id="editarCuenta_submit" type="submit" class="btn btn-default" value="Editar" />
+               </div>
+              </div>
+          </div>
 {% endblock %}
+
+

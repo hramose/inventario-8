@@ -15,15 +15,39 @@ class CuentaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre_cuenta')
-            ->add('email')
-            ->add('web')
-            ->add('telefono')
-            ->add('fax')
-            ->add('valor_agregado')
+            ->add('nombreCuenta',null,array('label' => 'Nombre de cuenta','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreUsuario'
+                   )))
+            ->add('email',null,array('label' => 'Correo electronico','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreUsuario'
+                   )))
+            ->add('web',null,array('label' => 'Sitio web','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreUsuario'
+                   )))
+            ->add('telefono',null,array('label' => 'Numero Telefonico','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreUsuario'
+                   )))
+            ->add('fax',null,array('label' => 'Fax','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreUsuario'
+                   )))
+            ->add('valorAgregado',null,array('label' => 'Valor Agregado','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreUsuario'
+                   )))
             //->add('tipo_cuenta')
-            ->add('direccionIgual')
-            ->add('estado')
+            ->add('direccionIgual',null,array('label' => 'Valor Agregado','required'=>false,
+                   'attr'=>array(
+                   'class'=>'checkbox-inline'
+                   )))
+             ->add('estado',null,array('label' => 'Estado (activo/inactivo)','required'=>false,
+                   'attr'=>array(
+                   'class'=>'checkbox-inline', 'checked'=>true
+                   )))
 //            ->add('tipoCuenta','entity',array('label' => 'Seleccione tipo cuenta','required'=>true,
 //            'class'=>'DGInventarioBundle:TipoCuenta',
 //            'multiple'=>false,
@@ -39,6 +63,8 @@ class CuentaType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 ))
+                
+                
             //->add('direccionEnvio', new DireccionEnvioType())
             //->add('direccionFactura', new DireccionFacturaType())
 //            ->add('tipoCuenta','entity', array(

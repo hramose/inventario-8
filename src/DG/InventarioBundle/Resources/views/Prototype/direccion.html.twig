@@ -1,15 +1,33 @@
 {% spaceless   %}
              
                           
-         <div class="row">
+    <div class="row">
         <div class="col-md-12">         
-            <div class="panel bg-grd-light" data-fill-color="true">
+            <div class="" data-fill-color="true">
+                {#<div class="panel bg-grd-light" data-fill-color="true">#}
                 <div class="panel-body">
 
-                        <div class="col-md-7">  
-                              {# <p class="text"><i class=""> Tratamiento </i> </p> #}
-                            {{ form_row(form.ciudad) }}
-                          </div> 
+                        <div class="col-md-6">  
+                          {# <p class="text"><i class=""> Tratamiento </i> </p> #}
+                          {{ form_row(form.direccion1) }}
+                        </div> 
+                        <div class="col-md-6">  
+                          {# <p class="text"><i class=""> Tratamiento </i> </p> #}
+                          {{ form_row(form.direccion2) }}
+                        </div>
+                        <div class="col-md-6">  
+                          {# <p class="text"><i class=""> Tratamiento </i> </p> #}
+                          {{ form_row(form.ciudad) }}
+                        </div> 
+                        <div class="col-md-6" style="">  
+                          {# <p class="text"><i class=""> Tratamiento </i> </p> #}
+                          {{ form_row(form.provinciaEstado) }}
+                        </div>
+                        <div class="col-md-6">  
+                          {# <p class="text"><i class=""> Tratamiento </i> </p> #}
+                          {{ form_row(form.postalZip) }}
+                        </div> 
+                        
                          
                       {#    <div class="col-md-5"> #}
                            {#   <p class="text"><i class=""> Sesiones </i> </p> #}
@@ -17,9 +35,9 @@
                           </div>  #}
 
                 </div><!-- /.panel-body -->
-              </div><!-- /.panel -->        
+            </div><!-- /.panel -->        
                           
-           </div>  
-          </div>                
+        </div>  
+    </div>                
              
 {% endspaceless   %}

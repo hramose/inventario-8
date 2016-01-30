@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Sucursal</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sucursal.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ sucursal.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Alias</th>
+                <td>{{ sucursal.alias }}</td>
+            </tr>
+            <tr>
+                <th>Direccion1</th>
+                <td>{{ sucursal.direccion1 }}</td>
+            </tr>
+            <tr>
+                <th>Direccion2</th>
+                <td>{{ sucursal.direccion2 }}</td>
+            </tr>
+            <tr>
+                <th>Ciudad</th>
+                <td>{{ sucursal.ciudad }}</td>
+            </tr>
+            <tr>
+                <th>Provinciaestado</th>
+                <td>{{ sucursal.provinciaEstado }}</td>
+            </tr>
+            <tr>
+                <th>Postalzip</th>
+                <td>{{ sucursal.postalZip }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{% if sucursal.estado %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_sucursal_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('admin_sucursal_edit', { 'id': sucursal.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,7 +1,7 @@
 <?php
 
 namespace DG\InventarioBundle\Controller;
-
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -42,6 +42,7 @@ class ConfTaxController extends Controller
     public function newAction(Request $request)
     {
         $confTax = new ConfTax();
+        $confTax->setEstado(true);
         $form = $this->createForm('DG\InventarioBundle\Form\ConfTaxType', $confTax);
         $form->handleRequest($request);
 
@@ -50,7 +51,7 @@ class ConfTaxController extends Controller
             $em->persist($confTax);
             $em->flush();
 
-            return $this->redirectToRoute('admin_conftax_show', array('id' => $conftax->getId()));
+            return $this->redirectToRoute('admin_conftax_index', array('id' => $confTax->getId()));
         }
 
         return $this->render('conftax/new.html.twig', array(
@@ -92,7 +93,7 @@ class ConfTaxController extends Controller
             $em->persist($confTax);
             $em->flush();
 
-            return $this->redirectToRoute('admin_conftax_edit', array('id' => $confTax->getId()));
+            return $this->redirectToRoute('admin_conftax_index', array('id' => $confTax->getId()));
         }
 
         return $this->render('conftax/edit.html.twig', array(
@@ -137,4 +138,37 @@ class ConfTaxController extends Controller
             ->getForm()
         ;
     }
+    
+          
+   /**
+     * Deletes a ConfTax entity.
+     *
+     * @Route("/desactivar_conftax/{id}", name="admin_conftax_desactivar", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function desactivarAction(Request $request, $id)
+    {
+        //$form = $this->createDeleteForm($id);
+        //$form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('DGInventarioBundle:ConfTax')->find($id);
+        
+        if($entity->getEstado()==0){
+            $entity->setEstado(1);
+            $exito['regs']=1;//registro activado
+        }
+        else{
+            $entity->setEstado(0);
+            $exito['regs']=0;//registro desactivado
+        }
+        
+        $em->persist($entity);
+        $em->flush();
+        
+        
+        
+        return new Response(json_encode($exito));
+        
+    }  
 }

@@ -1,7 +1,38 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <h1>ConfTax creation</h1>
+{% block contenido %}
+    
+     {{ form_start(form, {'action': path('admin_conftax_new')}) }}
+    
+    {{ form_errors(form) }}
+   <div class="row" style="margin: 50px 0;">
+    {# <div class="col-md-5 text-right" style="margin-bottom: 4px;">
+           Nombre:
+     </div>#}
+     <div class="col-md-12">
+         {{ form_row(form.nombreTax) }}
+     </div>
+      <div class="col-md-12">
+         {{ form_row(form.numeroRegistro) }}
+     </div>
+      <div class="col-md-12">
+         {{ form_row(form.porcentaje) }}
+     </div>
+    </div> 
+
+      <div class="container-fluid" >
+             <div class="form-grouphide col-sm-12" style="">
+               <div class="text-center" style="margin-top: 10px;"> <a href="{{ path('admin_conftax_index') }}">Cancelar</a>
+                 <input type="submit" class="btn btn-default btn-nuevo" value="Guardar" />
+               </div>
+              </div>
+      </div>
+     
+    {{ form_end(form) }}
+    
+    
+    
+  {#  <h1>ConfTax creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -12,5 +43,22 @@
         <li>
             <a href="{{ path('admin_conftax_index') }}">Back to the list</a>
         </li>
-    </ul>
+    </ul>#}
+{% endblock %}
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarConfTax.js') }}"></script>
+   
+    <script>
+       
+        $(document).ready(function(){
+                    
+                    
+                ValidarConfTax1();   
+         });
+
+    </script>
+                    
 {% endblock %}

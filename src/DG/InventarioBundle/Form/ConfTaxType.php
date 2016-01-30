@@ -15,9 +15,18 @@ class ConfTaxType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreTax')
-            ->add('numeroRegistro')
-            ->add('porcentaje')
+            ->add('nombreTax','text',array('label' => 'Nombre','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm nombreTax'
+                    )))   
+            ->add('numeroRegistro','text',array('label' => 'Numero de registro','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm numeroRegistroTax'
+                    )))   
+            ->add('porcentaje','text',array('label' => 'Porcentaje','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm porcentajeTax'
+                    )))   
         ;
     }
     

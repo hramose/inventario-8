@@ -3,10 +3,10 @@
 {% block contenido %}
     
     
-    <div id="resultado"></div>
-    
-    
-     <div class="content-body">
+     <div id="resultado"></div>
+     
+
+      <div class="content-body">
           <div class="panel" data-fill-color="true">
             <div class="panel-heading">
               <div class="panel-control pull-right">
@@ -14,14 +14,14 @@
                 <a href="#" class="btn btn-icon" data-toggle="panel-expand" rel="tooltip" data-placement="bottom" title="expand"><i class="arrow_expand"></i></a>
                 <a href="#" class="btn btn-icon" data-toggle="panel-collapse" rel="tooltip" data-placement="bottom" title="collapse"><i class="icon_minus_alt2"></i></a>
               </div>
-              <h3 class="panel-title">Configuración tax</h3>
+              <h3 class="panel-title">Sucursales</h3>
             </div><!-- /.panel-heading -->
 
             <div class="panel-body">
               <div class="btn-toolbar clearfix" role="toolbar">
                
                 <div class="btn-group btn-group-sm pull-left">
-                   <button href="{{ path('admin_conftax_new') }}" data-toggle="tooltip" data-container="body" title="Nuevo tipo cuenta" id="add-datatables1" class="btn btn-default nuevo-registro" role="button">
+                   <button href="{{ path('admin_sucursal_new') }}" data-toggle="tooltip" data-container="body" title="Nuevo tipo cuenta" id="add-datatables1" class="btn btn-default nuevo-registro" role="button">
                     <i class="fa fa-plus"></i>
                       </button> 
                 </div>
@@ -44,21 +44,30 @@
         <thead>
             <tr>
                {# <th>Id</th>#}
-                <th>Nombre tax</th>
-                <th>Numero registro</th>
-                <th>Porcentaje</th>
+                <th>Nombre</th>
+                <th>Alias</th>
+                <th>Direccion 1</th>
+               {# <th>Direccion 2</th>#}
+                <th>Ciudad</th>
+                <th>Provincia/Estado</th>
+                <th>Codigo postal</th>
                 <th>Estado</th>
+                {#<th>Actions</th>#}
             </tr>
         </thead>
         <tbody>
-        {% for confTax in confTaxes %}
-            <tr id="{{ confTax.id}}">
-               {# <td><a href="{{ path('admin_conftax_show', { 'id': confTax.id }) }}">{{ confTax.id }}</a></td>#}
-                <td>{{ confTax.nombreTax }}</td>
-                <td>{{ confTax.numeroRegistro }}</td>
-                <td>{{ confTax.porcentaje }}</td>
-                 <td>
-                    {% if confTax.estado == 1 %}
+        {% for sucursal in sucursals %}
+            <tr id="{{ sucursal.id}}">
+               {# <td><a href="{{ path('admin_sucursal_show', { 'id': sucursal.id }) }}">{{ sucursal.id }}</a></td>#}
+                <td>{{ sucursal.nombre }}</td>
+                <td>{{ sucursal.alias }}</td>
+                <td>{{ sucursal.direccion1 }}</td>
+               {# <td>{{ sucursal.direccion2 }}</td>#}
+                <td>{{ sucursal.ciudad }}</td>
+                <td>{{ sucursal.provinciaEstado }}</td>
+                <td>{{ sucursal.postalZip }}</td>
+                <td>
+                    {% if sucursal.estado == 1 %}
                         Activo
                     {% else %}
                         Inactivo
@@ -68,10 +77,10 @@
                {# <td>
                     <ul>
                         <li>
-                            <a href="{{ path('admin_conftax_show', { 'id': confTax.id }) }}">show</a>
+                            <a href="{{ path('admin_sucursal_show', { 'id': sucursal.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('admin_conftax_edit', { 'id': confTax.id }) }}">edit</a>
+                            <a href="{{ path('admin_sucursal_edit', { 'id': sucursal.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>#}
@@ -79,17 +88,19 @@
         {% endfor %}
         </tbody>
     </table>
-     </div><!-- /.panel -->  
-     
-  </div><!-- /.content -->
+         </div><!-- /.panel -->
+          
+
+      </div><!-- /.content -->
+        
+        
 
    {# <ul>
         <li>
-            <a href="{{ path('admin_conftax_new') }}">Create a new entry</a>
+            <a href="{{ path('admin_sucursal_new') }}">Create a new entry</a>
         </li>
     </ul>#}
 {% endblock %}
-
 
 {% block javascripts_step %}
     {{parent()}}
@@ -121,7 +132,7 @@
                     $("#editFormContainer").load(link+"/edit");
                     
                     //Hay que cambiar el numero de la columna para las otras tablas
-                    estadoPrevio = $(this).children('td:nth-child(4)').html();
+                    estadoPrevio = $(this).children('td:nth-child(7)').html();
                     estadoPrevio = estadoPrevio.trim();
                     if(estadoPrevio==="Inactivo"){//se muestran los iconos de desactivado
                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
@@ -159,21 +170,21 @@
                    if(!$(this).hasClass('disabled')){
                     bootbox.confirm("¿Desea cambiar el estado de este registro?", function(result) {
                         if(result){
-                            $.getJSON(Routing.generate('admin_conftax_desactivar', { id: link}), 
+                            $.getJSON(Routing.generate('admin_sucursal_desactivar', { id: link}), 
                                 function(data) {
                                     var mensaje="";
                                     if(data.regs==0){
                                         //Se cambia a desactivado
-                                        mensaje ="Configuración tax desactivado con exito";
-                                        $('#'+link + ' > td:nth-child(4)').html('Inactivo');
+                                        mensaje ="Sucursal desactivado con exito";
+                                        $('#'+link + ' > td:nth-child(7)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
                                     //$('#datatables1>tbody>tr>td:nth-child(5)').html('Inactivo');
                                     }
                                     if(data.regs==1){
                                         //Se cambia a activado
-                                        mensaje ="Configuración tax activada con exito";
-                                        $('#'+link + ' > td:nth-child(4)').html('Activo');
+                                        mensaje ="Sucursal activada con exito";
+                                        $('#'+link + ' > td:nth-child(7)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
                                     }
@@ -237,9 +248,7 @@
                     "order":[[0, "desc"],[1,"desc"]],
                     "columnDefs": [
                            { "orderable": false, "targets": 0 },
-                           { "orderable": false, "targets": 1 },
-                           { "orderable": false, "targets": 2 },
-                           { "orderable": false, "targets": 3 }
+                           { "orderable": false, "targets": 1 }
                          
                      
                            
@@ -310,7 +319,7 @@
             $(this).dialog({
                         modal: true, 
                         width: 600,
-                        title: "Registrar nuevo tipo de cuenta",
+                        title: "Registrar nueva sucursal",
                         resizable: false,
                         position: { 
                         my: "center", 
@@ -346,7 +355,7 @@
                             $(this).dialog({
                                 modal: true, 
                                 width: 600,
-                                title: "Editar tipo de cuenta",
+                                title: "Editar sucursal",
                                 resizable: false,
                                 position: { 
                                     my: "center", 
@@ -367,3 +376,4 @@
     </script>
 
 {% endblock %}
+

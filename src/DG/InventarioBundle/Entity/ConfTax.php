@@ -152,4 +152,9 @@ class ConfTax
     {
         return $this->estado;
     }
+    
+     public function __toString() {
+    //return $this->cargo ? $this->cargo : '';
+    return $this->getNombreTax().' ';
+    }
 }

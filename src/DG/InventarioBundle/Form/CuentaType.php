@@ -35,18 +35,18 @@ class CuentaType extends AbstractType
                    'attr'=>array(
                    'class'=>'form-control input-sm nombreUsuario'
                    )))
-            ->add('valorAgregado',null,array('label' => 'Valor Agregado','required'=>false,
+//            ->add('valorAgregado',null,array('label' => 'Valor Agregado','required'=>false,
+//                   'attr'=>array(
+//                   'class'=>'form-control input-sm nombreUsuario'
+//                   )))
+            //->add('tipo_cuenta')
+            ->add('direccionIgual',null,array('label' => 'Direccion Igual','required'=>false,
                    'attr'=>array(
                    'class'=>'form-control input-sm nombreUsuario'
                    )))
-            //->add('tipo_cuenta')
-            ->add('direccionIgual',null,array('label' => 'Valor Agregado','required'=>false,
-                   'attr'=>array(
-                   'class'=>'checkbox-inline'
-                   )))
              ->add('estado',null,array('label' => 'Estado (activo/inactivo)','required'=>false,
                    'attr'=>array(
-                   'class'=>'checkbox-inline', 'checked'=>true
+                   'class'=>'form-control input-sm nombreUsuario', 'checked'=>true
                    )))
 //            ->add('tipoCuenta','entity',array('label' => 'Seleccione tipo cuenta','required'=>true,
 //            'class'=>'DGInventarioBundle:TipoCuenta',
@@ -62,16 +62,7 @@ class CuentaType extends AbstractType
                 'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
-                ))
-                
-                
-            //->add('direccionEnvio', new DireccionEnvioType())
-            //->add('direccionFactura', new DireccionFacturaType())
-//            ->add('tipoCuenta','entity', array(
-//                'label' => 'Elija una categoria', 'required' => true,'empty_value'=>'Seleccione categoria...',
-//                'class'=>'DGInventarioBundle:TipoCuenta',
-//                'cascade_validation' => true,
-//                ))
+                ))              
         ;
     }
     

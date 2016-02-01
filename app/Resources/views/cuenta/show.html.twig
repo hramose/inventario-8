@@ -8,35 +8,35 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ cuentum.id }}</td>
+                <td>{{ cuenta.id }}</td>
             </tr>
             <tr>
                 <th>Nombrecuenta</th>
-                <td>{{ cuentum.nombreCuenta }}</td>
+                <td>{{ cuenta.nombreCuenta }}</td>
             </tr>
             <tr>
                 <th>Email</th>
-                <td>{{ cuentum.email }}</td>
+                <td>{{ cuenta.email }}</td>
             </tr>
             <tr>
                 <th>Web</th>
-                <td>{{ cuentum.web }}</td>
+                <td>{{ cuenta.web }}</td>
             </tr>
             <tr>
                 <th>Telefono</th>
-                <td>{{ cuentum.telefono }}</td>
+                <td>{{ cuenta.telefono }}</td>
             </tr>
             <tr>
                 <th>Fax</th>
-                <td>{{ cuentum.fax }}</td>
+                <td>{{ cuenta.fax }}</td>
             </tr>
             <tr>
                 <th>Valoragregado</th>
-                <td>{{ cuentum.valorAgregado }}</td>
+                <td>{{ cuenta.valorAgregado }}</td>
             </tr>
             <tr>
                 <th>Tipocuenta</th>
-                <td>{% if cuentum.tipoCuenta %}Yes{% else %}No{% endif %}</td>
+                <td>{% if cuenta.tipoCuenta %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
@@ -46,7 +46,7 @@
             <a href="{{ path('admin_cuenta_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('admin_cuenta_edit', { 'id': cuentum.id }) }}">Edit</a>
+            <a href="{{ path('admin_cuenta_edit', { 'id': cuenta.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

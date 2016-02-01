@@ -49,6 +49,14 @@ class SucursalType extends AbstractType
                     'class'=>'form-control input-sm configuracionSucursal'
                     )))   
             //->add('configuracionEmpresa')
+                
+             ->add('placas','collection',array(
+                'type' => new LocalidadContactoType(),
+                'label'=>' ',
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                ))      
         ;
     }
     

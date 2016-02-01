@@ -15,11 +15,26 @@ class LocalidadContactoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreManager')
-            ->add('email')
-            ->add('telefono')
-            ->add('fax')
-            ->add('localidad')
+            ->add('nombreManager',null,array('label' => 'Gerente','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm nombreGerente'
+                   )))
+            ->add('email',null,array('label' => 'Correo','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm correoLocalidad'
+                   )))
+            ->add('telefono',null,array('label' => 'Telefono','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm telefonoLocalidad'
+                   )))
+            ->add('fax',null,array('label' => 'Fax','required'=>false,
+                   'attr'=>array(
+                   'class'=>'form-control input-sm faxLocalidad'
+                   )))
+//            ->add('localidad',null,array('label' => 'Localidad','required'=>false,
+//                   'attr'=>array(
+//                   'class'=>'form-control input-sm localidadContacto'
+//                   )))
         ;
     }
     

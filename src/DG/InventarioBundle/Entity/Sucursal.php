@@ -2,6 +2,8 @@
 
 namespace DG\InventarioBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -76,6 +78,15 @@ class Sucursal
      * @ORM\Column(name="estado", type="boolean", nullable=true)
      */
     private $estado;
+    
+    
+     /**
+     * @var integer
+     *
+     *
+     * @ORM\OneToOne(targetEntity="LocalidadContacto", mappedBy="sucursal", cascade={"persist", "remove"})
+     */
+    private $idlocalidadcontacto;
 
     /**
      * @var \ConfTax
@@ -292,6 +303,31 @@ class Sucursal
     {
         return $this->estado;
     }
+    
+     /**
+     * Set idlocalidadcontacto
+     *
+     * @param \DG\InventarioBundle\Entity\LocalidadContacto $idlocalidadcontacto
+     *
+     * @return Sucursal
+     */
+    public function setIdlocalidadcontacto(\DG\InventarioBundle\Entity\LocalidadContacto $idlocalidadcontacto)
+    {
+        $this->idlocalidadcontacto = $idlocalidadcontacto;
+
+        return $this;
+    }
+
+    /**
+     * Get idlocalidadcontacto
+     *
+     * @return \DG\InventarioBundle\Entity\LocalidadContacto
+     */
+    public function getIdlocalidadcontacto()
+    {
+        return $this->idlocalidadcontacto;
+    }
+
 
     /**
      * Set confTax
@@ -337,5 +373,26 @@ class Sucursal
     public function getConfiguracionEmpresa()
     {
         return $this->configuracionEmpresa;
+    }
+    
+      /**
+     * @ORM\OneToMany(targetEntity="LocalidadContacto", mappedBy="sucursal", cascade={"persist", "remove"})
+     */
+    protected $placas;
+    public function __construct()
+    {
+        //$this->placas = array(new EstudioRadTamPlaca(), new EstudioRadTamPlaca());
+        $this->placas = new ArrayCollection();
+    }           
+    public function getPlacas()
+    {
+        return $this->placas;
+    }
+    public function setPlacas(\Doctrine\Common\Collections\Collection $placas)
+    {
+        $this->placas = $placas;
+        foreach ($placas as $placa) {
+            $placa->setSucursal($this);
+        }
     }
 }

@@ -1,13 +1,46 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
+
+{% block css %}
+    {#{{parent()}}#}
+    <style>
+        
+       #sucursal_placas>div>label{
+            display: none;
+        }
+        
+       {# .correoLocalidad{
+            
+           margin-top: -57px;
+           margin-bottom: 20px;
+           margin-right:0px;
+           margin-left: 290px;
+           width: 100%;
+           
+        }#}
+        
+    </style>
+    
+  
+    
+{% endblock %}
+
+{% block contenido %}
     
     
   {{ form_start(edit_form, {'action': path('admin_sucursal_edit',{'id':sucursal.id})}) }}
  
   {{ form_errors(edit_form) }}
-   <div class="row" style="margin: 50px 0;">
+   <div class="row" style="margin: 0px 0;">
     
+     <div class="row">
+               <div class="col-md-12" >
+                  <h3 class="text">Informacion de sucursal</h3>
+                  <hr>
+                </div>
+    </div>    
+       
+       
      <div class="col-md-6">
          {{ form_row(edit_form.nombre) }}
      </div>
@@ -34,6 +67,20 @@
      </div>
     </div> 
 
+     <div class="row">
+               <div class="col-md-12" >
+                  <h3 class="text">Informacion de contacto</h3>
+                  <hr>
+                </div>
+     </div> 
+     
+      {# <div id="listadoa">#}
+         {# <div class="listado col-md-12" style="margin-bottom:30px">  #}       
+               <div class="placas col-md-6" data-prototype="{% filter escape %}  {% include 'DGInventarioBundle:Prototype:editlocalizacion.html.twig' with { 'edit_form': edit_form.placas.vars.prototype} %}   {% endfilter  %}"> 
+                  {{ form_row(edit_form.placas) }}
+               </div>
+       {#   </div>#}
+     {#   </div>#}
      
   <div class="container-fluid" >
       <div class="form-grouphide col-sm-12" style="">
@@ -64,4 +111,146 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>#}
+{% endblock %}
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarSucursal.js') }}"></script>
+   
+   {# <script>
+       
+        $(document).ready(function(){
+                    
+                    
+                ValidarSucursal1();   
+         });
+
+    </script>
+    #}
+    
+<script>
+
+// Get the ul that holds the collection of tags
+var collectionHolder = $('div.placas');
+var col=$('#hnr_sircimbundle_estudioradiologicotype_placas');
+// setup an "add a tag" link
+var $addTagLink = $('{#<div class="row" id="ax"><div class="col-md-1"><a href="#" class=" botonpanel btn btn-primary ">Agregar otra imagen</a></div></div>#}');
+var $removeTagLink = $('{#<a href="#" class="remove_placa_link btn btn-danger">Eliminar</a>#}');
+var $newLinkLi = $('<div class="col-md-6 addItem"></div>').append($addTagLink);
+var $delLinkLi = $('#hnr_sircimbundle_estudioradiologicotype_placas.required').append($removeTagLink);
+
+
+
+
+
+jQuery(document).ready(function() {
+    
+      $('div[id*="dginventario_sucursal_placas_"]').siblings().remove();   // Oculta el id de la colección
+
+    //$("#dgplusbellebundle_consulta_pacienteSelectBoxItOptions li").remove();
+
+  /*  $('#dgplusbellebundle_consulta_fechaConsulta').daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    },
+                });*/
+
+   //$('input[id$=dgplusbellebundle_plantilla_placas_]').selectBoxIt;
+
+    collectionHolder.find('li').each(function() {
+        addTagFormDeleteLink($(this));
+
+    });
+
+    
+
+    // add the "add a tag" anchor and li to the tags ul
+    collectionHolder.append($newLinkLi);
+
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    collectionHolder.data('index', collectionHolder.find(':input').length);
+    
+    //Identificar que form esta activo
+    var editar=$('div.placas').attr('id');
+   // if(editar!='editar_usuario'){
+        //addTagForm(collectionHolder, $newLinkLi);   //Muestra un formulario en la carga de la página nuevo
+   // }
+    
+
+
+    $addTagLink.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // add a new tag form (see next code block)
+        addTagForm(collectionHolder, $newLinkLi);
+        // $('.btn_radio').attr('name', 'rol_predet');
+    });
+
+
+ ValidarSucursal1();    
+});
+
+
+function addTagForm(collectionHolder, $newLinkLi) {
+    // Get the data-prototype explained earlier
+    var prototype = collectionHolder.data('prototype');
+
+    // get the new index
+    var index = collectionHolder.data('index');
+
+    // Replace '__name__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    var newForm = prototype.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<div class="col-md-6"></div>').append(newForm);
+    $newLinkLi.before($newFormLi);
+    
+
+
+    // add a delete link to the new form
+    addTagFormDeleteLink($newFormLi);
+    //validarPaquete(); 
+    $('.btn_radio').click(function(event) {
+        /* Act on the event */
+        var id = $(this).attr('id');
+        // alert(id);
+        $('.btn_radio').prop('checked', false);
+        $('#'+id).prop('checked', true);
+        $('.btn_radio').removeClass('errorform');
+    });
+}
+
+function addTagFormDeleteLink($tagFormLi) {
+    var $removeFormA = $('{#<div class="row"><div class="col-md-1"><a class="link btn btn-danger" style="margin-left:35px" href="#">Eliminar</a></div></div>#}');
+    $tagFormLi.append($removeFormA);
+
+    $removeFormA.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // remove the li for the tag form
+        $('input[name="rol_predet"]:checked').each(function() {
+            //$(this).val() es el valor del checkbox correspondiente
+           // alert('chequeado'); 
+           $('#hnr_sircimbundle_usuariotype_placas_0_usroPredeterminado').prop('checked', true);
+        });
+
+        $tagFormLi.remove();
+        
+    });
+}
+
+
+
+ </script>
+                    
 {% endblock %}

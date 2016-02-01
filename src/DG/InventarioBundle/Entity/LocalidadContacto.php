@@ -52,7 +52,7 @@ class LocalidadContacto
     /**
      * @var \Sucursal
      *
-     * @ORM\ManyToOne(targetEntity="Sucursal")
+     * @ORM\ManyToOne(targetEntity="Sucursal", inversedBy="idlocalidadcontacto", cascade={"persist", "remove"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="sucursal_id", referencedColumnName="id")
      * })

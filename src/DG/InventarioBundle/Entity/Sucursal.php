@@ -302,7 +302,7 @@ class Sucursal
     public function getEstado()
     {
         return $this->estado;
-    }
+    }   
     
      /**
      * Set idlocalidadcontacto
@@ -394,5 +394,9 @@ class Sucursal
         foreach ($placas as $placa) {
             $placa->setSucursal($this);
         }
+    }
+    
+    public function __toString() {
+    return $this->nombre ? $this->nombre : '';
     }
 }

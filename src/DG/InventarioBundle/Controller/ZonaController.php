@@ -1,7 +1,7 @@
 <?php
 
 namespace DG\InventarioBundle\Controller;
-
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -42,6 +42,7 @@ class ZonaController extends Controller
     public function newAction(Request $request)
     {
         $zona = new Zona();
+        $zona->setEstado(true);
         $form = $this->createForm('DG\InventarioBundle\Form\ZonaType', $zona);
         $form->handleRequest($request);
 
@@ -50,7 +51,7 @@ class ZonaController extends Controller
             $em->persist($zona);
             $em->flush();
 
-            return $this->redirectToRoute('admin_zona_show', array('id' => $zona->getId()));
+            return $this->redirectToRoute('admin_zona_index', array('id' => $zona->getId()));
         }
 
         return $this->render('zona/new.html.twig', array(
@@ -92,7 +93,7 @@ class ZonaController extends Controller
             $em->persist($zona);
             $em->flush();
 
-            return $this->redirectToRoute('admin_zona_edit', array('id' => $zona->getId()));
+            return $this->redirectToRoute('admin_zona_index', array('id' => $zona->getId()));
         }
 
         return $this->render('zona/edit.html.twig', array(
@@ -137,4 +138,36 @@ class ZonaController extends Controller
             ->getForm()
         ;
     }
+    
+       /**
+     * Deletes a Zona entity.
+     *
+     * @Route("/desactivar_zona/{id}", name="admin_zona_desactivar", options={"expose"=true})
+     * @Method("GET")
+     */
+    public function desactivarAction(Request $request, $id)
+    {
+        //$form = $this->createDeleteForm($id);
+        //$form->handleRequest($request);
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('DGInventarioBundle:Zona')->find($id);
+        
+        if($entity->getEstado()==0){
+            $entity->setEstado(1);
+            $exito['regs']=1;//registro activado
+        }
+        else{
+            $entity->setEstado(0);
+            $exito['regs']=0;//registro desactivado
+        }
+        
+        $em->persist($entity);
+        $em->flush();
+        
+        
+        
+        return new Response(json_encode($exito));
+        
+    }  
 }

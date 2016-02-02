@@ -2,7 +2,8 @@
 
 {% block contenido %}
     
-   <div id="resultado"></div>
+    
+     <div id="resultado"></div>
      
 
       <div class="content-body">
@@ -13,22 +14,23 @@
                 <a href="#" class="btn btn-icon" data-toggle="panel-expand" rel="tooltip" data-placement="bottom" title="expand"><i class="arrow_expand"></i></a>
                 <a href="#" class="btn btn-icon" data-toggle="panel-collapse" rel="tooltip" data-placement="bottom" title="collapse"><i class="icon_minus_alt2"></i></a>
               </div>
-              <h3 class="panel-title">Zonas</h3>
+              <h3 class="panel-title">Empresas</h3>
             </div><!-- /.panel-heading -->
 
             <div class="panel-body">
               <div class="btn-toolbar clearfix" role="toolbar">
                
                 <div class="btn-group btn-group-sm pull-left">
-                   <button href="{{ path('admin_zona_new') }}" data-toggle="tooltip" data-container="body" title="Nueva zona" id="add-datatables1" class="btn btn-default nuevo-registro" role="button">
+                   <button href="{{ path('admin_configuracionempresa_new') }}" data-toggle="tooltip" data-container="body" title="Nueva empresa" id="add-datatables1" class="btn btn-default nuevo-registro" role="button">
                     <i class="fa fa-plus"></i>
                       </button> 
                 </div>
                 <div class="btn-group btn-group-sm pull-left">
-                  <button id="edit-datatables1" data-toggle="tooltip" data-container="body" title="Editar zona" class="btn btn-default datatables1-actions disabled edit-registro" role="button">
+                  <button id="edit-datatables1" data-toggle="tooltip" data-container="body" title="Editar empresa" class="btn btn-default datatables1-actions disabled edit-registro" role="button">
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button id="delete-datatables1" data-toggle="tooltip" data-container="body" title="Desactivar zona" class="btn btn-default datatables1-actions disabled" role="button">
+                  <button id="delete-datatables1" data-toggle="tooltip" data-container="body" title="Desactivar empresa
+                          " class="btn btn-default datatables1-actions disabled" role="button">
                     <i class="fa fa-toggle-off"></i>
                   </button>
                 </div>
@@ -36,44 +38,54 @@
                   <input id="filterDatatables1" class="form-control input-sm" placeholder="Buscar...">
                 </div>
               </div><!-- /btn-toolbar -->
-            </div><!-- /.panel-body -->   
+            </div><!-- /.panel-body -->
     
 
-
-    <table id="datatables1" class="table table-noborder table-hover bordered-top" >
+    <table id="datatables1" class="table table-noborder table-hover bordered-top">
         <thead>
             <tr>
                {# <th>Id</th>#}
-                <th>Zona</th>
-                <th>Alias</th>
-                <th>Descripcion</th>
-                <th>Sucursal</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+               {# <th>Direccion2</th>#}
+                <th>Ciudad</th>
+                <th>Provincia/Estado</th>
+                <th>Codigo postal</th>
+                <th>Nrc</th>
+                <th>Nit</th>
+                <th>Giro</th>
                 <th>Estado</th>
+                {#<th>Actions</th>#}
             </tr>
         </thead>
         <tbody>
-        {% for zona in zonas %}
-            <tr id="{{ zona.id}}">
-               {# <td><a href="{{ path('admin_zona_show', { 'id': zona.id }) }}">{{ zona.id }}</a></td>#}
-                <td>{{ zona.nombre }}</td>
-                <td>{{ zona.alias }}</td> 
-                <td>{{ zona.descripcion }}</td>
-                 <td>{{ zona.sucursal }}</td>
-                 <td>
-                    {% if zona.estado == 1 %}
+        {% for configuracionEmpresa in configuracionEmpresas %}
+            <tr id="{{ configuracionEmpresa.id}}">
+               {# <td><a href="{{ path('admin_configuracionempresa_show', { 'id': configuracionEmpresa.id }) }}">{{ configuracionEmpresa.id }}</a></td>#}
+                <td>{{ configuracionEmpresa.nombre }}</td>
+                <td>{{ configuracionEmpresa.direccion1 }}</td>
+               {# <td>{{ configuracionEmpresa.direccion2 }}</td>#}
+                <td>{{ configuracionEmpresa.ciudad }}</td>
+                <td>{{ configuracionEmpresa.provinciaEstado }}</td>
+                <td>{{ configuracionEmpresa.codPostal }}</td>
+                <td>{{ configuracionEmpresa.nrc }}</td>
+                <td>{{ configuracionEmpresa.nit }}</td>
+                <td>{{ configuracionEmpresa.giro }}</td>
+                <td>
+                    {% if configuracionEmpresa.estado == 1 %}
                         Activo
                     {% else %}
                         Inactivo
                     {% endif %}
                     
                 </td>
-               {# <td>
+                {#<td>
                     <ul>
                         <li>
-                            <a href="{{ path('admin_zona_show', { 'id': zona.id }) }}">show</a>
+                            <a href="{{ path('admin_configuracionempresa_show', { 'id': configuracionEmpresa.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('admin_zona_edit', { 'id': zona.id }) }}">edit</a>
+                            <a href="{{ path('admin_configuracionempresa_edit', { 'id': configuracionEmpresa.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>#}
@@ -81,14 +93,13 @@
         {% endfor %}
         </tbody>
     </table>
-        
-       </div><!-- /.panel -->
+   </div><!-- /.panel -->
+          
 
-      </div><!-- /.content -->    
-
+   </div><!-- /.content -->
    {# <ul>
         <li>
-            <a href="{{ path('admin_zona_new') }}">Create a new entry</a>
+            <a href="{{ path('admin_configuracionempresa_new') }}">Create a new entry</a>
         </li>
     </ul>#}
 {% endblock %}
@@ -123,7 +134,7 @@
                     $("#editFormContainer").load(link+"/edit");
                     
                     //Hay que cambiar el numero de la columna para las otras tablas
-                    estadoPrevio = $(this).children('td:nth-child(5)').html();
+                    estadoPrevio = $(this).children('td:nth-child(9)').html();
                     estadoPrevio = estadoPrevio.trim();
                     if(estadoPrevio==="Inactivo"){//se muestran los iconos de desactivado
                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
@@ -161,21 +172,21 @@
                    if(!$(this).hasClass('disabled')){
                     bootbox.confirm("¿Desea cambiar el estado de este registro?", function(result) {
                         if(result){
-                            $.getJSON(Routing.generate('admin_zona_desactivar', { id: link}), 
+                            $.getJSON(Routing.generate('admin_empresa_desactivar', { id: link}), 
                                 function(data) {
                                     var mensaje="";
                                     if(data.regs==0){
                                         //Se cambia a desactivado
-                                        mensaje ="Zona desactivado con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Inactivo');
+                                        mensaje ="Empresa desactivado con exito";
+                                        $('#'+link + ' > td:nth-child(9)').html('Inactivo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-on");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-off");
                                     //$('#datatables1>tbody>tr>td:nth-child(5)').html('Inactivo');
                                     }
                                     if(data.regs==1){
                                         //Se cambia a activado
-                                        mensaje ="Zona activada con exito";
-                                        $('#'+link + ' > td:nth-child(5)').html('Activo');
+                                        mensaje ="Empresa activada con exito";
+                                        $('#'+link + ' > td:nth-child(9)').html('Activo');
                                         $('#delete-datatables1').children().removeClass("fa fa-toggle-off");
                                         $('#delete-datatables1').children().addClass("fa fa-toggle-on");
                                     }
@@ -239,11 +250,7 @@
                     "order":[[0, "desc"],[1,"desc"]],
                     "columnDefs": [
                            { "orderable": false, "targets": 0 },
-                           { "orderable": false, "targets": 1 },
-                           { "orderable": false, "targets": 2 },
-                           { "orderable": false, "targets": 3 },
-                           { "orderable": false, "targets": 4 }
-                    
+                           { "orderable": false, "targets": 1 }
                          
                      
                            
@@ -313,8 +320,8 @@
             $('#resultado').load(href, function(){
             $(this).dialog({
                         modal: true, 
-                        width: 600,
-                        title: "Registrar nueva zona",
+                        width: 750,
+                        title: "Registrar nueva empresa",
                         resizable: false,
                         position: { 
                         my: "center", 
@@ -349,8 +356,8 @@
                         $('#resultado').load(href, function(){
                             $(this).dialog({
                                 modal: true, 
-                                width: 600,
-                                title: "Editar zona",
+                                width: 750,
+                                title: "Editar empresa",
                                 resizable: false,
                                 position: { 
                                     my: "center", 

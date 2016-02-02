@@ -15,10 +15,23 @@ class ZonaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('alias')
-            ->add('descripcion')
-            ->add('localidad')
+            ->add('nombre','text',array('label' => 'Nombre','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm nombreZona'
+                    )))   
+            ->add('alias','text',array('label' => 'Alias','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm aliasZona'
+                    )))   
+            ->add('descripcion','textarea',array('label' => 'Descripción','required'=>false,
+                    'attr'=>array(
+                    'class'=>'form-control input-sm descripcionZona'
+                    )))   
+//            ->add('localidad')
+             ->add('sucursal',null,array('label' => 'Susursal','required'=>false,'empty_value'=>'Seleccione sucursal...',
+                    'attr'=>array(
+                    'class'=>'form-control input-sm idSucursal'
+                    )))       
         ;
     }
     

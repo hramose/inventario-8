@@ -1,13 +1,17 @@
 
- function ValidarSucursal1(){
-$('.nombreSucursal').
+ function ValidarZona1(){
+$('.nombreZona').
   attr('data-bvalidator', 'required,required');
   
-$('.aliasSucursal').
+$('.aliasZona').
   attr('data-bvalidator', 'required,required');  
   
-$('.configuracionSucursal').
+$('.idSucursal').
   attr('data-bvalidator', 'required,required');    
+  
+//$('.descripcionZona').
+//  attr('data-bvalidator', 'required,required');    
+
 
 
     //Opciones del validador

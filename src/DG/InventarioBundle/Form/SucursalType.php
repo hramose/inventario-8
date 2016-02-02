@@ -22,7 +22,8 @@ class SucursalType extends AbstractType
             ->add('alias','text',array('label' => 'Alias','required'=>false,
                     'attr'=>array(
                     'class'=>'form-control input-sm aliasSucursal'
-                    )))   
+                    ))) 
+               
             ->add('direccion1','text',array('label' => 'Dirección 1','required'=>false,
                     'attr'=>array(
                     'class'=>'form-control input-sm direccion1Sucursal'
@@ -56,7 +57,15 @@ class SucursalType extends AbstractType
                 'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
-                ))      
+                ))  
+                
+//              ->add('zona','entity',array('label' => 'Seleccione Zonas','required'=>false,
+//                'class'=>'DGInventarioBundle:Zona','property'=>'nombre',
+//                'multiple'=>true,
+//                'expanded'=>true,
+//                    'attr'=>array(
+//                    'class'=>'zonas'
+//                    )))
         ;
     }
     

@@ -1,0 +1,66 @@
+{#{% extends 'base.html.twig' %}#}
+
+{% block contenido %}
+    
+    {{ form_start(form, {'action': path('admin_configuracionempresa_new')}) }}
+    
+    {{ form_errors(form) }}
+   <div class="row" style="margin: 0px 0;">
+   
+   
+    <div class="col-md-6">
+         {{ form_row(form.nombre) }}
+     </div>
+      <div class="col-md-12">
+         {{ form_row(form.direccion1) }}
+     </div>
+     
+      <div class="col-md-12">
+         {{ form_row(form.direccion2) }}
+     </div>
+     <div class="col-md-6">
+         {{ form_row(form.ciudad) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.provinciaEstado) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.codPostal) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.nrc) }}
+     </div>
+     <div class="col-md-6">
+         {{ form_row(form.nit) }}
+     </div>
+     <div class="col-md-6">
+         {{ form_row(form.giro) }}
+     </div>
+    </div>   
+     
+     
+  <div class="container-fluid" >
+             <div class="form-grouphide col-sm-12" style="">
+               <div class="text-center" style="margin-top: 10px;"> <a href="{{ path('admin_configuracionempresa_index') }}">Cancelar</a>
+                 <input type="submit" class="btn btn-default btn-nuevo" value="Guardar" />
+               </div>
+              </div>
+      </div>
+     
+    {{ form_end(form) }}
+        
+     
+    
+   {# <h1>ConfiguracionEmpresa creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_configuracionempresa_index') }}">Back to the list</a>
+        </li>
+    </ul>#}
+{% endblock %}

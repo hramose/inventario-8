@@ -4,7 +4,37 @@
     
     
     {{ form_start(form, {'action': path('admin_zona_new')}) }}
-        {{ form_widget(form) }}
+    
+    {{ form_errors(form) }}
+    
+   <div class="row" style="margin: 0px 0;">
+   
+    <div class="col-md-6">
+         {{ form_row(form.nombre) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.alias) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.sucursal) }}
+     </div>
+      <div class="col-md-12">
+         {{ form_row(form.descripcion) }}
+     </div>
+
+   </div>   
+     
+     
+    <div class="container-fluid" >
+         <div class="form-grouphide col-sm-12" style="">
+             <div class="text-center" style="margin-top: 10px;"> <a href="{{ path('admin_zona_index') }}">Cancelar</a>
+                <input type="submit" class="btn btn-default btn-nuevo" value="Guardar" />
+             </div>
+         </div>
+    </div>  
+  {{ form_end(form) }}              
+    
+      {#  {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
@@ -12,5 +42,22 @@
         <li>
             <a href="{{ path('admin_zona_index') }}">Back to the list</a>
         </li>
-    </ul>
+    </ul>#}
+{% endblock %}
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarZona.js') }}"></script>
+   
+    <script>
+       
+        $(document).ready(function(){
+                    
+                    
+                ValidarZona1();   
+         });
+
+    </script>
+                    
 {% endblock %}

@@ -1,0 +1,16 @@
+{% spaceless   %}
+                      
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                      <div class="fileinput-preview thumbnail bg-light" data-trigger="fileinput" style="width: 200px; min-height: 100px"></div>
+                      <div>
+                        <span class="btn btn-primary btn-file">
+                          <span class="fileinput-new">Examinar</span>
+                          <span class="fileinput-exists">Cambiar</span>
+                             {{ form_widget(form.file,{'attr':{'name':'...'}}) }}
+                        </span>
+                        <a href="#" class="" ></a>
+                      </div>
+                    </div>
+                            
+             
+{% endspaceless   %}

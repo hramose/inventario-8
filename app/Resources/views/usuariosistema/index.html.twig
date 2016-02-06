@@ -106,12 +106,13 @@
 {% endblock %}
 
 
-{% block javascripts_step %}
-    {{parent()}}
-   {#<script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script>  
-   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script> #}
-   <script src="{{ asset('Resources/js/ValidarUsuario.js') }}"></script> 
-   <script src="{{ asset('Resources/js/ValidarEditarUsuario.js') }}"></script>
+{% block javascripts %}
+    {{parent()}} 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script> 
+   
+  <script src="{{ asset('Resources/js/ValidarUsuario.js') }}"></script> 
+  <script src="{{ asset('Resources/js/ValidarEditarUsuario.js') }}"></script>
    
     <script>
        
@@ -325,7 +326,7 @@
             $('#resultado').load(href, function(){
             $(this).dialog({
                         modal: true, 
-                        width: 850,
+                        width: 1100,
                         title: "Registrar usuario",
                         resizable: false,
                         position: { 

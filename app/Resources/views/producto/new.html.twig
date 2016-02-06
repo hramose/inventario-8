@@ -1,10 +1,158 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block body %}
-    <h1>Producto creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
+{% block css %}
+
+    <link rel="stylesheet" href="{{ asset('Resources/css/colorpicker.css') }}" />
+  
+
+    <style>
+        
+        .placas>div:last-child {
+                        position:absolute;
+                    }
+
+                    img{
+                        width: 100%;
+                        
+                    }
+                    .archivo{
+                        margin-top:10px;
+                    }
+                    .addItem{
+                        position: absolute;
+                        
+                        float: right;
+                        margin-bottom: 50px;
+                        top: -30px;
+                        left: 1px;
+                    }
+
+                        .addItem div {
+                            position: absolute;
+                        }
+                    .col-md-4{
+                        margin-top: 40px;
+                    }
+                    
+                        .col-md-4 > div>div>  label{
+                            display: none;
+                            
+                        }
+                        
+                        .col-md-4 > .col-md-1 >.link{
+                            margin-top:-32px;
+                            
+                        }
+                    
+                    .col-md-7{
+                        margin-top: -17px;
+                        position:relative;
+                        margin-left:-30px;
+                    }
+                    .link{
+                        position:absolute;
+                        margin-left:-15px;
+                        margin-top:-25px;
+                    }
+                        
+                    .panel{
+                        box-shadow:none;
+                        
+                    }
+                    
+                     .delete{
+                        margin-top: -75px;
+                        position:relative;
+ 
+                    }
+                    
+                   
+   
+  
+    </style>
+    
+    {% endblock %}
+
+
+
+{% block contenido %}
+   
+   {{ form_start(form, {'action': path('admin_producto_new')}) }}
+   
+    {{ form_errors(form) }}
+   <div class="row" style="margin: 0px 0;">
+    
+    
+    <div class="col-md-6">
+         {{ form_row(form.nombre) }}
+     </div>
+     {# <div class="col-md-6">
+         {{ form_row(form.fecha) }}
+     </div>#}
+     <div class="col-md-6">
+         {{ form_row(form.catproducto) }}
+     </div>
+      <div class="col-md-12">
+         {{ form_row(form.descripcion) }}
+     </div>
+     <div class="col-md-4">
+         {{ form_row(form.precioCompra) }}
+     </div>
+      <div class="col-md-4">
+         {{ form_row(form.precioVenta) }}
+     </div>
+     <div class="col-md-4">
+         {{ form_row(form.inventarioBajo) }}
+     </div>
+    
+     {#<div class="col-md-6">
+         {{ form_row(form.cuenta) }}
+     </div>#}
+      <div class="col-md-4">
+         {{ form_row(form.tipoInventario) }}
+     </div>
+     <div class="col-md-4">
+         {{ form_row(form.unidades) }}
+     </div>
+     <div class="col-md-4">
+         {{ form_row(form.zona) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.sku) }}
+     </div>
+      <div class="col-md-6">
+         {{ form_row(form.serial) }}
+     </div>
+     
+    </div>  
+     
+     
+       <div class="row" style="margin:60px 0;">  
+            <div id="listadoa">
+                <div class="listado col-md-12" style="margin-bottom:0px">          
+                    <div class="placas" data-prototype="{% filter escape %}  {% include 'DGInventarioBundle:Prototype:foto.html.twig' with { 'form': form.placas.vars.prototype} %}   {% endfilter  %}"> 
+                          {{ form_widget(form.placas) }}
+                    </div>
+               </div>
+            </div>
+
+        </div>    
+   
+    
+      <div class="container-fluid" >
+             <div class="form-grouphide col-sm-12" style="">
+               <div class="text-center" style="margin-top: 10px;"> <a href="{{ path('admin_producto_index') }}">Cancelar</a>
+                 <input type="submit" class="btn btn-default btn-nuevo" value="Guardar" />
+               </div>
+              </div>
+      </div>
+     
+    {{ form_end(form) }}
+   
+   
+   
+   {#     {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
@@ -12,5 +160,135 @@
         <li>
             <a href="{{ path('admin_producto_index') }}">Back to the list</a>
         </li>
-    </ul>
+    </ul>#}
 {% endblock %}
+
+{% block javascripts_step %}
+   {# <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>#}
+
+ 
+<script>
+
+// Get the ul that holds the collection of tags
+var collectionHolder = $('div.placas');
+var col=$('#hnr_sircimbundle_estudioradiologicotype_placas');
+// setup an "add a tag" link
+var $addTagLink = $('<div class="col-md-1"><a href="#" class=" botonpanel btn btn-primary ">Agregar imagen producto</a></div>');
+var $removeTagLink = $('<a href="#" class="remove_placa_link btn btn-danger delete">Eliminar</a>');
+var $newLinkLi = $('<div class="col-md-12 addItem"></div>').append($addTagLink);
+var $delLinkLi = $('#hnr_sircimbundle_estudioradiologicotype_placas.required').append($removeTagLink);
+
+
+
+
+
+jQuery(document).ready(function() {
+
+    //$("#dgplusbellebundle_consulta_pacienteSelectBoxItOptions li").remove();
+
+  /*  $('#dgplusbellebundle_consulta_fechaConsulta').daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'YYYY-MM-DD'
+                    },
+                });*/
+
+   //$('input[id$=dgplusbellebundle_plantilla_placas_]').selectBoxIt;
+
+    collectionHolder.find('li').each(function() {
+        addTagFormDeleteLink($(this));
+
+    });
+
+    
+
+    // add the "add a tag" anchor and li to the tags ul
+    collectionHolder.append($newLinkLi);
+
+    // count the current form inputs we have (e.g. 2), use that as the new
+    // index when inserting a new item (e.g. 2)
+    collectionHolder.data('index', collectionHolder.find(':input').length);
+    
+    //Identificar que form esta activo
+    var editar=$('div.placas').attr('id');
+   // if(editar!='editar_usuario'){
+        addTagForm(collectionHolder, $newLinkLi);   //Muestra un formulario en la carga de la página nuevo
+   // }
+    
+
+
+    $addTagLink.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // add a new tag form (see next code block)
+        addTagForm(collectionHolder, $newLinkLi);
+        // $('.btn_radio').attr('name', 'rol_predet');
+    });
+
+
+  //ValidarSucursal1();    
+});
+
+
+function addTagForm(collectionHolder, $newLinkLi) {
+    // Get the data-prototype explained earlier
+    var prototype = collectionHolder.data('prototype');
+
+    // get the new index
+    var index = collectionHolder.data('index');
+
+    // Replace '__name__' in the prototype's HTML to
+    // instead be a number based on how many items we have
+    var newForm = prototype.replace(/__name__/g, index);
+
+    // increase the index with one for the next item
+    collectionHolder.data('index', index + 1);
+
+    // Display the form in the page in an li, before the "Add a tag" link li
+    var $newFormLi = $('<div class="col-md-4">{#<img style="margin-top:23px" class="archivo" src="http://placehold.it/1980x400">#}</div>').append(newForm);
+    $newLinkLi.before($newFormLi);
+    
+
+
+    // add a delete link to the new form
+    addTagFormDeleteLink($newFormLi);
+    //validarPaquete(); 
+    $('.btn_radio').click(function(event) {
+        /* Act on the event */
+        var id = $(this).attr('id');
+        // alert(id);
+        $('.btn_radio').prop('checked', false);
+        $('#'+id).prop('checked', true);
+        $('.btn_radio').removeClass('errorform');
+    });
+}
+
+function addTagFormDeleteLink($tagFormLi) {
+    var $removeFormA = $('<a class="link btn btn-danger delete" style="margin-left:120px" href="#">Eliminar</a>');
+    $tagFormLi.append($removeFormA);
+
+    $removeFormA.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // remove the li for the tag form
+        $('input[name="rol_predet"]:checked').each(function() {
+            //$(this).val() es el valor del checkbox correspondiente
+           // alert('chequeado'); 
+           $('#hnr_sircimbundle_usuariotype_placas_0_usroPredeterminado').prop('checked', true);
+        });
+
+        $tagFormLi.remove();
+        
+    });
+}
+
+
+
+ </script>
+                   
+{% endblock %}
+

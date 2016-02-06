@@ -17,20 +17,20 @@ class UsuarioSistemaType extends AbstractType
     {
         $builder
             ->add('persona', new PersonaType())    
-             ->add('username',null,array('label' => 'Usuario','required'=>false,
+             ->add('username',null,array('required'=>false,
                     'attr'=>array(
-                    'class'=>'form-control input-sm nombreUsuario'
+                    'class'=>'form-control nombreUsuario'
                     )))   
             ->add('password','repeated', array(
                     'type' => 'password',
                     'invalid_message' => 'La contraseña no son iguales',
                     'options' => array('attr' => array('class' => 'password-field')),
                     'required' => false,
-                    'first_options'  => array('label' => 'Contraseña','required'=>false,
+                    'first_options'  => array('required'=>false,
                     'attr'=>array(
                     'class'=>'form-control input-sm firstPassword'
                     )),
-                    'second_options' => array('label' => 'Confirmar contraseña','required'=>false,
+                    'second_options' => array('required'=>false,
                     'attr'=>array(
                     'class'=>'form-control input-sm secondPassword'
                     )),

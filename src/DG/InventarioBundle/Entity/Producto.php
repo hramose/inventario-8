@@ -3,6 +3,7 @@
 namespace DG\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Producto
@@ -83,11 +84,12 @@ class Producto
      * @ORM\Column(name="total_existencia", type="integer", nullable=true)
      */
     private $totalExistencia;
+    
 
     /**
-     * @var \CatProducto
+     * @var \Catproducto
      *
-     * @ORM\ManyToOne(targetEntity="CatProducto")
+     * @ORM\ManyToOne(targetEntity="Catproducto")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="catproducto_id", referencedColumnName="id")
      * })
@@ -352,14 +354,15 @@ class Producto
     {
         return $this->totalExistencia;
     }
+    
 
     /**
      * Set catproducto
      *
-     * @param \DG\InventarioBundle\Entity\CatProducto $catproducto
+     * @param \DG\InventarioBundle\Entity\Catproducto $catproducto
      * @return Producto
      */
-    public function setCatproducto(\DG\InventarioBundle\Entity\CatProducto $catproducto = null)
+    public function setCatproducto(\DG\InventarioBundle\Entity\Catproducto $catproducto = null)
     {
         $this->catproducto = $catproducto;
 
@@ -369,7 +372,7 @@ class Producto
     /**
      * Get catproducto
      *
-     * @return \DG\InventarioBundle\Entity\CatProducto 
+     * @return \DG\InventarioBundle\Entity\Catproducto 
      */
     public function getCatproducto()
     {
@@ -466,5 +469,26 @@ class Producto
     public function getZona()
     {
         return $this->zona;
+    }
+    
+      /**
+     * @ORM\OneToMany(targetEntity="FotoProducto", mappedBy="producto", cascade={"persist", "remove"})
+     */
+    protected $placas;
+    public function __construct()
+    {
+        //$this->placas = array(new EstudioRadTamPlaca(), new EstudioRadTamPlaca());
+        $this->placas = new ArrayCollection();
+    }           
+    public function getPlacas()
+    {
+        return $this->placas;
+    }
+    public function setPlacas(\Doctrine\Common\Collections\Collection $placas)
+    {
+        $this->placas = $placas;
+        foreach ($placas as $placa) {
+            $placa->setProducto($this);
+        }
     }
 }

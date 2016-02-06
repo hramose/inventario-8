@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use DG\InventarioBundle\Entity\Producto;
+use DG\InventarioBundle\Entity\FotoProducto;
 use DG\InventarioBundle\Form\ProductoType;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Producto controller.
@@ -42,6 +44,7 @@ class ProductoController extends Controller
     public function newAction(Request $request)
     {
         $producto = new Producto();
+        $producto->setFecha(new \DateTime('now'));
         $form = $this->createForm('DG\InventarioBundle\Form\ProductoType', $producto);
         $form->handleRequest($request);
 
@@ -49,8 +52,29 @@ class ProductoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($producto);
             $em->flush();
+            
+            
+              foreach($producto->getPlacas() as $row){
+            
+                if($row->getFile()!=null){
+                    $path = $this->container->getParameter('photo.producto');
 
-            return $this->redirectToRoute('admin_producto_show', array('id' => $producto->getId()));
+                    $fecha = date('Y-m-d His');
+                    $extension = $row->getFile()->getClientOriginalExtension();
+                    $nombreArchivo = $row->getId()."-"."Imagen"."-".$fecha.".".$extension;
+
+                    $row->setNombre($nombreArchivo);
+                    $row->getFile()->move($path,$nombreArchivo);
+
+                    $em->persist($row);
+                    $em->flush();
+
+                }  
+           } 
+            
+            
+
+            return $this->redirectToRoute('admin_producto_index', array('id' => $producto->getId()));
         }
 
         return $this->render('producto/new.html.twig', array(
@@ -83,6 +107,17 @@ class ProductoController extends Controller
      */
     public function editAction(Request $request, Producto $producto)
     {
+        
+        
+//        $originalImagenes= new ArrayCollection();
+//        $path  = $this->getRequest()->server->get('DOCUMENT_ROOT').'/inventario/web/Photos/producto/';
+//        $path2 = $this->container->getParameter('photo.producto');    
+//        // Create an ArrayCollection of the current Tag objects in the database
+//        $i=0;
+//        
+//        $originalImagenes = $entity->getPlacas();
+
+        //var_dump($producto->getPlacas()); 
         $deleteForm = $this->createDeleteForm($producto);
         $editForm = $this->createForm('DG\InventarioBundle\Form\ProductoType', $producto);
         $editForm->handleRequest($request);
@@ -91,13 +126,75 @@ class ProductoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($producto);
             $em->flush();
+            
+            
+//             foreach ($entity->getPlacas() as $row) {
+//            
+//                        
+//            
+//               // $galeriaImagenes = new Carrusel();
+//                if($row->getFile()!=null){
+//                    $file_path = $path.'/'.$row->getNombre();
+//                    //echo '*'.$row->getNombre().'*';
+//                    if(file_exists($file_path) && $row->getNombre()!="") unlink($file_path);
+//                    //var_dump($row->getFile());
+//                    //die();
+//                    //echo "vc";
+//                    $fecha = date('Y-m-d His');
+//                    $extension = $row->getFile()->getClientOriginalExtension();
+//                    $nombreArchivo = "producto - ".$i." - ".$fecha.".".$extension;
+//
+//                    //echo $nombreArchivo;
+//                    //$seguimiento->setFotoAntes($nombreArchivo);
+//
+//
+//                    $row->setNombre($nombreArchivo);
+//                    //$imagenConsulta->setConsulta($entity);
+//                    //array_push($placas, $imagenConsulta);
+//                    $row->getFile()->move($path2,$nombreArchivo);
+//                    //$em->merge($seguimiento);
+//                    $em->persist($row);
+//                    //$em->flush();
+//                    $i++;
+//
+//                }
+//            
+//        }
+//            
+//        
+//      
+//            foreach ($originalImagenes as $row) {
+//                
+//                 $file_path = $path2.$row->getNombre();
+//                if (false === $entity->getPlacas()->contains($row)) {
+//                    unlink($file_path);
+//                    // remove the Task from the Tag
+//                    //$row->getIdcategoria()->removeImagen($row);
+//
+//                    // if it was a many-to-one relationship, remove the relationship like this
+//                    //$row->setIdcategoria(null);
+//
+//                    //$em->persist($row);
+//
+//                    // if you wanted to delete the Tag entirely, you can also do that
+//                     $em->remove($row);
+//                     $em->flush();
+//                }
+//            }
+//            
+//            
+//            
+//            
+//            $em->flush();
 
-            return $this->redirectToRoute('admin_producto_edit', array('id' => $producto->getId()));
+
+            return $this->redirectToRoute('admin_producto_index', array('id' => $producto->getId()));
         }
 
         return $this->render('producto/edit.html.twig', array(
             'producto' => $producto,
             'edit_form' => $editForm->createView(),
+            'placas'=>$producto->getPlacas(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

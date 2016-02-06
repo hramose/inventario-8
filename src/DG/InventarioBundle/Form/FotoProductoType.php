@@ -15,8 +15,13 @@ class FotoProductoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('producto')
+//            ->add('nombre')
+//            ->add('producto')
+                
+            ->add('file',null, array('label'=>'Imagen','required'=>false,
+                    'attr'=>array('class'=>'imagenProducto'
+                        
+                    )))      
         ;
     }
     

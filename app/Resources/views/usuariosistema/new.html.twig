@@ -1,6 +1,270 @@
 {#{% extends 'DGInventarioBundle:Layout:layout2.html.twig' %}#}
+{#{% extends 'DGInventarioBundle:Layout:layout2.html.twig' %}#}
+ {% block css -%}
+        <link rel="stylesheet" href="{{ asset('Resources/wrapkit/styles/styles/demo.css') }} ">
+ {% endblock %}
+
 
 {% block contenido %}
+    
+    
+    
+      <div class="content-body">
+          <!-- WIZARD
+          ================================================== -->
+          <div id="rootwizard" class="panel">
+            <a href="#" class="pull-right btn btn-icon btn-default" data-toggle="panel-expand" rel="tooltip" title="expand" data-placement="bottom" data-container="body"><i class="arrow_expand fa-lg text-muted"></i></a>
+            <ul>
+              <li>
+                <a href="#wizard1" data-toggle="tab">
+                  <span class="number">1</span>
+                  <span class="desc">Perfil</span>
+                </a>
+              </li>
+              <li>
+                <a href="#wizard2" data-toggle="tab">
+                  <span class="number">2</span>
+                  <span class="desc">Usuario</span>
+                </a>
+              </li>
+              {#<li>
+                <a href="#wizard3" data-toggle="tab">
+                  <span class="number">3</span>
+                  <span class="desc">Billing Setup</span>
+                </a>
+              </li>#}
+              <li>
+                <a href="#wizard4" data-toggle="tab">
+                  <span class="number">4</span>
+                  <span class="desc">Confirmación</span>
+                </a>
+              </li>
+            </ul><!-- /wizard-nav -->
+
+            <div class="panel-body">
+              <div class="progress">
+                <div class="progress-bar progress-bar-primary"></div>
+              </div><!-- /.progressbar -->
+            </div>
+
+            <div class="panel-body">
+              <form action="#" role="form" class="form-horizontal">
+                <div class="tab-content">
+                  <div class="tab-pane fade" id="wizard1">
+                    <h3 class="lead">Proporcionar datos de su perfil</h3>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="nombres">Nombres <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="nombres" name="nombres">
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="apellidos">Apellidos <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="apellidos" name="apellidos">
+                      </div>
+                    </div><!-- /form-group -->
+                    
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="correo">Correo <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="input-group input-group-in">
+                          <input class="form-control" id="correo" name="correo" type="correo">
+                          <span class="input-group-addon"><i class="fa fa-envelope-o text-muted"></i></span>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+                    
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="phoneNumber">Celular <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="celular" name="celular" type="tel">
+                      </div>
+                    </div><!-- /form-group -->
+                    
+                     <div class="form-group">
+                      <label class="col-md-3 control-label" for="phoneNumber">Telefono fijo <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="fijo" name="fijo" type="tel">
+                      </div>
+                    </div><!-- /form-group -->
+                    
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="address">Dirección <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="direccion" name="direccion">
+                      </div>
+                    </div><!-- /form-group -->
+
+                   {# <div class="form-group">
+                      <label class="col-md-3 control-label" for="gender">Gender <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="nice-radio nice-radio-inline">
+                          <input id="genderMale" name="gender" type="radio" value="Male" checked="checked">
+                          <label for="genderMale">Male</label>
+                        </div>
+                        <div class="nice-radio nice-radio-inline">
+                          <input id="genderFemale" name="gender" value="Female" type="radio">
+                          <label for="genderFemale">Female</label>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="address">Address <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="address" name="address">
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="country">Country <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input type="hidden" name="country" id="country" style="width:100%">
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="briefNotes">Brief Notes</label>
+                      <div class="col-md-5">
+                        <textarea class="autogrow form-control" name="briefNotes" id="briefNotes" rows="3"></textarea>
+                      </div>
+                    </div><!-- /form-group -->#}
+                  </div><!-- /.tab-pane -->
+                  
+                   <div class="tab-pane fade in" id="wizard2">
+                    <h3 class="lead">Proporcionar datos de usuario</h3>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="usuario">Usuario <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="" values>
+                            {{ form_widget(form.username) }}
+                          {#<input class="form-control" id="usuario" name="usuario">
+                          <span class="input-group-addon"><i class="icon-user text-muted"></i></span>#}
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="passwd">Contraseña <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="">
+                           {{ form_row(form.password.first) }}
+                          {#<input class="form-control" id="contraseña" name="contraseña" type="password">
+                          <span class="input-group-addon"><i class="icon-lock text-muted"></i></span>#}
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="confirmar">Confirmar contraseña <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="">
+                             {{ form_row(form.password.second) }}
+                          {#<input class="form-control" id="confirm_passwd" name="confirmar" type="password" equalto="#passwd" >
+                          <span class="input-group-addon"><i class="icon-lock text-muted"></i></span>#}
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+                    
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="gender">Rol <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                           {{ form_widget(form.user_roles) }}
+                        <div class="nice-radio nice-radio-inline">
+                          <input id="usuario_sistema_user_roles_1" name="usuario_sistema[user_roles][]" type="radio" value="1" checked="checked">
+                          <label for="usuario_sistema_user_roles_1">ROLE_ADMIN</label>
+                        </div>
+                        <div class="nice-radio nice-radio-inline">
+                          <input id="usuario_sistema_user_roles_2" name="usuario_sistema_user_roles_2" value="2" type="radio">
+                          <label for="usuario_sistema_user_roles_2">ROLE_USER</label>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+
+                   {# <div class="form-group">
+                      <label class="col-md-3 control-label" for="email">Email <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="input-group input-group-in">
+                          <input class="form-control" id="email" name="email" type="email">
+                          <span class="input-group-addon"><i class="fa fa-envelope-o text-muted"></i></span>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->#}
+                  </div><!-- /.tab-pane -->
+                {#  <div class="tab-pane fade" id="wizard3">
+                    <h3 class="lead">Provide your payment details</h3>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="cardName">Name on card <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="cardName" name="cardName">
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="cardNumber">Card Number <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <div class="row">
+                          <div class="col-md-8">
+                            <input class="form-control" id="cardNumber" name="cardNumber">
+                          </div>
+                          <div class="col-md-4">
+                            <input class="form-control" id="cvc" name="cvc" placeholder="CVV2">
+                          </div>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="cardExpired">Card Expired <span class="text-danger">*</span></label>
+                      <div class="col-md-5">
+                        <input class="form-control" id="cardExpired" name="cardExpired" type="date">
+                      </div>
+                    </div><!-- /form-group -->
+
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="cardExpired">Auto-pay</label>
+                      <div class="col-md-5">
+                        <div class="nice-checkbox">
+                          <input type="checkbox" name="autoPay" id="autoPay1" value="1">
+                          <label for="autoPay1">Yes, with this Credit Card</label>
+                        </div>
+                        <div class="nice-checkbox">
+                          <input type="checkbox" name="autoPay" id="autoPay0" value="0">
+                          <label for="autoPay0">Send me an email about Payment</label>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+                  </div><!-- /.tab-pane -->#}
+                  <div class="tab-pane fade" id="wizard4">
+                    <h3 class="lead">Asegúrese de que ha introducido los datos correctos !</h3>
+                    <h4 class="page-header lead">Perfil</h4>
+                    <h4 class="page-header lead">Usuario</h4>
+                   {# <h4 class="page-header lead">Billing</h4>#}
+                  </div><!-- /.tab-pane -->
+
+                  <div class="wizard-actions">
+                    <div class="form-group">
+                      <div class="col-md-5 col-md-offset-3">
+                        <button type="button" class="btn btn-default wizard-prev"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
+                        <button type="button" class="btn btn-primary wizard-next">Continue <i class="fa fa-arrow-circle-o-right"></i></button>
+                        <button type="submit" class="btn btn-primary finish">Guardar</button>
+                      </div><!-- /.cols -->
+                    </div><!-- /form-group -->
+                  </div><!-- /.wizard-actions -->
+
+                </div><!-- /.tab-content -->
+              </form><!-- /form -->
+            </div><!-- /.panel-body -->
+          </div><!-- /.panel -->
+    
+    
+    
+    
+    
+    
+    
 
     {#<h1>UsuarioSistema creation</h1>
 
@@ -115,11 +379,15 @@
 
 {% endblock %}
 
-{% block javascripts_step %}
+{% block javascripts %}
+    
    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/wrapkit/scripts/jquery.bootstrap.wizard.js') }}"></script>
+   <script src="{{ asset('Resources/wrapkit/scripts/demo/frm-wizard-demo.js') }}"></script>
    <script src="{{ asset('Resources/js/ValidarUsuario.js') }}"></script>
    
+
     <script>
        
         $(document).ready(function(){

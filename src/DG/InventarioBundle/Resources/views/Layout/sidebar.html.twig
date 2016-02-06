@@ -56,14 +56,14 @@
    
    
         <li class="nav-item" role="presentation">
-          <a href="#">
+          <a href="{{ path('admin_producto_index') }}">
             <span class="nav-icon"><i class="fa fa-list"></i></span>
             <span class="nav-text">Listado de Inventario</span>
           </a>
         </li>
         
         <li class="nav-item" role="presentation">
-          <a href="#">
+          <a href="{{ path('admin_catproducto_index') }}">
             <span class="nav-icon"><i class="fa fa-edit"></i></span>
             <span class="nav-text">Administrar categorias</span>
           </a> 
@@ -77,9 +77,15 @@
         </li>
         
         <li class="nav-item" role="presentation">
-          <a href="#">
+          <a href="{{ path('admin_sucursal_index') }}">
             <span class="nav-icon"><i class="fa fa-home"></i></span>
-            <span class="nav-text">Sucursales/Zonas</span>
+            <span class="nav-text">Sucursales</span>
+          </a>
+        </li>
+         <li class="nav-item" role="presentation">
+          <a href="{{ path('admin_zona_index') }}">
+            <span class="nav-icon"><i class="fa fa-home"></i></span>
+            <span class="nav-text">Zonas</span>
           </a>
         </li>
     

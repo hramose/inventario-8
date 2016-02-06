@@ -155,4 +155,8 @@ class UnidadMedida
     {
         return $this->configuracionEmpresa;
     }
+    
+    public function __toString() {
+    return $this->nombre ? $this->nombre : '';
+    }
 }

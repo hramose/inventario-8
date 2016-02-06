@@ -65,3 +65,19 @@
         </li>
     </ul>#}
 {% endblock %}
+
+{% block javascripts_step %}
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
+   <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
+   <script src="{{ asset('Resources/js/ValidarEmpresa.js') }}"></script>
+
+  <script>
+   
+   $(document).ready(function(){
+   
+     ValidarEmpresa1();    
+   });
+
+ </script>
+   
+{% endblock %}

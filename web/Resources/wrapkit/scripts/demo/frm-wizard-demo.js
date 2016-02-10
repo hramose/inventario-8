@@ -46,9 +46,9 @@ $(function(){
 			return false;
 		}
 	}).find('form').on( 'submit', function(e){
-		e.preventDefault();
-		console.log($(this).serializeArray());
-		window.alert('Submited!');
+//		e.preventDefault();
+//		console.log($(this).serializeArray());
+//		window.alert('Submited!');
 	});
 
 

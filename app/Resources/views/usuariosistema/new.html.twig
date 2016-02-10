@@ -7,7 +7,8 @@
 
 {% block contenido %}
     
-    
+ {{ form_start(form, {'action': path('admin_usuario_new')}) }}
+    {{ form_errors(form) }}
     
       <div class="content-body">
           <!-- WIZARD
@@ -27,12 +28,12 @@
                   <span class="desc">Usuario</span>
                 </a>
               </li>
-              {#<li>
+            <li>
                 <a href="#wizard3" data-toggle="tab">
                   <span class="number">3</span>
-                  <span class="desc">Billing Setup</span>
+                  <span class="desc">Foto de perfil</span>
                 </a>
-              </li>#}
+              </li>
               <li>
                 <a href="#wizard4" data-toggle="tab">
                   <span class="number">4</span>
@@ -48,52 +49,77 @@
             </div>
 
             <div class="panel-body">
-              <form action="#" role="form" class="form-horizontal">
+              <form action="{#{{ path('admin_usuario_new') }}#}" role="form" class="form-horizontal">
                 <div class="tab-content">
                   <div class="tab-pane fade" id="wizard1">
                     <h3 class="lead">Proporcionar datos de su perfil</h3>
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="nombres">Nombres <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="nombres">{#Nombres <span class="text-danger">*</span>#}</label>
                       <div class="col-md-5">
-                        <input class="form-control" id="nombres" name="nombres">
+                           <div class="col-md-12 control-label" for="usuario">Nombres <span class="text-danger">*</span></div>
+                            <div class="" style="margin-bottom: 15px;">
+                          {{ form_widget(form.persona.nombres) }}
+                        {#<input class="form-control" id="nombres" name="nombres">#}
+                           </div>
                       </div>
                     </div><!-- /form-group -->
-
+                    <div class="clearfix"></div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="apellidos">Apellidos <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="apellidos">{#Apellidos <span class="text-danger">*#}</span></label>
                       <div class="col-md-5">
-                        <input class="form-control" id="apellidos" name="apellidos">
+                           <div class="col-md-12 control-label" for="usuario">Apellidos <span class="text-danger">*</span></div>
+                            <div class="" style="margin-bottom: 15px;">
+                          {{ form_widget(form.persona.apellidos) }}
+                        {#<input class="form-control" id="apellidos" name="apellidos">#}
+                            </div>
                       </div>
                     </div><!-- /form-group -->
-                    
+                     <div class="clearfix"></div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="correo">Correo <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="correo">{#Correo <span class="text-danger">*</span>#}</label>
                       <div class="col-md-5">
-                        <div class="input-group input-group-in">
+                           <div class="col-md-12 control-label" for="usuario">Correo <span class="text-danger">*</span></div>
+                            <div class="input-group input-group-in" style="margin-bottom: 15px;">
+                          {{ form_widget(form.persona.correo) }}
+                          <span class="input-group-addon"><i class="fa fa-envelope-o text-muted"></i></span>
+                        {#<div class="input-group input-group-in">
                           <input class="form-control" id="correo" name="correo" type="correo">
                           <span class="input-group-addon"><i class="fa fa-envelope-o text-muted"></i></span>
+                        </div>#}
+                           </div>
+                      </div>
+                    </div><!-- /form-group -->
+                     <div class="clearfix"></div>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="phoneNumber">{#Celular <span class="text-danger">*</span>#}</label>
+                      <div class="col-md-5">
+                           <div class="col-md-12 control-label" for="usuario">Celular <span class="text-danger">*</span></div>
+                           <div class="" style="margin-bottom: 15px;">
+                          {{ form_widget(form.persona.celular) }}
+                       {# <input class="form-control" id="celular" name="celular" type="tel">#}
                         </div>
                       </div>
                     </div><!-- /form-group -->
-                    
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="phoneNumber">Celular <span class="text-danger">*</span></label>
-                      <div class="col-md-5">
-                        <input class="form-control" id="celular" name="celular" type="tel">
-                      </div>
-                    </div><!-- /form-group -->
-                    
+                     <div class="clearfix"></div>
                      <div class="form-group">
-                      <label class="col-md-3 control-label" for="phoneNumber">Telefono fijo <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="phoneNumber">{#Telefono fijo <span class="text-danger">*</span>#}</label>
                       <div class="col-md-5">
-                        <input class="form-control" id="fijo" name="fijo" type="tel">
+                           <div class="col-md-12 control-label" for="usuario">Telefono fijo <span class="text-danger">*</span></div>
+                            <div class="" style="margin-bottom: 15px;">
+                          {{ form_widget(form.persona.fijo) }}
+                       {# <input class="form-control" id="fijo" name="fijo" type="tel">#}
+                           </div>
                       </div>
                     </div><!-- /form-group -->
-                    
+                     <div class="clearfix"></div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="address">Dirección <span class="text-danger">*</span></label>
+                      <label class="col-md-3 control-label" for="address">{#Dirección <span class="text-danger">*</span>#}</label>
                       <div class="col-md-5">
-                        <input class="form-control" id="direccion" name="direccion">
+                           <div class="col-md-12 control-label" for="usuario">Dirección <span class="text-danger">*</span></div>
+                            <div class="" style="margin-bottom: 15px;">
+                          {{ form_widget(form.persona.direccion) }}
+                       {# <input class="form-control" id="direccion" name="direccion">#}
+                           </div>
                       </div>
                     </div><!-- /form-group -->
 
@@ -134,52 +160,59 @@
                   </div><!-- /.tab-pane -->
                   
                    <div class="tab-pane fade in" id="wizard2">
-                    <h3 class="lead">Proporcionar datos de usuario</h3>
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="usuario">Usuario <span class="text-danger">*</span></label>
+                    <h3  class="lead">Proporcionar datos de usuario</h3>
+                    <div class="clearfix"></div>
+                    <div class="form-group" style="margin-top: 15px;">
+                     <label class="col-md-3 control-label" for="usuario">{# Usuario <span class="text-danger">*</span>#}</label>
                       <div class="col-md-5">
-                        <div class="" values>
-                            {{ form_widget(form.username) }}
-                          {#<input class="form-control" id="usuario" name="usuario">
-                          <span class="input-group-addon"><i class="icon-user text-muted"></i></span>#}
-                        </div>
-                      </div>
-                    </div><!-- /form-group -->
-
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="passwd">Contraseña <span class="text-danger">*</span></label>
-                      <div class="col-md-5">
-                        <div class="">
-                           {{ form_row(form.password.first) }}
-                          {#<input class="form-control" id="contraseña" name="contraseña" type="password">
-                          <span class="input-group-addon"><i class="icon-lock text-muted"></i></span>#}
-                        </div>
-                      </div>
-                    </div><!-- /form-group -->
-
-                    <div class="form-group">
-                      <label class="col-md-3 control-label" for="confirmar">Confirmar contraseña <span class="text-danger">*</span></label>
-                      <div class="col-md-5">
-                        <div class="">
-                             {{ form_row(form.password.second) }}
-                          {#<input class="form-control" id="confirm_passwd" name="confirmar" type="password" equalto="#passwd" >
-                          <span class="input-group-addon"><i class="icon-lock text-muted"></i></span>#}
+                           <div class="col-md-12 control-label" for="usuario">Usuario <span class="text-danger">*</span></div>
+                        <div class="input-group input-group-in" style="margin-bottom: 15px;" >
+                          {{ form_widget(form.username) }}
+                         {# <input class="form-control" id="usuario" name="usuario">#}
+                          <span class="input-group-addon"><i class="icon-user text-muted"></i></span>
                         </div>
                       </div>
                     </div><!-- /form-group -->
                     
+                    <div class="clearfix"></div>
                     <div class="form-group">
-                      <label class="col-md-3 control-label" for="gender">Rol <span class="text-danger">*</span></label>
+                     <label class="col-md-3 control-label" for="passwd"> {#Contraseña <span class="text-danger">*</span>#}</label>
                       <div class="col-md-5">
+                          <div class="col-md-12 control-label" for="usuario">Contraseña <span class="text-danger">*</span></div>
+                        <div class="input-group input-group-in" style="margin-bottom: 15px;">
+                           {{ form_widget(form.password.first) }}
+                          {#<input class="form-control" id="contraseña" name="contraseña" type="password">#}
+                          <span class="input-group-addon"><i class="icon-lock text-muted"></i></span>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="confirmar">{#Confirmar contraseña <span class="text-danger">*</span>#}</label>
+                      <div class="col-md-5">
+                          <div class="col-md-12 control-label" for="usuario">Confirmar contraseña <span class="text-danger">*</span></div>
+                        <div class="input-group input-group-in" style="margin-bottom: 15px;">
+                             {{ form_widget(form.password.second) }}
+                          {#<input class="form-control" id="confirm_passwd" name="confirmar" type="password" equalto="#passwd" >#}
+                          <span class="input-group-addon"><i class="icon-lock text-muted"></i></span>
+                        </div>
+                      </div>
+                    </div><!-- /form-group -->
+                    
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                      <label class="col-md-3 control-label" for="gender">{#Rol <span class="text-danger">*</span>#}</label>
+                      <div class="col-md-5">
+                           <div class="col-md-12 control-label" style="margin-bottom: 15px;" for="usuario">Seleccione rol <span class="text-danger">*</span></div>
                            {{ form_widget(form.user_roles) }}
-                        <div class="nice-radio nice-radio-inline">
+                        {#<div class="nice-radio nice-radio-inline">
                           <input id="usuario_sistema_user_roles_1" name="usuario_sistema[user_roles][]" type="radio" value="1" checked="checked">
                           <label for="usuario_sistema_user_roles_1">ROLE_ADMIN</label>
                         </div>
                         <div class="nice-radio nice-radio-inline">
                           <input id="usuario_sistema_user_roles_2" name="usuario_sistema_user_roles_2" value="2" type="radio">
                           <label for="usuario_sistema_user_roles_2">ROLE_USER</label>
-                        </div>
+                        </div>#}
                       </div>
                     </div><!-- /form-group -->
 
@@ -237,19 +270,44 @@
                       </div>
                     </div><!-- /form-group -->
                   </div><!-- /.tab-pane -->#}
-                  <div class="tab-pane fade" id="wizard4">
-                    <h3 class="lead">Asegúrese de que ha introducido los datos correctos !</h3>
-                    <h4 class="page-header lead">Perfil</h4>
-                    <h4 class="page-header lead">Usuario</h4>
+                  <div class="tab-pane fade in" id="wizard3">
+                      <h3 class="lead">Foto de perfil !</h3>
+                    {#<h3 class="lead">Asegúrese de que ha introducido los datos correctos !</h3>#}
+                   {# <h4 class="page-header lead">Perfil</h4>
+                    <h4 class="page-header lead">Usuario</h4>#}
                    {# <h4 class="page-header lead">Billing</h4>#}
+                   
+                   
+                   
+                   <div class="col-md-12" style="margin-top: 5px;">
+                          <div class="form-group">
+                            <div class="fileinput fileinput-new"  data-provides="fileinput">
+                              <div class="fileinput-preview thumbnail bg-light" data-trigger="fileinput" style="width: 200px; min-height: 100px"></div>
+                              <div>
+                                <span class="btn btn-primary btn-file">
+                                  <span class="fileinput-new">Examinar</span>
+                                  <span class="fileinput-exists">Cambiar</span>
+                                     {{ form_widget(form.file,{'attr':{'name':'...'}}) }}
+                                </span>
+                                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Eliminar</a>
+                              </div>
+                            </div>
+                          </div><!-- /.form-group -->
+                        </div><!-- /.cols -->
+                   
+
                   </div><!-- /.tab-pane -->
+                  
+                   <div class="tab-pane fade in" id="wizard4">
+                       <h3 class="lead">Asegúrese de que ha introducido los datos correctos !</h3>  
+                   </div><!-- /.tab-pane -->  
 
                   <div class="wizard-actions">
                     <div class="form-group">
-                      <div class="col-md-5 col-md-offset-3">
-                        <button type="button" class="btn btn-default wizard-prev"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
-                        <button type="button" class="btn btn-primary wizard-next">Continue <i class="fa fa-arrow-circle-o-right"></i></button>
-                        <button type="submit" class="btn btn-primary finish">Guardar</button>
+                      <div class="col-md-5 col-md-offset-3" style="margin-top: 20px;">
+                        <button id="back" type="button" class="btn btn-default wizard-prev"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
+                        <button id="next" type="button" class="btn btn-primary wizard-next">Continue <i class="fa fa-arrow-circle-o-right"></i></button>
+                        <button type="submit" class="btn btn-primary finish">Confirmar</button>                 
                       </div><!-- /.cols -->
                     </div><!-- /form-group -->
                   </div><!-- /.wizard-actions -->
@@ -284,47 +342,27 @@
   <!-- Default panel contents -->
   {#<div class="panel-heading"><p>Usuario</p></div>#}
   <div class="panel-body">
-  {{ form_start(form, {'action': path('admin_usuario_new')}) }}
-    {{ form_errors(form) }}
+  {#{{ form_start(form, {'action': path('admin_usuario_new')}) }}
+    {{ form_errors(form) }}#}
    
  {#<div class="row"> #}
      
-     <div class="row">
+    {# <div class="row">
                <div class="col-md-12">
-                  <h3 class="text">Informacion personal</h3>
+                  <h3 class="text">Foto de perfil</h3>
                   <hr>
                 </div>
-      </div> 
+      </div> #}
 
-   {% include 'DGInventarioBundle:Persona:form.html.twig' with { 'form': form.persona }%}  
+  {# {% include 'DGInventarioBundle:Persona:form.html.twig' with { 'form': form.persona }%}  #}
    
 {#   <div class="col-md-6" style="margin-top: 40px;">
     {{ form_row(form.file) }}
    </div>#}
    
+
    
-   
-                <div class="col-md-6" style="margin-top: 30px;">
-                  <div class="form-group">
-                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                      <div class="fileinput-preview thumbnail bg-light" data-trigger="fileinput" style="width: 200px; min-height: 100px"></div>
-                      <div>
-                        <span class="btn btn-primary btn-file">
-                          <span class="fileinput-new">Seleccione imagen</span>
-                          <span class="fileinput-exists">Cambiar</span>
-{#                          <input type="file" name="...">#}
-{#<input id="usuario_sistema_file" name="usuario_sistema[file]" class="fotoUsuario" type="file">#}
-                             {{ form_widget(form.file,{'attr':{'name':'...'}}) }}
-                        </span>
-                        <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Eliminar</a>
-                      </div>
-                    </div>
-                  </div><!-- /.form-group -->
-                </div><!-- /.cols -->
-   
-   
-   
-   <div class="row">
+  {# <div class="row">
                <div class="col-md-12" >
                   <h3 class="text">Informacion de usuario</h3>
                   <hr>
@@ -350,7 +388,7 @@
          </div>
          <div class="col-md-12 text-center" style="margin-bottom: 4px;">
                 {{ form_widget(form.user_roles) }}
-         </div>
+         </div>#}
          {# <div class="col-md-4">
         {{ form_row(form.password.second) }}
          </div> #}
@@ -360,14 +398,14 @@
          </div>  #}
      
 {# </div> #}
-          <div class="container-fluid" >
+         {# <div class="container-fluid" >
              <div class="form-grouphide col-sm-12" style="">
                <div class="text-center" style="margin-top: 30px;">  <a href="{{ path('admin_usuario_index') }}">Cancelar</a>
                 <input type="submit" class="btn btn-default" value="Guardar" />
                </div>
               </div>
-          </div>
-            
+          </div>#}
+           
       
   
     {{ form_end(form) }}
@@ -383,7 +421,7 @@
     
    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
    <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>
-   <script src="{{ asset('Resources/wrapkit/scripts/jquery.bootstrap.wizard.js') }}"></script>
+  {# <script src="{{ asset('Resources/wrapkit/scripts/jquery.bootstrap.wizard.js') }}"></script>#}
    <script src="{{ asset('Resources/wrapkit/scripts/demo/frm-wizard-demo.js') }}"></script>
    <script src="{{ asset('Resources/js/ValidarUsuario.js') }}"></script>
    
@@ -392,7 +430,21 @@
        
         $(document).ready(function(){
                     
+           
+      {#  $('#next').on('click', function(event) {
+            alert('Estoy aqui');
+            if($('form').data('bValidator').isValid()){
+               alert('Estoy aqui'); 
+                            
+                $('#back').click();   
                     
+                    
+                            
+               return false;             
+             }
+            
+        });#}
+        
                 ValidarUsuario1();   
          });
 

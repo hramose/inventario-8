@@ -39,7 +39,7 @@ class PersonaType extends AbstractType
                     'attr'=>array(
                     'class'=>'form-control input-sm fijoPersona'
                     )))
-            ->add('direccion','text',array('label' => 'Direccion','required'=>false,
+            ->add('direccion','text',array('label' => 'Dirección','required'=>false,
                     'attr'=>array(
                     'class'=>'form-control input-sm direccionPersona'
                     )))

@@ -47,7 +47,7 @@ class ProductoType extends AbstractType
                     'attr'=>array(
                     'class'=>'form-control input-sm invbajoProducto'
                     )))   
-//            ->add('totalExistencia')
+            ->add('totalExistencia')
             ->add('catproducto',null,array('label' => 'Categoria producto','required'=>false,'empty_value'=>'Seleccione categoria...',
                     'attr'=>array(
                     'class'=>'form-control input-sm catproductoProducto'

@@ -1,10 +1,10 @@
-{#{% extends 'base.html.twig' %}#}
+{#{% extends 'DGInventarioBundle:Layout:layout.html.twig' %}#}
 
 
 {% block css %}
 
     <link rel="stylesheet" href="{{ asset('Resources/css/colorpicker.css') }}" />
-  
+    <link rel="stylesheet" href="{{ asset('Resources/wrapkit/styles/styles/demo.css') }} ">
 
     <style>
         
@@ -24,7 +24,7 @@
                         
                         float: right;
                         margin-bottom: 50px;
-                        top: -30px;
+                        top: -5px;
                         left: 1px;
                     }
 
@@ -81,16 +81,206 @@
    {{ form_start(form, {'action': path('admin_producto_new')}) }}
    
     {{ form_errors(form) }}
-   <div class="row" style="margin: 0px 0;">
+    
+    
+     <div class="content-body">
+          <!-- WIZARD
+          ================================================== -->
+          <div id="rootwizard" class="panel">
+            <a href="#" class="pull-right btn btn-icon btn-default" data-toggle="panel-expand" rel="tooltip" title="expand" data-placement="bottom" data-container="body"><i class="arrow_expand fa-lg text-muted"></i></a>
+            <ul>
+              <li>
+                <a href="#wizard1" data-toggle="tab">
+                  <span class="number">1</span>
+                  <span class="desc">Información</span>
+                </a>
+              </li>
+              <li>
+                <a href="#wizard2" data-toggle="tab">
+                  <span class="number">2</span>
+                  <span class="desc">Fotos</span>
+                </a>
+              </li>
+             <li>
+                <a href="#wizard3" data-toggle="tab">
+                  <span class="number">3</span>
+                  <span class="desc">Confirmación</span>
+                </a>
+              </li>
+             {# <li>
+                <a href="#wizard4" data-toggle="tab">
+                  <span class="number">4</span>
+                  <span class="desc">Foto de perfil</span>
+                </a>
+              </li>#}
+            </ul><!-- /wizard-nav -->
+
+            <div class="panel-body">
+              <div class="progress">
+                <div class="progress-bar progress-bar-primary"></div>
+              </div><!-- /.progressbar -->
+            </div>
+
+            <div class="panel-body">
+              <form action="#" role="form" class="form-horizontal">
+                <div class="tab-content">
+                  <div class="tab-pane fade" id="wizard1">
+                    <h3 class="lead">Producto</h3>
+                            <div class="col-md-6" style="margin-bottom: 5px;">
+                             <div class="control-label" for="usuario">Nombre <span class="text-danger">*</span></div>   
+                            {{ form_widget(form.nombre) }}
+                            </div>
+                            
+                            <div class="col-md-6" style="margin-bottom: 5px;">
+                              <div class=" control-label" for="usuario">Categoria de producto <span class="text-danger">*</span></div>   
+                             {{ form_widget(form.catproducto) }}
+                            </div>
+
+                            <div class="col-md-12">
+                           <div class=" control-label" for="usuario">Descripción <span class="text-danger">*</span></div>
+                            <div class="" style="margin-bottom: 5px;">
+                              {{ form_widget(form.descripcion) }}
+                           </div>
+                           </div>
+                           
+                           <div class="col-md-4">
+                           <div class="control-label" for="usuario">Precio de compra <span class="text-danger">*</span></div>
+                           <div class="" style="margin-bottom: 5px;">
+                            {{ form_widget(form.precioCompra) }}
+                           </div>
+                           </div>
+                           
+                            <div class="col-md-4">
+                            <div class="control-label" for="usuario">Precio de venta <span class="text-danger">*</span></div>
+                            <div class="" style="margin-bottom: 5px;">
+                              {{ form_widget(form.precioVenta) }}
+                              {# <input class="form-control" id="fijo" name="fijo" type="tel">#}
+                            </div>
+                            </div>
+                            
+                            <div class="col-md-4" style="margin-bottom: 5px;">
+                              <div class="control-label" for="usuario">Inventario bajo <span class="text-danger">*</span></div>
+                              {{ form_widget(form.inventarioBajo) }}
+                            </div>
+                            
+                            <div class="col-md-4" style="margin-bottom: 5px;">
+                               <div class="control-label" for="usuario">Tipo de inventario <span class="text-danger">*</span></div>  
+                              {{ form_widget(form.tipoInventario) }}
+                            </div>
+                            
+                            <div class="col-md-4" style="margin-bottom: 5px;">
+                              <div class="control-label" for="usuario">Unidades <span class="text-danger">*</span></div>  
+                              {{ form_widget(form.unidades) }}
+                            </div>
+                            
+                            <div class="col-md-4" style="margin-bottom: 5px;">
+                              <div class="control-label" for="usuario">Zona <span class="text-danger">*</span></div>
+                              {{ form_widget(form.zona) }}
+                            </div>
+                            
+                            <div class="col-md-4" style="margin-bottom: 5px;">
+                              <div class="control-label" for="usuario">SKU <span class="text-danger">*</span></div>
+                              {{ form_widget(form.sku) }}  
+                            </div>  
+                            
+                            <div class="col-md-4" style="margin-bottom: 5px;">
+                              <div class="control-label" for="usuario">Serial <span class="text-danger">*</span></div>
+                              {{ form_widget(form.serial) }}
+                            </div>
+                            
+                            <div id="total" class="col-md-4" style="margin-bottom: 5px;">
+                              <div class="control-label" for="usuario">Cantidad <span class="text-danger">*</span></div>
+                              {{ form_widget(form.totalExistencia) }}
+                            </div>
+
+                      </div><!-- /.tab-pane -->                    
+                     
+                      
+                        <div class="tab-pane fade" id="wizard2">
+                    <h3 class="lead">Foto de productos !</h3>
+                    
+                            <div class="row">  
+                                 <div id="listadoa">
+                                     <div class="listado col-md-12" style="margin-bottom:5px">          
+                                         <div class="placas" data-prototype="{% filter escape %}  {% include 'DGInventarioBundle:Prototype:foto.html.twig' with { 'form': form.placas.vars.prototype} %}   {% endfilter  %}"> 
+                                               {{ form_widget(form.placas) }}
+                                         </div>
+                                    </div>
+                                 </div>
+
+                            </div>                  
+                                         
+                    <!-- DROPZONE
+                      ================================================== -->
+                      <div class="panel" data-fill-color="true">
+                        <div class="panel-heading">
+
+                        </div>
+                        <div class="panel-body">
+                          <form action="/file-upload" class="dropzone" data-input="dropzone" method="post" enctype="multipart/form-data">
+                          </form>
+                        </div><!-- /.panel-body -->
+
+                        <div class="panel-body">
+                          <h3>Personalización en línea</h3>
+                          <div class="row">
+
+                          </div><!-- /.row -->
+
+                          <form action="/file-upload" class="dropzone border-blue" data-input="dropzone" method="post" enctype="multipart/form-data" style="padding:54px">
+                            <div class="fallback">
+                              <input name="file" type="file" multiple="multiple">
+                            </div>
+                            <div class="dz-message">
+                              <h1>Soltar los archivos o haga clic aquí para cargar.</h1>
+                              <p class="lead">(Esto es sólo una zona de saltos de demostración . Los archivos seleccionados<strong> no </strong>están subidos en realidad.)</p>
+                            </div>
+                          </form>
+                        </div><!-- /.panel-body -->
+                      </div><!-- /.panel -->
+                 
+                                          
+
+                    </div><!-- /.tab-pane -->
+                
+                  <div class="tab-pane fade in" id="wizard3">
+                      <h3 class="lead">Asegúrese de que ha introducido los datos correctos !</h3>       
+                      {{ form_widget(form._token) }}
+                  </div><!-- /.tab-content -->
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="wizard-actions">
+                    <div class="form-group">
+                      <div class="col-md-5 col-md-offset-3" style="margin-top: 20px;">
+                        <button  type="button" class="btn btn-default wizard-prev"><i class="fa fa-arrow-circle-o-left"></i> Back</button>
+                        <button  type="button" class="btn btn-primary wizard-next">Continue <i class="fa fa-arrow-circle-o-right"></i></button>
+                        <button type="submit" class="btn btn-primary finish">Confirmar</button>                 
+                      </div><!-- /.cols -->
+                    </div><!-- /form-group -->
+                  </div><!-- /.wizard-actions -->
+                  
+              </div><!-- /.panel -->      
+            </form><!-- /form -->
+          </div><!-- /.tab-content -->
+              
+ 
+    
+    
+  {# <div class="row" style="margin: 0px 0;">
     
     
     <div class="col-md-6">
          {{ form_row(form.nombre) }}
-     </div>
+     </div>#}
      {# <div class="col-md-6">
          {{ form_row(form.fecha) }}
      </div>#}
-     <div class="col-md-6">
+     {#<div class="col-md-6">
          {{ form_row(form.catproducto) }}
      </div>
       <div class="col-md-12">
@@ -104,12 +294,12 @@
      </div>
      <div class="col-md-4">
          {{ form_row(form.inventarioBajo) }}
-     </div>
+     </div>#}
     
      {#<div class="col-md-6">
          {{ form_row(form.cuenta) }}
      </div>#}
-      <div class="col-md-4">
+    {#  <div class="col-md-4">
          {{ form_row(form.tipoInventario) }}
      </div>
      <div class="col-md-4">
@@ -125,9 +315,9 @@
          {{ form_row(form.serial) }}
      </div>
      
-    </div>  
+    </div>  #}
      
-     
+     {#
        <div class="row" style="margin:60px 0;">  
             <div id="listadoa">
                 <div class="listado col-md-12" style="margin-bottom:0px">          
@@ -137,17 +327,17 @@
                </div>
             </div>
 
-        </div>    
+        </div>    #}
    
     
-      <div class="container-fluid" >
+   {# <div class="container-fluid" >
              <div class="form-grouphide col-sm-12" style="">
                <div class="text-center" style="margin-top: 10px;"> <a href="{{ path('admin_producto_index') }}">Cancelar</a>
                  <input type="submit" class="btn btn-default btn-nuevo" value="Guardar" />
                </div>
               </div>
-      </div>
-     
+    </div>#}
+    
     {{ form_end(form) }}
    
    
@@ -164,8 +354,15 @@
 {% endblock %}
 
 {% block javascripts_step %}
+    
+    <!-- COMPONENTS -->
+     <script src="{{ asset('Resources/wrapkit/scripts/dropzone.js') }}"></script>
+     <script src="{{ asset('Resources/wrapkit/scripts/fileinput.js') }}"></script>
+    <!-- END COMPONENTS -->
+    
    {# <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/jquery.bvalidator.js')}}"></script> 
     <script type="text/javascript" src="{{ asset('Resources/bValidator-0.73/bvalidator.lang.es.js')}}" ></script>#}
+    <script src="{{ asset('Resources/wrapkit/scripts/demo/frm-wizard-demo.js') }}"></script>
 
  
 <script>
@@ -184,16 +381,23 @@ var $delLinkLi = $('#hnr_sircimbundle_estudioradiologicotype_placas.required').a
 
 
 jQuery(document).ready(function() {
+  $('#total').hide();  $('#producto_totalExistencia').show();   
+    
+ $('#producto_tipoInventario').on('change', function(event) {
+        var tipo = $(this).val(); //Para guardar lo que he seleccionado
+       {#  alert(tipo);#}
+        if (tipo == 2) {
+           
+            $('#total').show(); //Mostrar el total   
+        }else {
+            
+          $('#total').hide(); 
+        }
+
+    });   
+    
 
     //$("#dgplusbellebundle_consulta_pacienteSelectBoxItOptions li").remove();
-
-  /*  $('#dgplusbellebundle_consulta_fechaConsulta').daterangepicker({
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    locale: {
-                        format: 'YYYY-MM-DD'
-                    },
-                });*/
 
    //$('input[id$=dgplusbellebundle_plantilla_placas_]').selectBoxIt;
 

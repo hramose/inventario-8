@@ -48,6 +48,7 @@
         <thead>
             <tr>
                {# <th>Id</th>#}
+              {# <th>Producto</th>#}
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Precio compra</th>
@@ -64,7 +65,11 @@
         <tbody>
         {% for producto in productos %}
             <tr id="{{ producto.id}}">
+                {# <td>
+                    {{key+1}}
+                 </td>#}
                 {#<td><a href="{{ path('admin_producto_show', { 'id': producto.id }) }}">{{ producto.id }}</a></td>#}
+           {# <td> <img class="embed-responsive-item" itemprop="thumbnail" src="{{ asset('Photos/producto/')}}{{producto.placas[0]}}" alt="dummy image"></td>#}
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precioCompra }}</td>

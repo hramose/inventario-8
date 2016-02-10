@@ -29,7 +29,7 @@ class ProductoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $productos = $em->getRepository('DGInventarioBundle:Producto')->findAll();
-
+//        var_dump($productos[0]->getPlacas());
         return $this->render('producto/index.html.twig', array(
             'productos' => $productos,
         ));
@@ -71,8 +71,22 @@ class ProductoController extends Controller
 
                 }  
            } 
-            
-            
+           $productot = new \DG\InventarioBundle\Entity\ProductoTrasaccion();
+           
+           if($producto->getTotalExistencia() != NULL){
+               $productot->setCantidad($producto->getTotalExistencia());
+           } else {
+                $productot->setCantidad(1);
+           }
+           
+//           $productot->setFecha(new \DateTime('now'));
+           
+           $productot->setProducto($producto);
+           $productot->setTipoTransaccion(1);
+           $em->persist($productot);
+            $em->flush();
+           //$producto->getProductoTrasaccion->setFecha(new \DateTime('now')); 
+           
 
             return $this->redirectToRoute('admin_producto_index', array('id' => $producto->getId()));
         }
@@ -109,14 +123,14 @@ class ProductoController extends Controller
     {
         
         
-//        $originalImagenes= new ArrayCollection();
-//        $path  = $this->getRequest()->server->get('DOCUMENT_ROOT').'/inventario/web/Photos/producto/';
-//        $path2 = $this->container->getParameter('photo.producto');    
-//        // Create an ArrayCollection of the current Tag objects in the database
-//        $i=0;
-//        
-//        $originalImagenes = $entity->getPlacas();
-
+        $originalImagenes= new ArrayCollection();
+        $path  = $this->getRequest()->server->get('DOCUMENT_ROOT').'/inventario/web/Photos/producto/';
+        $path2 = $this->container->getParameter('photo.producto');    
+        // Create an ArrayCollection of the current Tag objects in the database
+        $i=0;
+        
+        $originalImagenes = $producto->getPlacas();
+ 
         //var_dump($producto->getPlacas()); 
         $deleteForm = $this->createDeleteForm($producto);
         $editForm = $this->createForm('DG\InventarioBundle\Form\ProductoType', $producto);
@@ -128,64 +142,64 @@ class ProductoController extends Controller
             $em->flush();
             
             
-//             foreach ($entity->getPlacas() as $row) {
-//            
-//                        
-//            
-//               // $galeriaImagenes = new Carrusel();
-//                if($row->getFile()!=null){
-//                    $file_path = $path.'/'.$row->getNombre();
-//                    //echo '*'.$row->getNombre().'*';
-//                    if(file_exists($file_path) && $row->getNombre()!="") unlink($file_path);
-//                    //var_dump($row->getFile());
-//                    //die();
-//                    //echo "vc";
-//                    $fecha = date('Y-m-d His');
-//                    $extension = $row->getFile()->getClientOriginalExtension();
-//                    $nombreArchivo = "producto - ".$i." - ".$fecha.".".$extension;
-//
-//                    //echo $nombreArchivo;
-//                    //$seguimiento->setFotoAntes($nombreArchivo);
-//
-//
-//                    $row->setNombre($nombreArchivo);
-//                    //$imagenConsulta->setConsulta($entity);
-//                    //array_push($placas, $imagenConsulta);
-//                    $row->getFile()->move($path2,$nombreArchivo);
-//                    //$em->merge($seguimiento);
-//                    $em->persist($row);
-//                    //$em->flush();
-//                    $i++;
-//
-//                }
-//            
-//        }
-//            
-//        
-//      
-//            foreach ($originalImagenes as $row) {
-//                
-//                 $file_path = $path2.$row->getNombre();
-//                if (false === $entity->getPlacas()->contains($row)) {
-//                    unlink($file_path);
-//                    // remove the Task from the Tag
-//                    //$row->getIdcategoria()->removeImagen($row);
-//
-//                    // if it was a many-to-one relationship, remove the relationship like this
-//                    //$row->setIdcategoria(null);
-//
-//                    //$em->persist($row);
-//
-//                    // if you wanted to delete the Tag entirely, you can also do that
-//                     $em->remove($row);
-//                     $em->flush();
-//                }
-//            }
-//            
-//            
-//            
-//            
-//            $em->flush();
+             foreach ($producto->getPlacas() as $row) {
+            
+                        
+            
+               // $galeriaImagenes = new Carrusel();
+                if($row->getFile()!=null){
+                    $file_path = $path.'/'.$row->getNombre();
+                    //echo '*'.$row->getNombre().'*';
+                    if(file_exists($file_path) && $row->getNombre()!="") unlink($file_path);
+                   var_dump($row->getFile());
+                   die();
+                    //echo "vc";
+                    $fecha = date('Y-m-d His');
+                    $extension = $row->getFile()->getClientOriginalExtension();
+                    $nombreArchivo = "producto - ".$i." - ".$fecha.".".$extension;
+
+                    //echo $nombreArchivo;
+                    //$seguimiento->setFotoAntes($nombreArchivo);
+
+
+                    $row->getNombre($nombreArchivo);
+                    //$imagenConsulta->setConsulta($entity);
+                    //array_push($placas, $imagenConsulta);
+                    $row->getFile()->move($path2,$nombreArchivo);
+                    //$em->merge($seguimiento);
+                    $em->persist($row);
+                    //$em->flush();
+                    $i++;
+
+                }
+            
+        }
+            
+        
+      
+            foreach ($originalImagenes as $row) {
+                
+                 $file_path = $path2.$row->getNombre();
+                if (false === $producto->getPlacas()->contains($row)) {
+                    unlink($file_path);
+                    // remove the Task from the Tag
+                    //$row->getIdcategoria()->removeImagen($row);
+
+                    // if it was a many-to-one relationship, remove the relationship like this
+                    //$row->setIdcategoria(null);
+
+                    //$em->persist($row);
+
+                    // if you wanted to delete the Tag entirely, you can also do that
+                     $em->remove($row);
+                     $em->flush();
+                }
+            }
+            
+            
+            
+            
+            $em->flush();
 
 
             return $this->redirectToRoute('admin_producto_index', array('id' => $producto->getId()));

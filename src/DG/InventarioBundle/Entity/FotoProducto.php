@@ -122,4 +122,8 @@ class FotoProducto
     {
         return $this->producto;
     }
+    
+     public function __toString() {
+    return $this->getNombre().' ';
+    }
 }

@@ -85,44 +85,74 @@
  {{ form_start(edit_form, {'action': path('admin_producto_edit',{'id':producto.id})}) }}
  
   {{ form_errors(edit_form) }}
-   <div class="row" style="margin: 0px 0;">   
+   <div class="row" style="margin: 30px;">   
     
-    <div class="col-md-6">
-         {{ form_row(edit_form.nombre) }}
-     </div>
+    <div class="col-md-6" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Nombre <span class="text-danger">*</span></div>   
+           {{ form_widget(edit_form.nombre) }}
+    </div>
      {# <div class="col-md-6">
          {{ form_row(form.fecha) }}
      </div>#}
-     <div class="col-md-6">
-         {{ form_row(edit_form.catproducto) }}
+     <div class="col-md-6" style="margin-bottom: 5px;">
+        <div class=" control-label" for="usuario">Categoria de producto <span class="text-danger">*</span></div>   
+        {{ form_widget(edit_form.catproducto) }}
      </div>
-     
-      <div class="col-md-12">
-         {{ form_row(edit_form.descripcion) }}
+
+     <div class="col-md-12">
+        <div class=" control-label" for="usuario">Descripción <span class="text-danger">*</span></div>
+            <div class="" style="margin-bottom: 5px;">
+                {{ form_widget(edit_form.descripcion) }}
+            </div>
      </div>
+                           
      <div class="col-md-4">
-         {{ form_row(edit_form.precioCompra) }}
+        <div class="control-label" for="usuario">Precio de compra <span class="text-danger">*</span></div>
+            <div class="" style="margin-bottom: 5px;">
+                {{ form_widget(edit_form.precioCompra) }}
+            </div>
      </div>
-      <div class="col-md-4">
-         {{ form_row(edit_form.precioVenta) }}
-     </div>
+                           
      <div class="col-md-4">
-         {{ form_row(edit_form.inventarioBajo) }}
+        <div class="control-label" for="usuario">Precio de venta <span class="text-danger">*</span></div>
+            <div class="" style="margin-bottom: 5px;">
+                {{ form_widget(edit_form.precioVenta) }}            
+            </div>
      </div>
-     <div class="col-md-4">
-         {{ form_row(edit_form.tipoInventario) }}
+                            
+     <div class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Inventario bajo <span class="text-danger">*</span></div>
+                {{ form_widget(edit_form.inventarioBajo) }}
      </div>
-     <div class="col-md-4">
-         {{ form_row(edit_form.unidades) }}
+                            
+     <div class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Tipo de inventario <span class="text-danger">*</span></div>  
+                {{ form_widget(edit_form.tipoInventario) }}
      </div>
-     <div class="col-md-4">
-         {{ form_row(edit_form.zona) }}
+                            
+     <div class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Unidades <span class="text-danger">*</span></div>  
+                {{ form_widget(edit_form.unidades) }}
      </div>
-      <div class="col-md-6">
-         {{ form_row(edit_form.sku) }}
+                            
+     <div class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Zona <span class="text-danger">*</span></div>
+                {{ form_widget(edit_form.zona) }}
      </div>
-      <div class="col-md-6">
-         {{ form_row(edit_form.serial) }}
+                            
+     <div class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">SKU <span class="text-danger">*</span></div>
+                {{ form_widget(edit_form.sku) }}  
+     </div>  
+                            
+     <div class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Serial <span class="text-danger">*</span></div>
+                {{ form_widget(edit_form.serial) }}
+     </div>
+                            
+     <div id="total" class="col-md-4" style="margin-bottom: 5px;">
+        <div class="control-label" for="usuario">Cantidad <span class="text-danger">*</span></div>
+                {{ form_widget(edit_form.totalExistencia) }}
      </div>
      
      

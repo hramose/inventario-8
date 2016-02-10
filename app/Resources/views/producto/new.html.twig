@@ -212,7 +212,7 @@
                                          
                     <!-- DROPZONE
                       ================================================== -->
-                      <div class="panel" data-fill-color="true">
+                 {#     <div class="panel" data-fill-color="true">
                         <div class="panel-heading">
 
                         </div>
@@ -237,7 +237,7 @@
                             </div>
                           </form>
                         </div><!-- /.panel-body -->
-                      </div><!-- /.panel -->
+                      </div><!-- /.panel -->#}
                  
                                           
 
@@ -381,21 +381,23 @@ var $delLinkLi = $('#hnr_sircimbundle_estudioradiologicotype_placas.required').a
 
 
 jQuery(document).ready(function() {
-  $('#total').hide();  $('#producto_totalExistencia').show();   
+    
+////////Habilitar cantidad en seleccion de cantidad////////////////////////////   
+  $('#total').hide(); //Ocultar div   
     
  $('#producto_tipoInventario').on('change', function(event) {
-        var tipo = $(this).val(); //Para guardar lo que he seleccionado
+        var tipo = $(this).val(); //Guarda el valor de lo seleccionado
        {#  alert(tipo);#}
         if (tipo == 2) {
            
-            $('#total').show(); //Mostrar el total   
+            $('#total').show(); //Mostrar div   
         }else {
             
-          $('#total').hide(); 
+          $('#total').hide();    
         }
 
     });   
-    
+///FIN Habilitar cantidad en seleccion de cantidad/////////////////////////////  
 
     //$("#dgplusbellebundle_consulta_pacienteSelectBoxItOptions li").remove();
 

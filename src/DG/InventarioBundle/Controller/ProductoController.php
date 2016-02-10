@@ -76,6 +76,7 @@ class ProductoController extends Controller
            if($producto->getTotalExistencia() != NULL){
                $productot->setCantidad($producto->getTotalExistencia());
            } else {
+                $producto->setTotalExistencia(1);              
                 $productot->setCantidad(1);
            }
            
@@ -84,7 +85,7 @@ class ProductoController extends Controller
            $productot->setProducto($producto);
            $productot->setTipoTransaccion(1);
            $em->persist($productot);
-            $em->flush();
+           $em->flush();
            //$producto->getProductoTrasaccion->setFecha(new \DateTime('now')); 
            
 
